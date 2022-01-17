@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="scripts\models\" />
     <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\styles\css\" />
-    <Folder Include="wwwroot\styles\scss\components\" />
   </ItemGroup>
 
 </Project>

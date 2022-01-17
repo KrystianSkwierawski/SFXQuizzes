@@ -1,0 +1,58 @@
+﻿body {
+    background-color: #262636;
+}
+
+h1 {
+    text-align: center;
+    color: #F3F3FA;
+}
+
+i {
+    color: black;
+}
+
+form {
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+    margin-right: auto;
+    width: 95%;
+    height: auto;
+    min-height: 300px;
+    border: 1px solid #81879E;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    color: #81879E;
+
+    @include respond-to(medium) {
+        width: 60%;
+    }
+
+    & input {
+        display: none;
+    }
+
+    & p {
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    & i {
+        color: #F3F3FA;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+    }
+
+    & div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+
+.drag_enter {
+    opacity: .7;
+}
