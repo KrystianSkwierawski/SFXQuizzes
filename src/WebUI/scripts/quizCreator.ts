@@ -9,6 +9,7 @@ elements.dropArea.addEventListener('drop', (e: any) => {
     (<HTMLInputElement>elements.filesInput).files = fileList;
 
     quizCreatorView.selectedFilesStatus(fileList);
+    quizCreatorView.removeDragEnterBC();
 });
 
 elements.filesInput.addEventListener('change', () => {
@@ -19,14 +20,13 @@ elements.filesInput.addEventListener('change', () => {
 
 elements.dropArea.addEventListener('dragenter', (e: DragEvent) => {
     e.preventDefault();
-    elements.dropArea.classList.add('drag_enter');
+    quizCreatorView.addDragEnterBC();
 });
 
 elements.dropArea.addEventListener('dragleave', (e: DragEvent) => {
     e.preventDefault();
-    elements.dropArea.classList.remove('drag_enter');
+    quizCreatorView.removeDragEnterBC();
 });
-
 
 elements.dropArea.addEventListener('dragover', (e: DragEvent) => {
     e.preventDefault();
