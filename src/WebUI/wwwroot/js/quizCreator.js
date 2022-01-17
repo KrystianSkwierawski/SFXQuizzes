@@ -6,6 +6,10 @@ elements.dropArea.addEventListener('drop', (e) => {
     elements.filesInput.files = fileList;
     quizCreatorView.selectedFilesStatus(fileList);
 });
+elements.filesInput.addEventListener('change', () => {
+    const fileList = elements.filesInput.files;
+    quizCreatorView.selectedFilesStatus(fileList);
+});
 elements.dropArea.addEventListener('dragenter', (e) => {
     e.preventDefault();
     elements.dropArea.classList.add('drag_enter');

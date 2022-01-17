@@ -1,14 +1,31 @@
-﻿<h1>SFX Quiz Creator</h1>
+﻿<div class="container">
+    <h1>SFX Quiz Creator</h1>
 
-<form class="drop-area" method="post" enctype="multipart/form-data">
-    <i class="fas fa-cloud-upload-alt"></i>
+    <form method="post" enctype="multipart/form-data">
 
-    <div class="drop-area__status">
-        <p>Drag & Drop files Here</p>
-        <p>Or</p>
-        <button class="browse-files-button">Browse Files</button>
-        <input class="files-input" type="file" name="files[]" multiple />
-    </div>
-</form>
+        <div class="drop-area">
+            <i class="fas fa-cloud-upload-alt"></i>
+
+            <div class="drop-area__status">
+                <p>Drag & Drop files Here</p>
+                <p>Or</p>
+                <button type="button" class="browse-files-button">Browse Files</button>
+                <input class="files-input" type="file" multiple required />
+            </div>
+        </div>
+
+        <label>
+            Quiz Title
+            <input type="text" required />
+        </label>
+
+        <label>
+            Private Quiz
+            <input type="checkbox" />
+        </label>
+
+        <button class="create-quiz-button" type="submit">Create Quiz</button>
+    </form>
+</div>
 
 <script defer type="module" src=~/js/quizCreator.js></script>

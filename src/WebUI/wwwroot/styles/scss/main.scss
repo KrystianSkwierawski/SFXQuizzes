@@ -2,4 +2,10 @@
 
 @import 'abstracts/_variables.scss', 'abstracts/_mixins.scss';
 
-@import 'components/_QuizCreator.scss';
+@import 'components/_quiz-creator.scss', 'components/_footer.scss';
+
+body {
+    height: auto;
+    width: auto;
+    background-color: #222431;
+}

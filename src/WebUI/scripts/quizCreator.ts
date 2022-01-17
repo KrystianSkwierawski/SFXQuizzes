@@ -11,6 +11,12 @@ elements.dropArea.addEventListener('drop', (e: any) => {
     quizCreatorView.selectedFilesStatus(fileList);
 });
 
+elements.filesInput.addEventListener('change', () => {
+    const fileList: FileList = (<HTMLInputElement>elements.filesInput).files;
+
+    quizCreatorView.selectedFilesStatus(fileList);
+});
+
 elements.dropArea.addEventListener('dragenter', (e: DragEvent) => {
     e.preventDefault();
     elements.dropArea.classList.add('drag_enter');
@@ -34,4 +40,6 @@ elements.dropArea.addEventListener('dragstart', (e: DragEvent) => {
 elements.browseFilesButton.addEventListener('click', () => {
     (<HTMLInputElement>elements.filesInput).click();
 });
+
+
 
