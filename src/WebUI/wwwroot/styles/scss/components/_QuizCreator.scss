@@ -52,6 +52,14 @@ form {
     }
 }
 
+.browse-files-button {
+    @include reset-button;
+    background-color: #F3F3FA;
+    color: black;
+    padding: 1rem;
+    border-radius: 13px;
+    font-weight: bold;
+}
 
 .drag_enter {
     opacity: .7;
