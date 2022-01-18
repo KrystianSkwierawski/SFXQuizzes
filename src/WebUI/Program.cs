@@ -6,6 +6,7 @@ using Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.InstallServicesInAssembly(
         builder.Configuration
     );
