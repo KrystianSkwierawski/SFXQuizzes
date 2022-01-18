@@ -461,6 +461,10 @@ input {
   color: black;
 }
 
+.title-input {
+  width: 30%;
+}
+
 .browse-files-button {
   border: 0;
   background: none;
@@ -499,7 +503,8 @@ footer {
   left: 0;
   height: auto;
   color: white;
-  background-color: #222431;
+  background-color: #191924;
+  /*background-color: #262636;*/
   width: 100%;
   min-height: 50px;
 }

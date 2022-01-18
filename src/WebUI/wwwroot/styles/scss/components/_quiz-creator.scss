@@ -66,6 +66,11 @@ input{
     color: black;
 }
 
+.title-input{
+    width: 30%;
+}
+
+
 .browse-files-button {
     @include reset-button;
     background-color: #F3F3FA;
