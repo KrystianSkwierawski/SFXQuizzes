@@ -595,6 +595,7 @@ nav ul {
   flex-grow: 1;
   font-size: 1.4rem;
   font-family: "Quicksand", sans-serif;
+  color: white !important;
 }
 
 .footer__bottom {
