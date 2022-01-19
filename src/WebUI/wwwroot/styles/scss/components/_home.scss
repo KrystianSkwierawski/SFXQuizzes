@@ -1,0 +1,30 @@
+﻿.home{
+    min-height: 100vh;
+
+}
+
+.home__demo {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @include respond-to(large) {
+        flex-direction: row;
+    }
+}
+
+
+
+.demo__form-group{
+    & input{
+        width: auto;
+    }
+}
+
+.home__brand {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+}
+

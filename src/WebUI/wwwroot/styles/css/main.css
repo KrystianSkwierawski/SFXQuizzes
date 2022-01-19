@@ -397,7 +397,7 @@ th {
   padding: 0;
 }
 
-.container {
+.quiz-creator {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,13 +501,33 @@ input {
 footer {
   height: auto;
   color: white;
-  background-color: #191924;
-  /*background-color: #262636;*/
   width: 100%;
   min-height: 50px;
   display: flex;
   flex-direction: column;
   padding: 1rem 1rem;
+  position: relative;
+}
+footer::before {
+  content: "";
+  background-image: url("https://storage.googleapis.com/subtlepatterns-production/designers/subtlepatterns/uploads/oriental-tiles.png");
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.1;
+  z-index: -1;
+}
+footer::after {
+  content: "";
+  background-color: #191924;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -2;
 }
 @media screen and (min-height: 550px) and (min-width: 768px) {
   footer {
@@ -571,7 +591,7 @@ nav ul {
   margin-bottom: 2rem;
 }
 
-.brand {
+.top__brand {
   flex-grow: 1;
   font-size: 1.4rem;
   font-family: "Quicksand", sans-serif;
@@ -592,6 +612,68 @@ nav ul {
 }
 .social-medias a:hover {
   opacity: 0.7;
+}
+
+.home {
+  min-height: 100vh;
+}
+
+.home__demo {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .home__demo {
+    flex-direction: row;
+  }
+}
+
+.demo__form-group input {
+  width: auto;
+}
+
+.home__brand {
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+}
+
+.audio-player {
+  border: 3px solid #81879E;
+  padding: 1.5rem;
+  position: relative;
+  flex-grow: 1;
+  margin: 3rem;
+  display: flex;
+  justify-content: space-between;
+  color: #81879E;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.name-input {
+  position: absolute;
+  top: -15px;
+  right: 5%;
+  background-color: #222431;
+  border: 2px solid #81879E;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 3px;
+}
+
+.volume-input {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.audio-player__button {
+  border: 0;
+  background: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 body {

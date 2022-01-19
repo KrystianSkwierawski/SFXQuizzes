@@ -1,0 +1,35 @@
+﻿.audio-player {
+    border: 3px solid #81879E;
+    padding: 1.5rem;
+    position: relative;
+    flex-grow: 1;
+    margin: 3rem;
+    display: flex;
+    justify-content: space-between;
+    color: #81879E;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.name-input {
+    position: absolute;
+    top: -15px;
+    right: 5%;
+    background-color: #222431;
+    border: 2px solid #81879E;
+    color: white;
+    padding: .2rem;
+    border-radius: 3px;
+}
+
+.volume-input{
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.audio-player__button {
+    @include reset-button;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
