@@ -1,7 +1,4 @@
 using Project.WebUI.Installers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Persistance;
 
 
 var builder = WebApplication.CreateBuilder(args);
