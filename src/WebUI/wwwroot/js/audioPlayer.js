@@ -1,7 +1,7 @@
 import { elements } from './views/base.js';
 import * as quizCreatorView from './views/quizCreatorView.js';
 let _audio;
-let _linkedVolume;
+let _linkedVolumes;
 elements.audioPlayer__startButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         const id = button.id;
@@ -19,23 +19,26 @@ elements.audioPlayer__startButtons.forEach(button => {
 elements.linkVolumeButtons.forEach(button => {
     button.addEventListener('click', () => {
         quizCreatorView.showUnlinkVolumeButton();
-        _linkedVolume = false;
+        _linkedVolumes = false;
     });
 });
 elements.unlinkVolumeButtons.forEach(button => {
     button.addEventListener('click', () => {
         quizCreatorView.showLinkVolumeButton();
-        _linkedVolume = true;
+        _linkedVolumes = true;
     });
 });
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
-        if (!_linkedVolume)
+        if (!_linkedVolumes)
             return;
         const volume = input.value;
-        elements.volumeInputs.forEach(input => {
-            input.value = volume;
-        });
+        setLinkedVolumeInputs(volume);
     });
 });
+function setLinkedVolumeInputs(volume) {
+    elements.volumeInputs.forEach(input => {
+        input.value = volume;
+    });
+}
 //# sourceMappingURL=audioPlayer.js.map

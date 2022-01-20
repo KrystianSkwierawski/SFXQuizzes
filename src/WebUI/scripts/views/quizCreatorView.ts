@@ -1,9 +1,5 @@
 ﻿import { elements, elementStrings } from './base.js';
 
-//export const uploadingFilesStatus = () => {
-//    elements.browseFilesButton.innerHTML = `<p>Uploading files...</p>`;
-//};
-
 export const selectedFilesStatus = (fileList: FileList): void => {
     const markup = (fileList.length) > 1 ? `<p>${fileList.length} files selected</p>` : `<p>${fileList[0].name} selected</p>`
     elements.dropArea__status.innerHTML = markup;
