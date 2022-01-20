@@ -4,4 +4,5 @@
     filesInput: document.querySelector('.files-input'),
     dropArea__status: document.querySelector('.drop-area__status'),
     audioPlayer__startButtons: document.querySelectorAll('.audio-player__start-button'),
+    volumeInput: document.querySelector('.volume-input')
 }

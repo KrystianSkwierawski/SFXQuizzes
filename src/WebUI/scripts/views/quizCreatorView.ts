@@ -17,6 +17,9 @@ export const removeDragEnterBC = (): void => {
     elements.dropArea.classList.remove('drag_enter');
 }
 
+export const getVolumeInputValue = () => {
+    return (<HTMLInputElement>elements.volumeInput).value;
+};
 
 
 

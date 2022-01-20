@@ -12,4 +12,7 @@ export const addDragEnterBC = () => {
 export const removeDragEnterBC = () => {
     elements.dropArea.classList.remove('drag_enter');
 };
+export const getVolumeInputValue = () => {
+    return elements.volumeInput.value;
+};
 //# sourceMappingURL=quizCreatorView.js.map
