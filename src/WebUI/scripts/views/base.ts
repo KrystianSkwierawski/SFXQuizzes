@@ -4,5 +4,11 @@
     filesInput: document.querySelector('.files-input'),
     dropArea__status: document.querySelector('.drop-area__status'),
     audioPlayer__startButtons: document.querySelectorAll('.audio-player__start-button'),
-    volumeInput: document.querySelector('.volume-input')
-}
+    linkVolumeButtons: document.querySelectorAll('.link-volume-button'),
+    unlinkVolumeButtons: document.querySelectorAll('.unlink-volume-button'),
+    volumeInputs: document.querySelectorAll('.volume-input')
+};
+
+export const elementStrings = {
+    volumeInput: '.volume-input'
+};

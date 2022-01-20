@@ -1,4 +1,4 @@
-﻿import { elements } from './base.js';
+﻿import { elements, elementStrings } from './base.js';
 
 //export const uploadingFilesStatus = () => {
 //    elements.browseFilesButton.innerHTML = `<p>Uploading files...</p>`;
@@ -17,9 +17,29 @@ export const removeDragEnterBC = (): void => {
     elements.dropArea.classList.remove('drag_enter');
 }
 
-export const getVolumeInputValue = () => {
-    return (<HTMLInputElement>elements.volumeInput).value;
+export const getVolumeInputValue = (audioPlayer: HTMLElement) => {
+    const volumeInput: HTMLInputElement = audioPlayer.querySelector(elementStrings.volumeInput);
+    return volumeInput.value;
 };
 
+export const showLinkVolumeButton = () => {
+    elements.linkVolumeButtons.forEach(button => {
+        button.classList.remove('d-none');
+    });
+
+    elements.unlinkVolumeButtons.forEach(button => {
+        button.classList.add('d-none');
+    });
+};
+
+export const showUnlinkVolumeButton = () => {
+    elements.linkVolumeButtons.forEach(button => {
+        button.classList.add('d-none');
+    });
+
+    elements.unlinkVolumeButtons.forEach(button => {
+        button.classList.remove('d-none');
+    });
+};
 
 

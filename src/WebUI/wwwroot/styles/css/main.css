@@ -594,6 +594,7 @@ nav ul {
 .top__brand {
   flex-grow: 1;
   font-size: 1.4rem;
+  margin-bottom: 1rem;
   font-family: "Quicksand", sans-serif;
   color: white !important;
 }
@@ -643,15 +644,19 @@ nav ul {
 
 .audio-player {
   border: 3px solid #81879E;
-  padding: 1.5rem;
+  padding: 1.8rem;
   position: relative;
   flex-grow: 1;
   margin: 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color: #81879E;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+.audio-player p {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .name-input {
@@ -675,6 +680,16 @@ nav ul {
   background: none;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.volume {
+  display: flex;
+  flex-grow: 1;
+}
+.volume button {
+  border: 0;
+  background: none;
+  color: #81879E;
 }
 
 body {
