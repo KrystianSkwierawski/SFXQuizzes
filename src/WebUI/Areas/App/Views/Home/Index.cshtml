@@ -10,10 +10,11 @@
     <div class="quiz">
 
         <div class="quiz__audios-players">
-            <div class="audio-player">
+
+            <div class="audio-player" id="1">
                 <p>1.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="1" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
 
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
@@ -23,10 +24,10 @@
 
             </div>
 
-            <div class="audio-player">
+            <div class="audio-player" id="2">
                 <p>2.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="2" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
                     <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
@@ -34,10 +35,10 @@
                 </div>
             </div>
 
-            <div class="audio-player">
+            <div class="audio-player" id="3">
                 <p>3.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="3" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
                     <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
@@ -45,10 +46,10 @@
                 </div>
             </div>
 
-            <div class="audio-player">
+            <div class="audio-player" id="4">
                 <p>4.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="4" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
                     <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
@@ -56,10 +57,10 @@
                 </div>
             </div>
 
-            <div class="audio-player">
+            <div class="audio-player" id="5">
                 <p>5.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="5" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
                     <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
@@ -67,10 +68,10 @@
                 </div>
             </div>
 
-            <div class="audio-player">
+            <div class="audio-player" id="6">
                 <p>6.</p>
-                <input class="name-input" type="text" placeholder="guess sfx name" />
-                <button id="6" class="audio-player__start-button"><i class="fas fa-play"></i></button>
+                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                <button class="audio-player__start-button"><i class="fas fa-play"></i></button>
                 <div class="volume">
                     <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
                     <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
@@ -79,10 +80,21 @@
             </div>
         </div>
 
-        <p class="quiz__score">SCORE: 0 / 6</p>
+        <p class="quiz__score">SCORE: <span class="quiz__current-score">0</span> / 6</p>
         <button class="quiz__end-quiz-button">End The Quiz</button>
 
     </div>
 </div>
 
+<script defer>
+    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
+
+    window.answers = new Map();
+    answers.set("1", "1");
+    answers.set("2", "2");
+    answers.set("3", "3");
+    answers.set("4", "4");
+    answers.set("5", "5");
+    answers.set("6", "6");
+</script>
 <script type="module" defer src="~/js/audioPlayer.js"></script>

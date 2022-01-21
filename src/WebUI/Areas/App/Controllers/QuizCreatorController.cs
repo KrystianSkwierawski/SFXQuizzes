@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebUI.Areas.User.Controllers
+namespace WebUI.Areas.User.Controllers;
+
+public class QuizCreatorController : BaseController
 {
-    public class QuizCreatorController : BaseController
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }
+

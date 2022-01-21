@@ -5,8 +5,8 @@ let _audio: HTMLAudioElement = new Audio();
 let _linkedVolumes: boolean;
 
 elements.audioPlayer__startButtons.forEach(button => {
-    button.addEventListener('click', (e: any) => {
-        const id: string = button.id;
+    button.addEventListener('click', () => {
+        const id: string = (<HTMLElement>button.parentNode).id;
 
         if (!_audio.ended)
             _audio.pause();
@@ -57,6 +57,29 @@ function setLinkedVolumeInputs(volume: string) {
         (<HTMLInputElement>input).value = volume;
     })
 }
+
+elements.sfxNameInputs.forEach((input: HTMLElement) => {
+    input.addEventListener('keyup', (e: any) => {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            const id: string = (<HTMLElement>input.parentNode).id;
+
+            const userAnswer: string = (<string>e.target.value).toLowerCase();
+            const answer: string = (<any>window).answers.get(id).toLowerCase();
+
+            const isAnswerCorrect: boolean = answer === userAnswer;
+
+            if (isAnswerCorrect) {
+                quizCreatorView.setInputToAnsweredCorrectly(input);
+                quizCreatorView.addOnePointToCurrentScore();
+
+                return;
+            }
+
+            quizCreatorView.setInputToAnsweredInCorrectly(input);
+        }
+    });
+});
+
 
 
 

@@ -29,4 +29,16 @@ export const showUnlinkVolumeButton = () => {
         button.classList.remove('d-none');
     });
 };
+export const setInputToAnsweredCorrectly = (input) => {
+    input.classList.add('text-success');
+    input.classList.remove('text-danger');
+    input.setAttribute('disabled', "");
+};
+export const addOnePointToCurrentScore = () => {
+    const currentScore = +elements.quiz__currentScore.innerHTML;
+    elements.quiz__currentScore.innerHTML = (currentScore + 1).toString();
+};
+export const setInputToAnsweredInCorrectly = (input) => {
+    input.classList.add('text-danger');
+};
 //# sourceMappingURL=quizCreatorView.js.map

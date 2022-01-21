@@ -3,8 +3,8 @@ import * as quizCreatorView from './views/quizCreatorView.js';
 let _audio = new Audio();
 let _linkedVolumes;
 elements.audioPlayer__startButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        const id = button.id;
+    button.addEventListener('click', () => {
+        const id = button.parentNode.id;
         if (!_audio.ended)
             _audio.pause();
         const url = window.location;
@@ -42,4 +42,20 @@ function setLinkedVolumeInputs(volume) {
         input.value = volume;
     });
 }
+elements.sfxNameInputs.forEach((input) => {
+    input.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            const id = input.parentNode.id;
+            const userAnswer = e.target.value.toLowerCase();
+            const answer = window.answers.get(id).toLowerCase();
+            const isAnswerCorrect = answer === userAnswer;
+            if (isAnswerCorrect) {
+                quizCreatorView.setInputToAnsweredCorrectly(input);
+                quizCreatorView.addOnePointToCurrentScore();
+                return;
+            }
+            quizCreatorView.setInputToAnsweredInCorrectly(input);
+        }
+    });
+});
 //# sourceMappingURL=audioPlayer.js.map

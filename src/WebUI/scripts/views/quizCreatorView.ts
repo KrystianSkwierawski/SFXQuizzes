@@ -38,4 +38,20 @@ export const showUnlinkVolumeButton = () => {
     });
 };
 
+export const setInputToAnsweredCorrectly = (input: HTMLElement) => {
+    input.classList.add('text-success');
+    input.classList.remove('text-danger');
+
+    input.setAttribute('disabled', "");
+};
+
+export const addOnePointToCurrentScore = () => {
+    const currentScore: number = +elements.quiz__currentScore.innerHTML;
+    elements.quiz__currentScore.innerHTML = (currentScore + 1).toString();
+};
+
+export const setInputToAnsweredInCorrectly = (input: HTMLElement) => {
+    input.classList.add('text-danger');
+};
+
 
