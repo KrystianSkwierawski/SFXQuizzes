@@ -1,5 +1,29 @@
 ﻿body {
- 
+}
+
+.try-it {
+    margin-top: 4rem;
+    text-align: center;
+
+
+    & p {
+        font-size: 1.8rem;
+        color: #D2A517;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    & i {
+        color: white;
+        font-size: 1.5rem;
+        animation: 1.2s ease-in-out arrow infinite;
+    }
+}
+
+@keyframes arrow {
+    50% {
+        transform: translateY(6px);
+    }
 }
 
 .home {
