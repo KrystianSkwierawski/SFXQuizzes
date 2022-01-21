@@ -1,7 +1,9 @@
-﻿<div class="quiz-creator container">
+﻿@model Application.Quizzes.Commands.CreateQuiz.CreateQuizVm;
+
+<div class="quiz-creator container">
     <h1>SFX Quiz Creator</h1>
 
-    <form method="post" enctype="multipart/form-data">
+    <form class="create-quiz-form" method="post" enctype="multipart/form-data">
 
         <div class="drop-area">
             <i class="fas fa-cloud-upload-alt"></i>
@@ -10,18 +12,19 @@
                 <p>Drag & Drop files Here</p>
                 <p>Or</p>
                 <button type="button" class="browse-files-button">Browse Files</button>
-                <input class="files-input" type="file" multiple required />
             </div>
+
+            <input asp-for="Files" class="files-input" type="file" name="files" multiple required />
         </div>
 
         <div class="form-group title-input">
             <label for="title">Quiz Title*</label>
-            <input type="text" class="form-control" id="title" placeholder="Quiz Title">
+            <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Quiz Title">
         </div>
 
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="private">
-            <label class="form-check-label" for="private">Private Quiz</label>
+            <input asp-for="IsPublic" type="checkbox" class="form-check-input" checked id="public">
+            <label class="form-check-label" for="public">Public Quiz</label>
         </div>
 
         <button class="create-quiz-button" type="submit">Create Quiz</button>

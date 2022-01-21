@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Infrastructure.Files;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
         services.AddTransient<IDateTime, DateTimeService>();
+        services.AddTransient<ISFXFileBulider, SFXFileBulidercs>();
 
         return services;
     }

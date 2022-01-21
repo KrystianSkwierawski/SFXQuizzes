@@ -1,4 +1,4 @@
-﻿import { elements, elementStrings } from './base.js';
+﻿import { elements } from './base.js';
 
 export const selectedFilesStatus = (fileList: FileList): void => {
     const markup = (fileList.length) > 1 ? `<p>${fileList.length} files selected</p>` : `<p>${fileList[0].name} selected</p>`
@@ -11,58 +11,6 @@ export const addDragEnterBC = (): void => {
 
 export const removeDragEnterBC = (): void => {
     elements.dropArea.classList.remove('drag_enter');
-}
-
-export const getVolumeInputValue = (audioPlayer: HTMLElement) => {
-    const volumeInput: HTMLInputElement = audioPlayer.querySelector(elementStrings.volumeInput);
-    return volumeInput.value;
-};
-
-export const showLinkVolumeButton = () => {
-    elements.linkVolumeButtons.forEach(button => {
-        button.classList.remove('d-none');
-    });
-
-    elements.unlinkVolumeButtons.forEach(button => {
-        button.classList.add('d-none');
-    });
-};
-
-export const showUnlinkVolumeButton = () => {
-    elements.linkVolumeButtons.forEach(button => {
-        button.classList.add('d-none');
-    });
-
-    elements.unlinkVolumeButtons.forEach(button => {
-        button.classList.remove('d-none');
-    });
-};
-
-export const setInputToAnsweredCorrectly = (input: HTMLElement) => {
-    input.classList.add('text-success');
-    input.classList.remove('text-danger');
-
-    input.setAttribute('disabled', "");
-};
-
-export const addOnePointToCurrentScore = () => {
-    const currentScore: number = +elements.quiz__currentScore.innerHTML;
-    elements.quiz__currentScore.innerHTML = (currentScore + 1).toString();
-};
-
-export const setInputToAnsweredInCorrectly = (input: HTMLElement) => {
-    input.classList.add('text-danger');
-};
-
-export const setAllAnswers = function() {
-    elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
-        const sfxId: string = (<HTMLElement>input.parentNode).id;
-
-        const answer: string = (<any>window).answers.get(sfxId).toLowerCase();
-
-        input.setAttribute("disabled", "");
-        input.value = answer;
-    });
 }
 
 

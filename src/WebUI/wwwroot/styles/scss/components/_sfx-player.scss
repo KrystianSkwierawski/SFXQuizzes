@@ -1,4 +1,4 @@
-﻿.audio-player {
+﻿.sfx-player {
     border: 3px solid #81879E;
     padding: 1.8rem;
     position: relative;
@@ -22,7 +22,7 @@
     flex-direction: column;
 }
 
-.quiz__audios-players {
+.quiz__sfxs-players {
     color: white;
     display: flex;
     justify-content: space-between;
@@ -51,7 +51,7 @@
     margin-bottom: 0;
 }
 
-.audio-player__start-button {
+.sfx-player__start-button {
     @include reset-button;
     margin-left: 1rem;
     margin-right: 1rem;

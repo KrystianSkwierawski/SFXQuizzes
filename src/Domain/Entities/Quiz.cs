@@ -1,15 +1,19 @@
 ﻿using Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
 public class Quiz : AuditableEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
-    public string Name { get; set; }
+    public string Title { get; set; }
 
-    public bool Public { get; set; } = false;
+    public bool IsPublic { get; set; }
 
     public bool Approved { get; set; } = false;
+
+    [NotMapped]
+    public IList<string> SFXNames { get; set; }
 }
 

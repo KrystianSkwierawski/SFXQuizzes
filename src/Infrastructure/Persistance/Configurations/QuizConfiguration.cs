@@ -8,7 +8,7 @@ public class QuizConfiguration : IEntityTypeConfiguration<Quiz>
 {
     public void Configure(EntityTypeBuilder<Quiz> builder)
     {
-        builder.Property(quiz => quiz.Name)
+        builder.Property(quiz => quiz.Title)
             .HasMaxLength(50)
             .IsRequired();
     }

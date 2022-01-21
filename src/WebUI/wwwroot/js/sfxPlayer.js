@@ -1,8 +1,8 @@
 import { elements } from './views/base.js';
-import * as quizCreatorView from './views/quizCreatorView.js';
+import * as sfxPlayerView from './views/sfxPlayerView.js';
 let _audio = new Audio();
 let _linkedVolumes;
-elements.audioPlayer__startButtons.forEach(button => {
+elements.sfxPlayer__startButtons.forEach(button => {
     button.addEventListener('click', () => playAudio(button));
 });
 function playAudio(playAudioButton) {
@@ -13,7 +13,7 @@ function playAudio(playAudioButton) {
     if (url.search)
         _audio.src = `./assets/SFXs/${url.search}/${sfxId}.wav`;
     _audio.src = `./assets/SFXs/demo/${sfxId}.wav`;
-    const volume = +quizCreatorView.getVolumeInputValue(playAudioButton.parentElement) / 100;
+    const volume = +sfxPlayerView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
     _audio.play();
 }
@@ -21,14 +21,14 @@ elements.linkVolumeButtons.forEach(button => {
     button.addEventListener('click', unlinkVolumeButtons);
 });
 function unlinkVolumeButtons() {
-    quizCreatorView.showUnlinkVolumeButton();
+    sfxPlayerView.showUnlinkVolumeButton();
     _linkedVolumes = false;
 }
 elements.unlinkVolumeButtons.forEach(button => {
     button.addEventListener('click', linkVolumeButtons);
 });
 function linkVolumeButtons() {
-    quizCreatorView.showLinkVolumeButton();
+    sfxPlayerView.showLinkVolumeButton();
     _linkedVolumes = true;
 }
 elements.volumeInputs.forEach(input => {
@@ -56,12 +56,12 @@ function handleUsersSfxNameGuess(e, nameInput) {
         const answer = window.answers.get(sfxId).toLowerCase();
         const isAnswerCorrect = answer === userAnswer;
         if (isAnswerCorrect) {
-            quizCreatorView.setInputToAnsweredCorrectly(nameInput);
-            quizCreatorView.addOnePointToCurrentScore();
+            sfxPlayerView.setInputToAnsweredCorrectly(nameInput);
+            sfxPlayerView.addOnePointToCurrentScore();
             return;
         }
-        quizCreatorView.setInputToAnsweredInCorrectly(nameInput);
+        sfxPlayerView.setInputToAnsweredInCorrectly(nameInput);
     }
 }
-elements.quiz__endQuizButton.addEventListener('click', quizCreatorView.setAllAnswers);
-//# sourceMappingURL=audioPlayer.js.map
+elements.quiz__endQuizButton.addEventListener('click', sfxPlayerView.setAllAnswers);
+//# sourceMappingURL=sfxPlayer.js.map
