@@ -1,7 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Application.Quizzes.Commands.CreateQuiz;
 

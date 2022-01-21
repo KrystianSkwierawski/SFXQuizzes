@@ -1,8 +1,5 @@
 ﻿using Application.Quizzes.Commands.CreateQuiz;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace WebUI.Areas.User.Controllers;
 
