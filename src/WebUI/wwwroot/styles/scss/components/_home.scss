@@ -1,30 +1,24 @@
-﻿.home{
+﻿body {
+ 
+}
+
+.home {
     min-height: 100vh;
-
+    position: relative;
 }
 
-.home__demo {
+header {
     color: white;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    @include respond-to(large) {
-        flex-direction: row;
-    }
-}
-
-
-
-.demo__form-group{
-    & input{
-        width: auto;
-    }
-}
-
-.home__brand {
     text-align: center;
-    font-family: 'Quicksand', sans-serif;
-}
 
+    & h1 {
+        text-align: center;
+        margin-top: 0;
+        padding-top: 1rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    & p {
+        letter-spacing: 4px;
+    }
+}

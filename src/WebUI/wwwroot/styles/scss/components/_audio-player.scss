@@ -9,12 +9,31 @@
     color: #81879E;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    background-color: #222431;
 
-    & p{
+    & p {
         margin-top: auto;
         margin-bottom: auto;
     }
 }
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz__audios-players {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @include respond-to(large) {
+        flex-direction: row;
+    }
+}
+
 
 .name-input {
     position: absolute;
@@ -38,6 +57,34 @@
     margin-right: 1rem;
 }
 
+.quiz__score {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.quiz__end-quiz-button {
+    @include reset-button;
+    border-radius: 8px;
+    background-color: #D2A517;
+    color: black;
+    width: 30%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin-top: 1rem;
+    transition: .2s ease;
+    margin-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:hover {
+        margin-top: .9rem;
+    }
+}
 
 .volume {
     display: flex;
