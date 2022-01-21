@@ -54,4 +54,15 @@ export const setInputToAnsweredInCorrectly = (input: HTMLElement) => {
     input.classList.add('text-danger');
 };
 
+export const setAllAnswers = function() {
+    elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
+        const sfxId: string = (<HTMLElement>input.parentNode).id;
+
+        const answer: string = (<any>window).answers.get(sfxId).toLowerCase();
+
+        input.setAttribute("disabled", "");
+        input.value = answer;
+    });
+}
+
 

@@ -41,4 +41,12 @@ export const addOnePointToCurrentScore = () => {
 export const setInputToAnsweredInCorrectly = (input) => {
     input.classList.add('text-danger');
 };
+export const setAllAnswers = function () {
+    elements.sfxNameInputs.forEach((input) => {
+        const sfxId = input.parentNode.id;
+        const answer = window.answers.get(sfxId).toLowerCase();
+        input.setAttribute("disabled", "");
+        input.value = answer;
+    });
+};
 //# sourceMappingURL=quizCreatorView.js.map

@@ -5,52 +5,63 @@ let _audio: HTMLAudioElement = new Audio();
 let _linkedVolumes: boolean;
 
 elements.audioPlayer__startButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const id: string = (<HTMLElement>button.parentNode).id;
-
-        if (!_audio.ended)
-            _audio.pause();
-
-        const url: Location = window.location;
-
-        if (url.search)
-            _audio.src = `./assets/audios/${url.search}/${id}.wav`;
-
-        _audio.src = `./assets/audios/demo/${id}.wav`;
-
-        const volume: number = +quizCreatorView.getVolumeInputValue(button.parentElement) / 100;
-        _audio.volume = volume;
-
-        _audio.play();
-    })
+    button.addEventListener('click', () => playAudio(button));
 });
+
+function playAudio(playAudioButton) {
+    const sfxId: string = (<HTMLElement>playAudioButton.parentNode).id;
+
+    if (!_audio.ended)
+        _audio.pause();
+
+    const url: Location = window.location;
+
+    if (url.search)
+        _audio.src = `./assets/audios/${url.search}/${sfxId}.wav`;
+
+    _audio.src = `./assets/audios/demo/${sfxId}.wav`;
+
+    const volume: number = +quizCreatorView.getVolumeInputValue(playAudioButton.parentElement) / 100;
+    _audio.volume = volume;
+
+    _audio.play();
+}
+
 
 elements.linkVolumeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        quizCreatorView.showUnlinkVolumeButton();
-        _linkedVolumes = false;
-    });
+    button.addEventListener('click', unlinkVolumeButtons);
 });
+
+function unlinkVolumeButtons() {
+    quizCreatorView.showUnlinkVolumeButton();
+    _linkedVolumes = false;
+}
+
 
 elements.unlinkVolumeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        quizCreatorView.showLinkVolumeButton();
-        _linkedVolumes = true;
-    });
+    button.addEventListener('click', linkVolumeButtons);
 });
+
+function linkVolumeButtons() {
+    quizCreatorView.showLinkVolumeButton();
+    _linkedVolumes = true;
+}
+
 
 elements.volumeInputs.forEach(input => {
-    input.addEventListener('input', () => {
-        const volumeInputValue: string = (<HTMLInputElement>input).value;
-
-        _audio.volume = +volumeInputValue / 100;
-
-        if (!_linkedVolumes)
-            return;
-
-        setLinkedVolumeInputs(volumeInputValue);
-    });
+    input.addEventListener('input', () => changeVolume(input));
 });
+
+function changeVolume(volumeInput) {
+    const volumeInputValue: string = (<HTMLInputElement>volumeInput).value;
+
+    _audio.volume = +volumeInputValue / 100;
+
+    if (!_linkedVolumes)
+        return;
+
+    setLinkedVolumeInputs(volumeInputValue);
+}
 
 function setLinkedVolumeInputs(volume: string) {
     elements.volumeInputs.forEach(input => {
@@ -58,27 +69,33 @@ function setLinkedVolumeInputs(volume: string) {
     })
 }
 
-elements.sfxNameInputs.forEach((input: HTMLElement) => {
-    input.addEventListener('keyup', (e: any) => {
-        if (e.key === 'Enter' || e.keyCode === 13) {
-            const id: string = (<HTMLElement>input.parentNode).id;
 
-            const userAnswer: string = (<string>e.target.value).toLowerCase();
-            const answer: string = (<any>window).answers.get(id).toLowerCase();
-
-            const isAnswerCorrect: boolean = answer === userAnswer;
-
-            if (isAnswerCorrect) {
-                quizCreatorView.setInputToAnsweredCorrectly(input);
-                quizCreatorView.addOnePointToCurrentScore();
-
-                return;
-            }
-
-            quizCreatorView.setInputToAnsweredInCorrectly(input);
-        }
-    });
+elements.sfxNameInputs.forEach(input => {
+    input.addEventListener('keyup', (e: any) => handleUsersSfxNameGuess(e, input));
 });
+
+function handleUsersSfxNameGuess(e, nameInput) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        const sfxId: string = (<HTMLElement>nameInput.parentNode).id;
+
+        const userAnswer: string = (<string>e.target.value).toLowerCase();
+        const answer: string = (<any>window).answers.get(sfxId).toLowerCase();
+
+        const isAnswerCorrect: boolean = answer === userAnswer;
+
+        if (isAnswerCorrect) {
+            quizCreatorView.setInputToAnsweredCorrectly(nameInput);
+            quizCreatorView.addOnePointToCurrentScore();
+
+            return;
+        }
+
+        quizCreatorView.setInputToAnsweredInCorrectly(nameInput);
+    }
+}
+
+
+elements.quiz__endQuizButton.addEventListener('click', quizCreatorView.setAllAnswers);
 
 
 
