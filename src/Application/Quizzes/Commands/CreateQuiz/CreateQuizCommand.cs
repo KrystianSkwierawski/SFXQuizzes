@@ -45,7 +45,7 @@ public class CreateQuizCommand : IRequest<string>
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            _SFXFileBulider.SaveSFXs(request.CreateQuizVm.Files, entity.Id);
+            await _SFXFileBulider.SaveSFXs(request.CreateQuizVm.Files, entity.Id);
 
             return entity.Id;
         }

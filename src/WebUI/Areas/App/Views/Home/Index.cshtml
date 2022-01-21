@@ -1,4 +1,20 @@
-﻿<div class="home container">
+﻿@{
+    var _SFXs = new[] {
+        ("1", "1.wav"),
+        ("2", "2.wav"),
+        ("3", "3.wav"),
+        ("4", "4.wav"),
+        ("5", "5.wav"),
+        ("6", "jump.wav")
+    };
+}
+
+<script defer>
+    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
+    window.answers = new Map();
+</script>
+
+<div class="home container">
     <header>
         <h1>SFXQuizzes</h1>
         <p>
@@ -16,90 +32,28 @@
 
         <div class="quiz__sfxs-players">
 
-            <div class="sfx-player" id="1">
-                <p>1.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
+            @foreach (var (id, name) in _SFXs)
+            {
+                <div class="sfx-player" id="@id">
+                    <p>@id.</p>
+                    <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
+                    <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
 
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
+                    <div class="volume">
+                        <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
+                        <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
+                        <input class="volume-input" type="range" />
+                    </div>
+
+                    <script>answers.set('@id', '@name');</script>
                 </div>
+            }
 
-            </div>
-
-            <div class="sfx-player" id="2">
-                <p>2.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
-                </div>
-            </div>
-
-            <div class="sfx-player" id="3">
-                <p>3.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
-                </div>
-            </div>
-
-            <div class="sfx-player" id="4">
-                <p>4.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
-                </div>
-            </div>
-
-            <div class="sfx-player" id="5">
-                <p>5.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
-                </div>
-            </div>
-
-            <div class="sfx-player" id="6">
-                <p>6.</p>
-                <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-                <div class="volume">
-                    <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                    <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                    <input class="volume-input" type="range" />
-                </div>
-            </div>
         </div>
 
         <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / 6</p>
         <button class="quiz__end-quiz-button">End The Quiz</button>
-
     </div>
 </div>
 
-<script defer>
-    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
-
-    window.answers = new Map();
-    answers.set("1", "1.wav");
-    answers.set("2", "2.wav");
-    answers.set("3", "3.wav");
-    answers.set("4", "4.wav");
-    answers.set("5", "5.wav");
-    answers.set("6", "jump.wav");
-</script>
 <script type="module" defer src="~/js/sfxPlayer.js"></script>
