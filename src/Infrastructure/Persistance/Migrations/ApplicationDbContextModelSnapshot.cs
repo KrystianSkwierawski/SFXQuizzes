@@ -257,6 +257,34 @@ namespace Infrastructure.Persistance.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Quiz", b =>
+                {
+                    b.OwnsMany("Domain.ValueObjects.SFXName", "SFXNames", b1 =>
+                        {
+                            b1.Property<string>("QuizId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"), 1L, 1);
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("QuizId", "Id");
+
+                            b1.ToTable("SFXName");
+
+                            b1.WithOwner()
+                                .HasForeignKey("QuizId");
+                        });
+
+                    b.Navigation("SFXNames");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

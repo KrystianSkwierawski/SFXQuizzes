@@ -4,7 +4,7 @@ namespace WebUI.Areas.User.Controllers;
 
 public class HomeController : BaseController
 {
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         return View();
     }

@@ -1,15 +1,16 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
+using Domain.ValueObjects;
 using MediatR;
 
 namespace Application.Quizzes.Commands.CreateQuiz;
 
 
-public class CreateQuizCommand : IRequest
+public class CreateQuizCommand : IRequest<string>
 {
     public CreateQuizVm CreateQuizVm { get; set; }
 
-    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand>
+    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, string>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISFXFileBulider _SFXFileBulider;
@@ -20,13 +21,16 @@ public class CreateQuizCommand : IRequest
             _SFXFileBulider = SFXFileBulider;
         }
 
-        public async Task<Unit> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
-            IList<string> SFXNames = new List<string>();
+            IList<SFXName> SFXNames = new List<SFXName>();
 
             foreach (var file in request.CreateQuizVm.Files)
             {
-                SFXNames.Add(file.FileName);
+                SFXNames.Add(new SFXName
+                {
+                    Name = file.FileName
+                });
             };
 
             Quiz entity = new()
@@ -43,7 +47,7 @@ public class CreateQuizCommand : IRequest
 
             _SFXFileBulider.SaveSFXs(request.CreateQuizVm.Files, entity.Id);
 
-            return Unit.Value;
+            return entity.Id;
         }
     }
 }

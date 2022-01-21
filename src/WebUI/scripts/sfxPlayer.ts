@@ -10,19 +10,22 @@ elements.sfxPlayer__startButtons.forEach(button => {
 
 function playAudio(playAudioButton) {
     const sfxId: string = (<HTMLElement>playAudioButton.parentNode).id;
+    const quizId: string | undefined = (<any>window).quizId;
+    const sfxName: string | undefined = (<any>window).answers.get(sfxId);
 
     if (!_audio.ended)
         _audio.pause();
 
-    const url: Location = window.location;
+    if (quizId)
+        _audio.src = `/assets/SFXs/${quizId}/${sfxName}`;
 
-    if (url.search)
-        _audio.src = `./assets/SFXs/${url.search}/${sfxId}.wav`;
-
-    _audio.src = `./assets/SFXs/demo/${sfxId}.wav`;
+    if (!quizId)
+        _audio.src = `/assets/SFXs/demo/${sfxName}`;
 
     const volume: number = +sfxPlayerView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
+
+    console.log(_audio.src);
 
     _audio.play();
 }
@@ -79,7 +82,7 @@ function handleUsersSfxNameGuess(e, nameInput) {
         const sfxId: string = (<HTMLElement>nameInput.parentNode).id;
 
         const userAnswer: string = (<string>e.target.value).toLowerCase();
-        const answer: string = (<any>window).answers.get(sfxId).toLowerCase();
+        const answer: string = (<any>window).answers.get(sfxId).split('.')[0].toLowerCase();
 
         const isAnswerCorrect: boolean = answer === userAnswer;
 

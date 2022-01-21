@@ -4,6 +4,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Infrastructure.Persistance;
 

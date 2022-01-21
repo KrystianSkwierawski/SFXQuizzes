@@ -1,5 +1,5 @@
 ﻿using Domain.Common;
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
@@ -13,7 +13,6 @@ public class Quiz : AuditableEntity
 
     public bool Approved { get; set; } = false;
 
-    [NotMapped]
-    public IList<string> SFXNames { get; set; }
+    public IList<SFXName> SFXNames { get; set; }
 }
 

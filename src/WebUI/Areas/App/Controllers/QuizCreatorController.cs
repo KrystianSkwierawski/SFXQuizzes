@@ -24,9 +24,8 @@ public class QuizCreatorController : BaseController
     [HttpPost]
     public async Task<IActionResult> Index(CreateQuizVm createQuizVm)
     {
-        await Mediator.Send(new CreateQuizCommand { CreateQuizVm = createQuizVm });
+        string id = await Mediator.Send(new CreateQuizCommand { CreateQuizVm = createQuizVm });
 
-        return View();
+        return RedirectToAction("index", "quiz", new { id });
     }
 }
-
