@@ -463,7 +463,12 @@ input {
 }
 
 .title-input {
-  width: 30%;
+  width: 100%;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .title-input {
+    width: 40%;
+  }
 }
 
 .browse-files-button {

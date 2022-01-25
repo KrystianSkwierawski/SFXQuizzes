@@ -67,8 +67,12 @@ input{
     color: black;
 }
 
-.title-input{
-    width: 30%;
+.title-input {
+    width: 100%;
+
+    @include respond-to(large) {
+        width: 40%;
+    }
 }
 
 
