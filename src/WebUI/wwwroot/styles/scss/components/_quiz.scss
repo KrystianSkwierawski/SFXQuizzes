@@ -70,7 +70,8 @@
     border-radius: 8px;
     background-color: #D2A517;
     color: black;
-    width: 30%;
+    margin-left: 3rem;
+    margin-right: 3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-weight: bold;
@@ -78,10 +79,13 @@
     margin-top: 1rem;
     transition: .2s ease;
     margin-bottom: 4rem;
-    margin-left: auto;
-    margin-right: auto;
     transition: .1s ease-in-out;
 
+    @include respond-to(large) {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     &:hover {
         transform: translateY(-2px);
@@ -100,7 +104,6 @@
 
 .quiz-container {
     min-height: 100vh;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
