@@ -398,6 +398,7 @@ th {
 }
 
 .login {
+  margin-top: 2rem;
   min-height: 100vh;
   color: white;
   --bs-gutter-x: 0;
@@ -424,6 +425,7 @@ th {
 }
 
 .register {
+  margin-top: 2rem;
   min-height: 100vh;
   color: white;
   --bs-gutter-x: 0;
@@ -449,6 +451,57 @@ th {
   }
 }
 
+.navbar {
+  margin: 0;
+  padding: 0 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.navbar__list {
+  display: inline;
+  margin-bottom: 0;
+}
+.navbar__list a, .navbar__list button {
+  color: #81879e;
+  text-decoration: none;
+}
+.navbar__list a:hover, .navbar__list button:hover {
+  color: #81879e;
+  text-decoration: underline;
+}
+.navbar__list > li {
+  float: left;
+  margin-right: 1rem;
+}
+
+.logout-form__button {
+  border: 0;
+  background: none;
+}
+
+.navbar__brand {
+  font-family: "Quicksand", sans-serif;
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+.navbar__brand:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.list__create-quiz-link {
+  background-color: #d2a517;
+  color: black !important;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
 .quiz-creator {
   display: flex;
   flex-direction: column;
@@ -467,6 +520,7 @@ form {
 h1 {
   color: #F3F3FA;
   margin-bottom: 2rem;
+  margin-top: 0;
 }
 
 .drop-area {
