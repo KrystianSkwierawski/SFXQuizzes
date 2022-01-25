@@ -1,40 +1,6 @@
 ﻿@model Application.Quizzes.Queries.QuizDto;
 
-<script defer>
-    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
-    window.quizId = '@Model.Id';
-    window.answers = new Map();
-</script>
-
-<div class="home container">
-    <h1>@Model.Title</h1>
-
-    <div class="quiz">
-
-        <div class="quiz__sfxs-players">
-
-            @foreach (var (SFXName, index) in Model.SFXNames.Select((SFXName, index) => (SFXName, index + 1)))
-            {
-                <div class="sfx-player" id="@SFXName.Id">
-                    <p>@index.</p>
-                    <input class="sfx-name-input" type="text" placeholder="Guess sfx name" />
-                    <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-
-                    <div class="volume">
-                        <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                        <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                        <input class="volume-input" type="range" />
-                    </div>
-
-                    <script>answers.set('@SFXName.Id', '@SFXName.Name');</script>
-                </div>
-            }
-
-        </div>
-
-        <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / 6</p>
-        <button class="quiz__end-quiz-button">End The Quiz</button>
-    </div>
+<div class="quiz-container container">
+    @await Html.PartialAsync("_QuizPartial", Model)
 </div>
 
-<script type="module" defer src="~/js/sfxPlayer.js"></script>

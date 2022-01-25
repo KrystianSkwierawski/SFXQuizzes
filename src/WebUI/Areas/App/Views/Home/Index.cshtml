@@ -1,18 +1,20 @@
-﻿@{
-    var _SFXs = new[] {
-        ("1", "1.wav"),
-        ("2", "2.wav"),
-        ("3", "3.wav"),
-        ("4", "4.wav"),
-        ("5", "5.wav"),
-        ("6", "jump.wav")
-    };
-}
+﻿@using Application.Quizzes.Queries
+@using Domain.ValueObjects
 
-<script defer>
-    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
-    window.answers = new Map();
-</script>
+@{
+    QuizDto demoQuiz = new()
+            {
+                SFXNames = new List<SFXName>
+                {
+                    new SFXName {Id = 1, Name = "1.wav"},
+                    new SFXName {Id = 2, Name = "2.wav"},
+                    new SFXName {Id = 3, Name = "3.wav"},
+                    new SFXName {Id = 4, Name = "4.wav"},
+                    new SFXName {Id = 5, Name = "5.wav"},
+                    new SFXName {Id = 6, Name = "jump.wav"},
+                }
+            };
+}
 
 <div class="home container">
     <header>
@@ -28,32 +30,7 @@
         <i class="fas fa-sort-down"></i>
     </div>
 
-    <div class="quiz">
-
-        <div class="quiz__sfxs-players">
-
-            @foreach (var (id, name) in _SFXs)
-            {
-                <div class="sfx-player" id="@id">
-                    <p>@id.</p>
-                    <input class="sfx-name-input" type="text" placeholder="guess sfx name" />
-                    <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-
-                    <div class="volume">
-                        <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                        <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                        <input class="volume-input" type="range" />
-                    </div>
-
-                    <script>answers.set('@id', '@name');</script>
-                </div>
-            }
-
-        </div>
-
-        <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / 6</p>
-        <button class="quiz__end-quiz-button">End The Quiz</button>
-    </div>
+    @await Html.PartialAsync("_QuizPartial", demoQuiz);
 </div>
 
 <script type="module" defer src="~/js/sfxPlayer.js"></script>
