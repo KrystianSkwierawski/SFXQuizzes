@@ -1,5 +1,6 @@
 ﻿using Application.Quizzes.Commands.CreateQuiz;
 using Application.Quizzes.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Areas.User.Controllers;
 
@@ -16,6 +17,7 @@ public class QuizController : BaseController
         return View(quizDto);
     }
 
+    [Authorize]
     [Route("quiz/create")]
     public async Task<IActionResult> Create()
     {
@@ -24,7 +26,7 @@ public class QuizController : BaseController
         return View(createQuizVm);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost]
     [Route("quiz/create")]
     public async Task<IActionResult> Create(CreateQuizVm createQuizVm)
