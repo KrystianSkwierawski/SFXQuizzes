@@ -21,15 +21,15 @@
                 <div class="sfx-player" id="@SFXName.Id">
                     <p>@index.</p>
                     <input class="sfx-name-input" type="text" placeholder="Guess sfx name" />
-                    <button class="sfx-player__start-button"><i class="fas fa-play"></i></button>
+                    <button aria-label="play" class="sfx-player__start-button"><i class="fas fa-play"></i></button>
 
                     <div class="volume">
-                        <button class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                        <button class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                        <input class="volume-input" type="range" />
+                        <button aria-label="link volumes" class="link-volume-button d-none"><i class="fas fa-link"></i></button>
+                        <button aria-label="unlink volumes" class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
+                        <input aria-label="volume input" class="volume-input" type="range" />
                     </div>
 
-                    <script>answers.set('@SFXName.Id', '@SFXName.Name');</script>
+                    <script defer>answers.set('@SFXName.Id', '@SFXName.Name');</script>
                 </div>
             }
 
