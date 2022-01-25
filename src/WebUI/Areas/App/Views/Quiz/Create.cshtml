@@ -11,15 +11,15 @@
             <div class="drop-area__status">
                 <p>Drag & Drop files Here</p>
                 <p>Or</p>
-                <button type="button" class="browse-files-button">Browse Files</button>
+                <button type="button" class="browse-files-button" aria-label="browse files">Browse Files</button>
             </div>
 
-            <input asp-for="Files" class="files-input" type="file" name="files" multiple required />
+            <input asp-for="Files" class="files-input" type="file" name="files" multiple required aria-required="true"/>
         </div>
 
         <div class="form-group title-input">
             <label for="title">Quiz Title*</label>
-            <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Quiz Title" required>
+            <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Quiz Title" required aria-required="true">
         </div>
 
         <div class="form-check">
@@ -27,7 +27,7 @@
             <label class="form-check-label" for="public">Public Quiz</label>
         </div>
 
-        <button class="create-quiz-button" type="submit">Create Quiz</button>
+        <button class="create-quiz-button" type="submit" aria-label="create quiz">Create Quiz</button>
     </form>
 </div>
 
