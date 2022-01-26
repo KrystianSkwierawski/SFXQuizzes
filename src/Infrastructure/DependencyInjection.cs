@@ -29,7 +29,7 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
         services.AddTransient<IDateTime, DateTimeService>();
-        services.AddTransient<ISFXFileBulider, SFXFileBulidercs>();
+        services.AddTransient<ISFXFileBulider, SFXFileBuilder>();
 
         return services;
     }

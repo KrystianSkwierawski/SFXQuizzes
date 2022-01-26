@@ -8,6 +8,6 @@ public class CreateQuizVm
 
     public bool IsPublic { get; set; }
 
-    public IFormFileCollection Files { get; set; }
+    public IList<IFormFile> Files { get; set; }
 }
 
