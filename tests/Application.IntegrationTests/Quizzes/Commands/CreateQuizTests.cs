@@ -15,7 +15,7 @@ public class CreateQuizTests : TestBase
     [Test]
     public async Task ShouldRequireMinimumFields()
     {
-        var command = new CreateQuizCommand();
+        var command = new CreateQuizCommand() { CreateQuizVm = new() };
 
         await FluentActions.Invoking(() =>
              SendAsync(command)).Should().ThrowAsync<ValidationException>();
