@@ -397,11 +397,25 @@ th {
   padding: 0;
 }
 
-.login {
-  margin-top: 2rem;
-  min-height: 100vh;
+.account-manager {
+  margin: 2rem auto;
+  padding: 1rem;
   color: white;
-  --bs-gutter-x: 0;
+}
+.account-manager h1 {
+  margin-top: 0;
+}
+.account-manager .form-floating {
+  width: 100%;
+  margin: 1rem 0;
+}
+.account-manager button {
+  margin-bottom: 2rem;
+}
+
+.login {
+  margin: 2rem 0;
+  color: white;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -412,7 +426,7 @@ th {
 }
 .login .form-floating {
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 .login button {
   margin-bottom: 2rem;
@@ -425,10 +439,8 @@ th {
 }
 
 .register {
-  margin-top: 2rem;
-  min-height: 100vh;
+  margin: 2rem 0;
   color: white;
-  --bs-gutter-x: 0;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -439,7 +451,7 @@ th {
 }
 .register .form-floating {
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 .register button {
   margin-bottom: 2rem;
