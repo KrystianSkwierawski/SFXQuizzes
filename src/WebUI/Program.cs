@@ -1,42 +1,45 @@
-using Project.WebUI.Installers;
+using Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
 
+namespace WebUI;
 
-var builder = WebApplication.CreateBuilder(args);
-
-
-builder.Services.InstallServicesInAssembly(
-        builder.Configuration
-    );
-
-
-var app = builder.Build();
-
-
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseMigrationsEndPoint();
+    public async static Task Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
+
+        using (var scope = host.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+
+            try
+            {
+                var context = services.GetRequiredService<ApplicationDbContext>();
+
+                if (context.Database.IsSqlServer())
+                {
+                    context.Database.Migrate();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+                logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+
+                throw;
+            }
+        }
+
+        await host.RunAsync();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
-else
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{area=App}/{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapRazorPages();
-});
-
-
-app.Run();
