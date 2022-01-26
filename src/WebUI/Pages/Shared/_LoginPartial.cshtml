@@ -5,9 +5,22 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li>
-        <form class="logout-form" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-            <button type="submit" class="logout-form__button">Logout</button>
-        </form>
+        <div class="dropdown">
+            <button onClick="(function(){
+                        document.querySelector('.dropdown__menu').classList.toggle('d-none');
+                    })();"
+                class="dropdown__toggle-button">
+                @User.Identity?.Name <i class="fas fa-caret-down"></i>
+            </button>
+
+            <div class="dropdown__menu d-none">
+                <a href="/">Your quizzes</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
+                <form class="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="logout-form__button">Sign out</button>
+                </form>
+            </div>
+        </div>
     </li>
 }
 else
