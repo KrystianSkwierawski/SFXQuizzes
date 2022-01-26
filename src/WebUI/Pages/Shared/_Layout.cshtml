@@ -19,7 +19,22 @@
 
             <ul class="navbar__list">
                 <li><a class="list__create-quiz-link" asp-area="app" asp-controller="quiz" asp-action="create">Create Quiz</a></li>
-                @await Html.PartialAsync("_LoginPartial")
+                <li>
+                    <div class="dropdown">
+                        <button onClick="(function(){
+                                    document.querySelector('.dropdown__menu').classList.toggle('d-none');
+                                })();"
+                                class="dropdown__toggle-button">
+                            Get Started <i class="fas fa-caret-down"></i>
+                        </button>
+
+                        <div class="dropdown__menu d-none">
+                            <a href="/">Explore</a>
+                            <a href="/">How to get sfx</a>
+                            @await Html.PartialAsync("_LoginPartial")
+                        </div>
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -37,7 +52,7 @@
                     <p>App</p>
                     <ul>
                         <li><a asp-area="app" asp-controller="home" asp-action="index">Home</a></li>
-                        <li><a href="#">List Of Quizzes</a></li>
+                        <li><a href="#">Explore</a></li>
                         <li><a asp-area="app" asp-controller="quiz" asp-action="create">Create Quiz</a></li>
                     </ul>
                 </div>

@@ -466,14 +466,6 @@ th {
   display: inline;
   margin-bottom: 0;
 }
-.navbar__list a {
-  color: #81879e;
-  text-decoration: none;
-}
-.navbar__list a:hover {
-  color: #81879e;
-  text-decoration: underline;
-}
 .navbar__list > li {
   float: left;
   margin-right: 1rem;
@@ -494,7 +486,6 @@ th {
 }
 .navbar__brand:hover {
   color: white;
-  text-decoration: underline;
 }
 
 .list__create-quiz-link {
@@ -504,6 +495,7 @@ th {
   border-radius: 8px;
   font-weight: bold;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  text-decoration: none;
 }
 
 .dropdown {
@@ -511,33 +503,54 @@ th {
   margin: 0;
 }
 .dropdown button {
-  padding: 0;
+  padding: 0 !important;
+}
+
+.dropdown__menu a:not(:last-child) {
+  border-bottom: 1px solid #444c56;
 }
 
 .dropdown__menu {
   position: absolute;
   margin: 0;
-  top: 1.8rem;
+  padding: 0.3rem 0;
+  top: 2.5rem;
   right: 0;
-  width: 100%;
   z-index: 1;
   background-color: #2D333B;
   border-radius: 6px;
   border: 1px solid #444c56;
-}
-.dropdown__menu a {
-  border-bottom: 1px solid #444c56;
+  min-width: 180px;
 }
 .dropdown__menu a, .dropdown__menu form, .dropdown__menu button {
   display: block;
   width: 100%;
   color: #adbac7;
   padding: 0.2rem 0;
+  text-decoration: none;
+  text-align: left;
+  padding-left: 1rem;
 }
 .dropdown__menu a:hover, .dropdown__menu form:hover, .dropdown__menu button:hover {
   color: #cdd9e5;
   text-decoration: none;
   background-color: #316dca;
+}
+.dropdown__menu::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  right: 9px;
+  border: 8px solid transparent;
+  border-bottom-color: #444c56;
+}
+.dropdown__menu:after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  border: 7px solid transparent;
+  border-bottom-color: #2D333B;
 }
 
 .dropdown__toggle-button {

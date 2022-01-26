@@ -14,16 +14,6 @@
     display: inline;
     margin-bottom: 0;
 
-    & a {
-        color: #81879e;
-        text-decoration: none;
-
-        &:hover {
-            color: #81879e;
-            text-decoration: underline;
-        }
-    }
-
     & > li {
         float: left;
         margin-right: 1rem;
@@ -44,7 +34,6 @@
 
     &:hover {
         color: white;
-        text-decoration: underline;
     }
 }
 
@@ -55,6 +44,7 @@
     border-radius: 8px;
     font-weight: bold;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    text-decoration: none;
 }
 
 .dropdown {
@@ -62,36 +52,59 @@
     margin: 0;
 
     & button {
-        padding: 0;
+        padding: 0 !important;
     }
+}
+
+
+.dropdown__menu a:not(:last-child) {
+    border-bottom: 1px solid #444c56;
 }
 
 .dropdown__menu {
     position: absolute;
     margin: 0;
-    top: 1.8rem;
+    padding: .3rem 0;
+    top: 2.5rem;
     right: 0;
-    width: 100%;
     z-index: 1;
     background-color: #2D333B;
     border-radius: 6px;
     border: 1px solid #444c56;
-
-    & a {
-        border-bottom: 1px solid #444c56;
-    }
+    min-width: 180px;
 
     & a, form, button {
         display: block;
         width: 100%;
         color: #adbac7;
         padding: .2rem 0;
+        text-decoration: none;
+        text-align: left;
+        padding-left: 1rem;
 
         &:hover {
             color: #cdd9e5;
             text-decoration: none;
             background-color: #316dca;
         }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -16px;
+        right: 9px;
+        border: 8px solid transparent;
+        border-bottom-color: #444c56;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -14px;
+        right: 10px;
+        border: 7px solid transparent;
+        border-bottom-color: #2D333B;
     }
 }
 
