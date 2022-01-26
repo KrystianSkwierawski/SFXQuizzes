@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Files;
 
-public class SFXFileBuilder : ISFXFileBulider
+public class SFXFileBuilder : ISFXFileBuilder
 {
     private readonly ILogger<SFXFileBuilder> _logger;
 

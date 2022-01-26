@@ -13,9 +13,9 @@ public class CreateQuizCommand : IRequest<string>
     public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, string>
     {
         private readonly IApplicationDbContext _context;
-        private readonly ISFXFileBulider _SFXFileBulider;
+        private readonly ISFXFileBuilder _SFXFileBulider;
 
-        public CreateQuizCommandHandler(IApplicationDbContext context, ISFXFileBulider SFXFileBulider)
+        public CreateQuizCommandHandler(IApplicationDbContext context, ISFXFileBuilder SFXFileBulider)
         {
             _context = context;
             _SFXFileBulider = SFXFileBulider;

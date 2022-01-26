@@ -17,8 +17,8 @@ public class CreateQuizTests : TestBase
     {
         var command = new CreateQuizCommand();
 
-        FluentActions.Invoking(() =>
-            SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        await FluentActions.Invoking(() =>
+             SendAsync(command)).Should().ThrowAsync<ValidationException>();
     }
 
 
