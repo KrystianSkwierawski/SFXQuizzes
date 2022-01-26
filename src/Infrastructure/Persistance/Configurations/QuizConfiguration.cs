@@ -13,7 +13,7 @@ public class QuizConfiguration : IEntityTypeConfiguration<Quiz>
             .IsRequired();
 
         builder
-            .OwnsMany(x => x.SFXNames);
+            .OwnsMany(x => x.SFXs);
     }
 }
 

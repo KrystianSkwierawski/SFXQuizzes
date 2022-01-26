@@ -173,7 +173,7 @@ namespace Infrastructure.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SFXName",
+                name: "SFX",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -183,9 +183,9 @@ namespace Infrastructure.Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SFXName", x => new { x.QuizId, x.Id });
+                    table.PrimaryKey("PK_SFX", x => new { x.QuizId, x.Id });
                     table.ForeignKey(
-                        name: "FK_SFXName_Quizzes_QuizId",
+                        name: "FK_SFX_Quizzes_QuizId",
                         column: x => x.QuizId,
                         principalTable: "Quizzes",
                         principalColumn: "Id",
@@ -250,7 +250,7 @@ namespace Infrastructure.Persistance.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "SFXName");
+                name: "SFX");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

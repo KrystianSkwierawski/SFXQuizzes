@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220121164406_Initialize")]
+    [Migration("20220126101310_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -261,7 +261,7 @@ namespace Infrastructure.Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Quiz", b =>
                 {
-                    b.OwnsMany("Domain.ValueObjects.SFXName", "SFXNames", b1 =>
+                    b.OwnsMany("Domain.ValueObjects.SFX", "SFXs", b1 =>
                         {
                             b1.Property<string>("QuizId")
                                 .HasColumnType("nvarchar(450)");
@@ -278,13 +278,13 @@ namespace Infrastructure.Persistance.Migrations
 
                             b1.HasKey("QuizId", "Id");
 
-                            b1.ToTable("SFXName");
+                            b1.ToTable("SFX");
 
                             b1.WithOwner()
                                 .HasForeignKey("QuizId");
                         });
 
-                    b.Navigation("SFXNames");
+                    b.Navigation("SFXs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

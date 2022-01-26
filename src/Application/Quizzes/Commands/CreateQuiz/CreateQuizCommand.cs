@@ -23,11 +23,11 @@ public class CreateQuizCommand : IRequest<string>
 
         public async Task<string> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
-            IList<SFXName> SFXNames = new List<SFXName>();
+            IList<SFX> SFXs = new List<SFX>();
 
             foreach (var file in request.CreateQuizVm.Files)
             {
-                SFXNames.Add(new SFXName
+                SFXs.Add(new SFX
                 {
                     Name = file.FileName
                 });
@@ -38,7 +38,7 @@ public class CreateQuizCommand : IRequest<string>
                 Id = Guid.NewGuid().ToString(),
                 Title = request.CreateQuizVm.Title,
                 IsPublic = request.CreateQuizVm.IsPublic,
-                SFXNames = SFXNames
+                SFXs = SFXs
             };
 
             await _context.Quizzes.AddAsync(entity);

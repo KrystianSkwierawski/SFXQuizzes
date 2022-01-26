@@ -5,6 +5,10 @@ export const getVolumeInputValue = (audioPlayer: HTMLElement) => {
     return volumeInput.value;
 };
 
+export const getQuizId = () => {
+    return (<HTMLInputElement>elements.quizId).value;
+}
+
 export const showLinkVolumeButton = () => {
     elements.linkVolumeButtons.forEach(button => {
         button.classList.remove('d-none');

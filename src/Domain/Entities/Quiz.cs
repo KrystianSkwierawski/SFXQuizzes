@@ -13,6 +13,6 @@ public class Quiz : AuditableEntity
 
     public bool Approved { get; set; } = false;
 
-    public IList<SFXName> SFXNames { get; set; }
+    public IList<SFX> SFXs { get; set; }
 }
 

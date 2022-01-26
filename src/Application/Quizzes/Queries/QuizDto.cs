@@ -8,11 +8,11 @@ public class QuizDto : IMapFrom<Quiz>
 {
     public QuizDto()
     {
-        SFXNames = new List<SFXName>();
+        SFXs = new List<SFX>();
     }
 
     public string Id { get; set; }
     public string Title { get; set; }
-    public IList<SFXName> SFXNames { get; set; }
+    public IList<SFX> SFXs { get; set; }
 }
 
