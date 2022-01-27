@@ -1,0 +1,22 @@
+﻿<header>
+    <nav class="navbar">
+        <h1><a class="navbar__brand" href="/">SFXQuizzes</a></h1>
+
+        <ul class="navbar__list">
+            <li><a class="list__create-quiz-link" asp-area="app" asp-controller="quiz" asp-action="create">Create Quiz</a></li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropdown__toggle-button">
+                        Get Started <i class="fas fa-caret-down"></i>
+                    </button>
+
+                    <div class="dropdown__menu d-none">
+                        <a asp-area="app" asp-controller="explore" asp-action="index">Explore</a>
+                        <a href="/">How to get sfx</a>
+                        @await Html.PartialAsync("_LoginPartial")
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
