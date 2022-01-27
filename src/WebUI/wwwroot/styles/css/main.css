@@ -417,6 +417,7 @@ table.dataTable tbody tr {
 table.dataTable tbody tr:hover {
   background-color: #191924;
   cursor: pointer;
+  color: white;
 }
 table.dataTable thead tr {
   background-color: #222431;
@@ -429,6 +430,12 @@ table.dataTable thead tr {
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .paginate_button:active {
   border: 0;
   background: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  border: 0;
+  background: none;
+  box-shadow: none;
 }
 
 .dataTables_wrapper .dataTables_filter input {

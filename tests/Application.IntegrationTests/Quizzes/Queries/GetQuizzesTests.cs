@@ -1,9 +1,12 @@
-﻿using Application.Quizzes.Queries.GetQuizzes;
+﻿using Application.Quizzes.Commands.CreateQuiz;
+using Application.Quizzes.Queries.GetQuizzes;
 using Domain.Entities;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Queries;
@@ -15,17 +18,17 @@ public class GetQuizzesTests : TestBase
     public async Task ShouldReturnQuizzes()
     {
         //Arrange
-        await AddRangeAsync(new List<Quiz>
+        IList<IFormFile> files = new List<IFormFile>() {
+            new FormFile(null, 0, 0, null, "sf1.wav"),
+            new FormFile(null, 0, 0, null, "sfx2.wav")
+        };
+
+        await SendAsync(new CreateQuizCommand()
         {
-            new Quiz
+            CreateQuizVm = new CreateQuizVm()
             {
-                Id = Guid.NewGuid().ToString(),
-                Title = "quiz"
-            },
-            new Quiz
-            {
-                Id = Guid.NewGuid().ToString(),              
-                Title = "quiz"
+                Title = "quiz",
+                Files = files
             }
         });
 
@@ -36,7 +39,10 @@ public class GetQuizzesTests : TestBase
 
         //Assert
         result.Should().NotBeNull();
-        result.Should().HaveCount(2);
+        result.Should().HaveCount(1);
+
+        result[0].NumberOfSFXs.Should()
+            .Be(files.Count());
     }
 }
 

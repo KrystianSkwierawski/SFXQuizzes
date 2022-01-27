@@ -20,6 +20,7 @@ table.dataTable {
     & tbody tr:hover {
         background-color: #191924;
         cursor: pointer;
+        color: white;
     }
 
     & thead tr {
@@ -35,7 +36,12 @@ table.dataTable {
     @include reset-button;
 }
 
-.dataTables_wrapper .dataTables_filter input{
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    @include reset-button;
+    box-shadow: none;
+}
+
+.dataTables_wrapper .dataTables_filter input {
     color: white;
 }
 
