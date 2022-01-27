@@ -1,5 +1,5 @@
 ﻿using Application.Quizzes.Commands.CreateQuiz;
-using Application.Quizzes.Queries;
+using Application.Quizzes.Queries.GetQuiz;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using NUnit.Framework;

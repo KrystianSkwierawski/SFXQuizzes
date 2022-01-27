@@ -1,5 +1,5 @@
 ﻿using Application.Common.Mappings;
-using Application.Quizzes.Queries;
+using Application.Quizzes.Queries.GetQuiz;
 using AutoMapper;
 using Domain.Entities;
 using NUnit.Framework;

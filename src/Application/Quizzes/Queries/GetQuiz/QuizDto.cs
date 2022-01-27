@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Application.Quizzes.Queries;
+namespace Application.Quizzes.Queries.GetQuiz;
 
 public class QuizDto : IMapFrom<Quiz>
 {

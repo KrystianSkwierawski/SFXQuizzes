@@ -4,7 +4,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Quizzes.Queries;
+namespace Application.Quizzes.Queries.GetQuiz;
 
 
 public class GetQuizQuery : IRequest<QuizDto>
