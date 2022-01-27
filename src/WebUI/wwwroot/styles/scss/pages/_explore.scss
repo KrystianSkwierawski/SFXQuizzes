@@ -1,0 +1,32 @@
+﻿.explore {
+    margin-top: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.explore__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 .5rem;
+
+
+    & td, th {
+        padding: 1rem;
+    }
+
+    & tbody tr:hover {
+        background-color: #191924;
+        cursor: pointer;
+    }
+
+    & tbody tr {
+        color: #81879e;
+    }
+
+    & tr {
+        background-color: #222431;
+        border: 1px solid #81879e; 
+    }
+}

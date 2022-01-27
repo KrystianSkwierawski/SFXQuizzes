@@ -397,6 +397,34 @@ th {
   padding: 0;
 }
 
+.explore {
+  margin-top: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.explore__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+.explore__table td, .explore__table th {
+  padding: 1rem;
+}
+.explore__table tbody tr:hover {
+  background-color: #191924;
+  cursor: pointer;
+}
+.explore__table tbody tr {
+  color: #81879e;
+}
+.explore__table tr {
+  background-color: #222431;
+  border: 1px solid #81879e;
+}
+
 .account-manager {
   margin: 2rem auto;
   padding: 1rem;

@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Application.Quizzes.Queries.GetQuizzes
+@model IList<QuizDto>
+
+
+
+<div class="explore container">
+    <table class="explore__table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Url</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        @foreach (var (quiz, index) in Model.Select((quiz, index) => (quiz, index + 1)))
+        {
+            <tbody>
+                <tr onclick="(function(){ window.location = '/quiz/@quiz.Id'; })()">
+                    <td>@index</td>
+                    <td>@quiz.Title</td>
+                    <td>@quiz.Id</td>
+                    <td>user123</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

@@ -1,4 +1,4 @@
-﻿using Application.Quizzes.Queries;
+﻿using Application.Quizzes.Queries.GetQuizzes;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Areas.User.Controllers;
 
@@ -10,11 +10,9 @@ public class ExploreController : BaseController
     [Route("explore")]
     public async Task<IActionResult> Index()
     {
-        //QuizDto quizDto = await Mediator.Send(new GetQuizzesQuery { Id = id });
+        IList<QuizDto> quizzes = await Mediator.Send(new GetQuizzesQuery());
 
-        //return View(quizDto);
-
-        return View();
+        return View(quizzes);
     }
 }
 
