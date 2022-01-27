@@ -1,28 +1,34 @@
 ﻿@using Application.Quizzes.Queries.GetQuizzes
 @model IList<QuizDto>
 
-
-
 <div class="explore container">
-    <table class="explore__table">
+    <h1>Explore</h1>
+
+    <table id="explore__table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Url</th>
                 <th>Author</th>
             </tr>
         </thead>
-        @foreach (var (quiz, index) in Model.Select((quiz, index) => (quiz, index + 1)))
-        {
-            <tbody>
+        <tbody>
+            @foreach (var (quiz, index) in Model.Select((quiz, index) => (quiz, index + 1)))
+            {
                 <tr onclick="(function(){ window.location = '/quiz/@quiz.Id'; })()">
                     <td>@index</td>
                     <td>@quiz.Title</td>
-                    <td>@quiz.Id</td>
                     <td>user123</td>
                 </tr>
-            </tbody>
-        }
+            }
+        </tbody>
     </table>
 </div>
+
+
+<script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+<script defer>
+    $(document).ready( function () {
+        $('#explore__table').DataTable();
+    } );
+</script>

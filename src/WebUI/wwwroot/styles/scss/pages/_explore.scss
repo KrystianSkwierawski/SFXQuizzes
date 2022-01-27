@@ -1,19 +1,20 @@
 ﻿.explore {
-    margin-top: 2rem;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
+
+    & h1{
+        text-align: center;
+        margin: 1rem 0;
+    }
 }
 
-.explore__table {
+table.dataTable {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 .5rem;
+    color: white;
+    border-spacing: 0 .8rem;
 
-
-    & td, th {
-        padding: 1rem;
+    & tbody tr {
+        color: #81879e;
+        background-color: #222431;
     }
 
     & tbody tr:hover {
@@ -21,12 +22,31 @@
         cursor: pointer;
     }
 
-    & tbody tr {
-        color: #81879e;
-    }
-
-    & tr {
+    & thead tr {
         background-color: #222431;
-        border: 1px solid #81879e; 
     }
+}
+
+.dataTables_wrapper{
+   margin: 2rem 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover, .paginate_button:active {
+    @include reset-button;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+    color: white;
+}
+
+table.dataTable.no-footer, table.dataTable thead th {
+    border: 0;
+}
+
+.dataTables_wrapper .dataTables_info, paginate_button {
+    color: #81879e;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #81879e !important;
 }
