@@ -8,6 +8,7 @@
         if (file.size > 307200)
             validationError = `File size must under 300KB\n\n${file.name}: ${Math.floor(file.size / 1024)}KB \n`;
 
+
         const supportedFormats = ['mp3', 'wav', 'ogg'];
 
         const format: string = file.name.split('.')[1];
