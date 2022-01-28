@@ -1,14 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Application.Common.Interfaces;
+using Newtonsoft.Json.Linq;
 
-namespace Application.Common.Validators;
+namespace Infrastructure.Services;
 
-public static class CaptachaValidator
+public class CaptachaAPIService : ICaptachaAPIService
 {
-    public static async Task<bool> BeValid(string captacha, CancellationToken cancellationToken)
+    public async Task<JObject> GetResponseAsync(string captacha)
     {
-        if (Environment.GetEnvironmentVariable("RunningTests") == "true")
-            return true;
-
         using HttpClient client = new();
 
         string url = "https://www.google.com/recaptcha/api/siteverify?secret=6LdbmkEeAAAAAN1tg83pP-Pg0eSyyoa3AZQ7Yqxb&response=" + captacha;
@@ -19,9 +17,7 @@ public static class CaptachaValidator
         string data = await content.ReadAsStringAsync();
         JObject dataObj = JObject.Parse(data);
 
-        bool isValid = (dataObj["success"]?.Value<bool>() == true);
-
-        return isValid;
+        return dataObj;
     }
 }
 

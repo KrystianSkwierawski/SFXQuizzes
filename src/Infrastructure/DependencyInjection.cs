@@ -30,6 +30,8 @@ public static class DependencyInjection
 
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<ISFXFileBuilder, SFXFileBuilder>();
+        services.AddTransient<ICaptachaAPIService, CaptachaAPIService>();
+
 
         return services;
     }
