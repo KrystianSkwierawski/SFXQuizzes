@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.Validators;
 
-public static class SupportedFileFormat
+public static class FileFormatValidator
 {
     public static bool HasSupportedFileFormat(string fileName)
     {

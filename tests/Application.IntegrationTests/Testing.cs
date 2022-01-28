@@ -39,6 +39,8 @@ public class Testing
 
         var services = new ServiceCollection();
 
+        Environment.SetEnvironmentVariable("RunningTests", "true");
+
         services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
             w.EnvironmentName == "Development" &&
             w.ApplicationName == "WebUI"));
