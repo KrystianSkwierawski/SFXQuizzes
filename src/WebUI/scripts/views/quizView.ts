@@ -49,7 +49,7 @@ export const setAllAnswers = function () {
     elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
         const sfxId: string = (<HTMLElement>input.parentNode).id;
 
-        const answer: string = (<any>window).answers.get(sfxId).split('.')[0].toLowerCase();
+        const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
 
         input.setAttribute("disabled", "");
         input.value = answer;

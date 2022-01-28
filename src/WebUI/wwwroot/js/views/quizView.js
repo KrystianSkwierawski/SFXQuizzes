@@ -37,7 +37,7 @@ export const setInputToAnsweredInCorrectly = (input) => {
 export const setAllAnswers = function () {
     elements.sfxNameInputs.forEach((input) => {
         const sfxId = input.parentNode.id;
-        const answer = window.answers.get(sfxId).split('.')[0].toLowerCase();
+        const answer = window.answers.get(sfxId).split('.')[0].split(' ` ')[0];
         input.setAttribute("disabled", "");
         input.value = answer;
     });
