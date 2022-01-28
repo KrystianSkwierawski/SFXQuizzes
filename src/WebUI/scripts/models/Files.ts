@@ -11,7 +11,7 @@ export const validateFiles = (files: FileList) => {
             validationError = `File size must under 300KB\n\n${file.name}: ${Math.floor(file.size / 1024)}KB \n`;
 
         const format: string = file.name.split('.')[1];
-        if (!supportedFormats.some(supportedFormat => supportedFormat === format.toLocaleLowerCase()))
+        if (!supportedFormats.some(supportedFormat => supportedFormat === format.toLowerCase()))
             validationError = `File must be supported audio format - mp3, wav, ogg\n\n${file.name}`;
     });
 
