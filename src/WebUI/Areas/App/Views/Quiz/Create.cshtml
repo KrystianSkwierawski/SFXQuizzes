@@ -25,7 +25,7 @@
         </div>
 
         <div class="captacha">
-            <div class="g-recaptcha" data-sitekey="6LdbmkEeAAAAANLtuEoxy_BHHmiTYa2GEmiawZpX" data-callback="recaptchaCallback"></div>
+            <div class="g-recaptcha" data-sitekey="6LdbmkEeAAAAANLtuEoxy_BHHmiTYa2GEmiawZpX" data-callback="handleCaptachaCallback" data-expired-callback="handleCaptchaExpired"></div>
             <input asp-for="Captacha" id="captacha-field" required type="text" style="display:none;">
         </div>
 
@@ -38,11 +38,14 @@
     </form>
 </div>
 
-<script defer>
-        function recaptchaCallback(e) {
-        document.getElementById('captacha-field').value = e;
-    }
-</script>
-
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script defer type="module" src=~/js/quizCreator.js></script>
+<script defer>
+    function handleCaptachaCallback(captacha) {
+        document.getElementById('captacha-field').value = captacha;
+    }
+
+    function handleCaptchaExpired(){
+        document.getElementById('captacha-field') = "";
+    }
+</script>
