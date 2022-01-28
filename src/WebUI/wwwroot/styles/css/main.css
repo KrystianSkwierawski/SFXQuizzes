@@ -645,7 +645,7 @@ form {
 h1 {
   color: #F3F3FA;
   margin-bottom: 2rem;
-  margin-top: 0;
+  margin-top: 1rem;
 }
 
 .drop-area {
@@ -694,12 +694,16 @@ input {
 
 .title-input {
   width: 100%;
-  margin: 1rem 0;
 }
 @media screen and (min-height: 550px) and (min-width: 1000px) {
   .title-input {
     width: 40%;
   }
+}
+
+.captacha {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .browse-files-button {

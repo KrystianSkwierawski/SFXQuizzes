@@ -17,14 +17,19 @@
             <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true" />
         </div>
 
-     
+
 
         <div class="form-check">
             <input asp-for="IsPublic" type="checkbox" class="form-check-input" checked id="public">
             <label class="form-check-label" for="public">Public Quiz</label>
         </div>
 
-           <div class="form-floating title-input">
+        <div class="captacha">
+            <div class="g-recaptcha" data-sitekey="6LdbmkEeAAAAANLtuEoxy_BHHmiTYa2GEmiawZpX" data-callback="recaptchaCallback"></div>
+            <input id="captacha-field" required type="text" style="display:none;">
+        </div>
+
+        <div class="form-floating title-input">
             <input asp-for="Title" type="text" class="form-control" id="title" required aria-required="true">
             <label for="title">Quiz Title*</label>
         </div>
@@ -33,4 +38,11 @@
     </form>
 </div>
 
+<script defer>
+        function recaptchaCallback() {
+        document.getElementById('captacha-field').value = e;
+    }
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script defer type="module" src=~/js/quizCreator.js></script>
