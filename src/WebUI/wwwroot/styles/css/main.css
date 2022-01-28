@@ -694,6 +694,7 @@ input {
 
 .title-input {
   width: 100%;
+  margin: 1rem 0;
 }
 @media screen and (min-height: 550px) and (min-width: 1000px) {
   .title-input {

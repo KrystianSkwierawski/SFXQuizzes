@@ -14,17 +14,19 @@
                 <button type="button" class="browse-files-button" aria-label="browse files">Browse Files</button>
             </div>
 
-            <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true"/>
+            <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true" />
         </div>
 
-        <div class="form-group title-input">
-            <label for="title">Quiz Title*</label>
-            <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Quiz Title" required aria-required="true">
-        </div>
+     
 
         <div class="form-check">
             <input asp-for="IsPublic" type="checkbox" class="form-check-input" checked id="public">
             <label class="form-check-label" for="public">Public Quiz</label>
+        </div>
+
+           <div class="form-floating title-input">
+            <input asp-for="Title" type="text" class="form-control" id="title" required aria-required="true">
+            <label for="title">Quiz Title*</label>
         </div>
 
         <button class="create-quiz-button" type="submit" aria-label="create quiz">Create Quiz</button>
