@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Persistance;
+using WebUI.HealthChecks;
 
 namespace WebUI.Installers;
 
@@ -8,7 +9,8 @@ public class HealthChecksInstaller : IInstaller
     {
         {
             services.AddHealthChecks()
-              .AddDbContextCheck<ApplicationDbContext>();
+              .AddDbContextCheck<ApplicationDbContext>()
+              .AddCheck<CaptachaAPIHealthCheck>("API validating captacha");
         }
     }
 }
