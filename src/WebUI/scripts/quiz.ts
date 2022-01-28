@@ -1,5 +1,7 @@
 ﻿import { elements } from './views/base.js';
 import * as quizView from './views/quizView.js';
+import { isAnswerCorrect } from './models/Quiz.js';
+
 
 let _audio: HTMLAudioElement = new Audio();
 let _linkedVolumes: boolean;
@@ -76,23 +78,20 @@ elements.sfxNameInputs.forEach(input => {
 });
 
 function handleUsersSfxNameGuess(e, nameInput) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-        const sfxId: string = (<HTMLElement>nameInput.parentNode).id;
+    if (!(e.key === 'Enter') || !(e.keyCode === 13))
+        return;
 
-        const userAnswer: string = (<string>e.target.value).toLowerCase();
-        const answer: string = (<any>window).answers.get(sfxId).split('.')[0].toLowerCase();
+    const sfxId: string = (<HTMLElement>nameInput.parentNode).id;
+    const userAnswer: string = (<string>e.target.value).toLowerCase();
 
-        const isAnswerCorrect: boolean = answer === userAnswer;
+    if (isAnswerCorrect(sfxId, userAnswer)) {
+        quizView.setInputToAnsweredCorrectly(nameInput);
+        quizView.addOnePointToCurrentScore();
 
-        if (isAnswerCorrect) {
-            quizView.setInputToAnsweredCorrectly(nameInput);
-            quizView.addOnePointToCurrentScore();
-
-            return;
-        }
-
-        quizView.setInputToAnsweredInCorrectly(nameInput);
+        return;
     }
+
+    quizView.setInputToAnsweredInCorrectly(nameInput);
 }
 
 

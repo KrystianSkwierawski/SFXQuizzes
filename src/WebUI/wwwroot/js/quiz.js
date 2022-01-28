@@ -1,5 +1,6 @@
 import { elements } from './views/base.js';
 import * as quizView from './views/quizView.js';
+import { isAnswerCorrect } from './models/Quiz.js';
 let _audio = new Audio();
 let _linkedVolumes;
 elements.sfxPlayer__startButtons.forEach(button => {
@@ -52,18 +53,16 @@ elements.sfxNameInputs.forEach(input => {
     input.addEventListener('keyup', (e) => handleUsersSfxNameGuess(e, input));
 });
 function handleUsersSfxNameGuess(e, nameInput) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-        const sfxId = nameInput.parentNode.id;
-        const userAnswer = e.target.value.toLowerCase();
-        const answer = window.answers.get(sfxId).split('.')[0].toLowerCase();
-        const isAnswerCorrect = answer === userAnswer;
-        if (isAnswerCorrect) {
-            quizView.setInputToAnsweredCorrectly(nameInput);
-            quizView.addOnePointToCurrentScore();
-            return;
-        }
-        quizView.setInputToAnsweredInCorrectly(nameInput);
+    if (!(e.key === 'Enter') || !(e.keyCode === 13))
+        return;
+    const sfxId = nameInput.parentNode.id;
+    const userAnswer = e.target.value.toLowerCase();
+    if (isAnswerCorrect(sfxId, userAnswer)) {
+        quizView.setInputToAnsweredCorrectly(nameInput);
+        quizView.addOnePointToCurrentScore();
+        return;
     }
+    quizView.setInputToAnsweredInCorrectly(nameInput);
 }
 elements.quiz__endQuizButton.addEventListener('click', quizView.setAllAnswers);
 //# sourceMappingURL=quiz.js.map
