@@ -4,6 +4,7 @@ using Domain.Entities;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,10 +16,10 @@ public class CreateQuizTests : TestBase
     [Test]
     public async Task ShouldRequireMinimumFields()
     {
-        var command = new CreateQuizCommand() { CreateQuizVm = new() };
+        var command = new CreateQuizCommand();
 
         await FluentActions.Invoking(() =>
-             SendAsync(command)).Should().ThrowAsync<ValidationException>();
+             SendAsync(command)).Should().ThrowAsync<Exception>();
     }
 
 
