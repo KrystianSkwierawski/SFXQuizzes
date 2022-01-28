@@ -14,7 +14,7 @@
                 <button type="button" class="browse-files-button" aria-label="browse files">Browse Files</button>
             </div>
 
-            <input asp-for="Files" class="files-input" type="file" name="files" multiple required aria-required="true"/>
+            <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true"/>
         </div>
 
         <div class="form-group title-input">

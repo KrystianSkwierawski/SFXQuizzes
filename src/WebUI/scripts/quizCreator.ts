@@ -1,15 +1,21 @@
 ﻿import { elements } from './views/base.js';
 import * as quizCreatorView from './views/quizCreatorView.js';
+import { validateFiles } from './models/Files.js';
 
 elements.dropArea.addEventListener('drop', (e: any) => {
     e.preventDefault();
+    quizCreatorView.removeDragEnterBC();
 
     const fileList: FileList = e.dataTransfer.files;
+
+    const validationError: string = validateFiles(fileList);
+    if (validationError)
+        return alert(validationError);
+
 
     (<HTMLInputElement>elements.filesInput).files = fileList;
 
     quizCreatorView.selectedFilesStatus(fileList);
-    quizCreatorView.removeDragEnterBC();
 });
 
 elements.filesInput.addEventListener('change', () => {
