@@ -1,4 +1,4 @@
-export const elements = {
+export var elements = {
     dropArea: document.querySelector('.drop-area'),
     browseFilesButton: document.querySelector('.browse-files-button'),
     filesInput: document.querySelector('.files-input'),
@@ -13,7 +13,7 @@ export const elements = {
     createQuizForm: document.querySelector('.create-quiz-form'),
     quizId: document.querySelector('.quiz-id')
 };
-export const elementStrings = {
+export var elementStrings = {
     volumeInput: '.volume-input'
 };
 //# sourceMappingURL=base.js.map

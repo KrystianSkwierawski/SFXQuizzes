@@ -1,36 +1,41 @@
 import { elements } from './views/base.js';
 import * as quizCreatorView from './views/quizCreatorView.js';
 import { validateFiles } from './models/Files.js';
-elements.dropArea.addEventListener('drop', (e) => {
+elements.dropArea.addEventListener('drop', function (e) {
     e.preventDefault();
     quizCreatorView.removeDragEnterBC();
-    const fileList = e.dataTransfer.files;
-    const validationError = validateFiles(fileList);
+    var fileList = e.dataTransfer.files;
+    var validationError = validateFiles(fileList);
     if (validationError)
         return alert(validationError);
-    elements.filesInput.files = fileList;
+    quizCreatorView.setFilesInputValue(fileList);
     quizCreatorView.selectedFilesStatus(fileList);
 });
-elements.filesInput.addEventListener('change', () => {
-    const fileList = elements.filesInput.files;
+elements.filesInput.addEventListener('change', function (e) {
+    var fileList = quizCreatorView.getFilesInputValue();
+    var validationError = validateFiles(fileList);
+    if (validationError) {
+        quizCreatorView.resetFilesInput();
+        return alert(validationError);
+    }
     quizCreatorView.selectedFilesStatus(fileList);
 });
-elements.dropArea.addEventListener('dragenter', (e) => {
+elements.dropArea.addEventListener('dragenter', function (e) {
     e.preventDefault();
     quizCreatorView.addDragEnterBC();
 });
-elements.dropArea.addEventListener('dragleave', (e) => {
+elements.dropArea.addEventListener('dragleave', function (e) {
     e.preventDefault();
     quizCreatorView.removeDragEnterBC();
 });
-elements.dropArea.addEventListener('dragover', (e) => {
+elements.dropArea.addEventListener('dragover', function (e) {
     e.preventDefault();
 });
-elements.dropArea.addEventListener('dragstart', (e) => {
+elements.dropArea.addEventListener('dragstart', function (e) {
     e.preventDefault();
     e.dataTransfer.setData("file", "data");
 });
-elements.browseFilesButton.addEventListener('click', () => {
+elements.browseFilesButton.addEventListener('click', function () {
     elements.filesInput.click();
 });
 //# sourceMappingURL=quizCreator.js.map

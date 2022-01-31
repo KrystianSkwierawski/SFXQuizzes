@@ -50,7 +50,6 @@ function linkVolumeButtons() {
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
         //TODO: if playing current sfx     
-
         changeVolume(input)
     });
 });

@@ -4,7 +4,9 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es6",
+    "lib": [ "es6", "dom", "ES2018" ],
+    "module": "es6",
+    "target": "es5",
     "outDir": "wwwroot/js/"
   },
   "compileOnSave": true,
