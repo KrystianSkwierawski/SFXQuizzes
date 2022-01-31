@@ -8,7 +8,7 @@ elements.dropArea.addEventListener('drop', (e: any) => {
 
     const fileList: FileList = e.dataTransfer.files;
 
-    const validationError: string = validateFiles(fileList);
+    const validationError = validateFiles(fileList);
     if (validationError)
         return alert(validationError);
 

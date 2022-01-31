@@ -1,21 +1,60 @@
 ﻿export const validateFiles = (files: FileList) => {
-    let validationError: string | undefined;
 
+    const numberOfFilesError = validateNumberOfFiles(files);
+    if (numberOfFilesError)
+        return numberOfFilesError;
+
+    const filesSizeError = validateFilesSize(files);
+    if (filesSizeError)
+        return filesSizeError;
+
+    const supportedFormatsError = validateSupportedFormats(files);
+    if (supportedFormatsError)
+        return supportedFormatsError;
+
+    return;
+};
+
+const validateNumberOfFiles = (files: FileList) => {
     if (files.length > 30)
-        validationError = 'Number of files must less than 30';
+        return 'Number of files must less than 30';
 
-    [...files].forEach(file => {
-        if (file.size > 307200)
-            validationError = `File size must under 300KB\n\n${file.name}: ${Math.floor(file.size / 1024)}KB \n`;
+    return;
+};
 
+const validateFilesSize = (files: FileList) => {
+    const tooLargeFiles = Array.from(files).filter(file => file.size > 300 * 1024);
 
-        const supportedFormats = ['mp3', 'wav', 'ogg'];
+    if (tooLargeFiles.length > 0) {
+        let validationError = 'File size must under 300KB\n';
 
-        const format: string = file.name.split('.')[1];
-        if (!supportedFormats.some(supportedFormat => supportedFormat === format.toLowerCase()))
-            validationError = `File must be supported audio format - mp3, wav, ogg\n\n${file.name}`;
-    });
+        tooLargeFiles.forEach(file => {
+            validationError += `\n${file.name}: ${Math.floor(file.size / 1024)}KB`;
+        });
 
-    return validationError;
+        return validationError;
+    }
+
+    return;
+};
+
+const validateSupportedFormats = (files: FileList) => {
+    const supportedFormats = ['mp3', 'wav', 'ogg'];
+
+    const notSupportedFiles: File[] = Array.from(files).filter(file => !supportedFormats.includes(
+        file.name.split('.')[1].toLowerCase()
+    ))
+
+    if (notSupportedFiles.length > 0) {
+        let validationError = 'File must be supported audio format - mp3, wav, ogg\n';
+
+        notSupportedFiles.forEach(file => {
+            validationError += `\n${file.name}`;
+        });
+
+        return validationError;
+    }
+
+    return;
 };
 
