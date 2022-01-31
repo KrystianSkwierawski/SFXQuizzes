@@ -19,4 +19,21 @@
             </li>
         </ul>
     </nav>
+
 </header>
+
+<script defer>
+    const dropDownMenu = document.querySelector('.dropdown__menu');
+
+    document.querySelector('.dropdown__toggle-button').addEventListener('click', () => {
+        dropDownMenu.classList.toggle('d-none');
+    });
+
+    document.addEventListener('click', (e) => {
+        if(e.target.matches('.dropdown__toggle-button, .dropdown__toggle-button *') || dropDownMenu.classList.contains('d-none'))
+        return;
+
+        dropDownMenu.classList.add('d-none');
+    });
+</script>
+

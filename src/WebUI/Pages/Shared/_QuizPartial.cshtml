@@ -8,7 +8,7 @@
     </script>
 
     <div class="quiz">
-        <input class="quiz-id" value="@Model.Id" hidden/>
+        <input class="quiz-id" value="@Model.Id" hidden />
 
         @if (!string.IsNullOrEmpty(Model.Title))
         {
@@ -40,6 +40,8 @@
         <button class="quiz__end-quiz-button">End The Quiz</button>
     </div>
 
-    <script type="module" defer src="~/js/quiz.js"></script>
 </div>
+
+<script type="module" defer src="~/js/quiz.js"></script>
+
 
