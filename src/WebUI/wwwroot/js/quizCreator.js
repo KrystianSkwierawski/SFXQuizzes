@@ -11,8 +11,14 @@ elements.dropArea.addEventListener('drop', (e) => {
     elements.filesInput.files = fileList;
     quizCreatorView.selectedFilesStatus(fileList);
 });
-elements.filesInput.addEventListener('change', () => {
+elements.filesInput.addEventListener('change', (e) => {
     const fileList = elements.filesInput.files;
+    const validationError = validateFiles(fileList);
+    if (validationError) {
+        // reset input
+        elements.filesInput.files = new DataTransfer().files;
+        return alert(validationError);
+    }
     quizCreatorView.selectedFilesStatus(fileList);
 });
 elements.dropArea.addEventListener('dragenter', (e) => {

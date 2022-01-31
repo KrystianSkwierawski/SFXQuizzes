@@ -9,6 +9,7 @@ body {
     width: auto;
     background-color: #222431;
     position: relative;
+    overflow-x: hidden;
 
     &::before {
         content: "";
