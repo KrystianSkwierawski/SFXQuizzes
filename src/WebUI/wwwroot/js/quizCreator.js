@@ -8,15 +8,14 @@ elements.dropArea.addEventListener('drop', function (e) {
     var validationError = validateFiles(fileList);
     if (validationError)
         return alert(validationError);
-    elements.filesInput.files = fileList;
+    quizCreatorView.setFilesInputValue(fileList);
     quizCreatorView.selectedFilesStatus(fileList);
 });
 elements.filesInput.addEventListener('change', function (e) {
-    var fileList = elements.filesInput.files;
+    var fileList = quizCreatorView.getFilesInputValue();
     var validationError = validateFiles(fileList);
     if (validationError) {
-        // reset input
-        elements.filesInput.files = new DataTransfer().files;
+        quizCreatorView.resetFilesInput();
         return alert(validationError);
     }
     quizCreatorView.selectedFilesStatus(fileList);

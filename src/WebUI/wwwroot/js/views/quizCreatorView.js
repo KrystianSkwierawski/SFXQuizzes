@@ -9,4 +9,13 @@ export var addDragEnterBC = function () {
 export var removeDragEnterBC = function () {
     elements.dropArea.classList.remove('drag_enter');
 };
+export var resetFilesInput = function () {
+    elements.filesInput.files = new DataTransfer().files;
+};
+export var setFilesInputValue = function (files) {
+    elements.filesInput.files = files;
+};
+export var getFilesInputValue = function () {
+    return elements.filesInput.files;
+};
 //# sourceMappingURL=quizCreatorView.js.map

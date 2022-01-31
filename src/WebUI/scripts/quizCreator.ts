@@ -12,20 +12,16 @@ elements.dropArea.addEventListener('drop', (e: any) => {
     if (validationError)
         return alert(validationError);
 
-
-    (<HTMLInputElement>elements.filesInput).files = fileList;
-
+    quizCreatorView.setFilesInputValue(fileList);
     quizCreatorView.selectedFilesStatus(fileList);
 });
 
 elements.filesInput.addEventListener('change', (e) => {
-    const fileList: FileList = (<HTMLInputElement>elements.filesInput).files;
+    const fileList: FileList = quizCreatorView.getFilesInputValue();
 
     const validationError: string = validateFiles(fileList);
     if (validationError) {
-        // reset input
-        (<HTMLInputElement>elements.filesInput).files = new DataTransfer().files;
-
+        quizCreatorView.resetFilesInput();
         return alert(validationError);
     }
 
