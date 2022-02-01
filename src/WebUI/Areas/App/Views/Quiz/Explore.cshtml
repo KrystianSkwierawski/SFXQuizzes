@@ -1,5 +1,37 @@
 ﻿@using Application.Quizzes.Queries.GetQuizzes
 @model IList<QuizDto>
 
-<h1 class="text-center">Explore</h1>
-@await Html.PartialAsync("_QuizzesTablePartial", Model);
+<div class="container">
+    <h1 class="text-center">Explore</h1>
+
+    <table class="table-responsive" id="quizzes-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>title</th>
+                <th>number of sfxs</th>
+                <th>author</th>
+                <th>date created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var (quiz, index) in Model.Select((quiz, index) => (quiz, index + 1)))
+            {
+                <tr onclick="(function(){ window.location = '/quiz/@quiz.Id'; })()">
+                    <td data-label="#">@index</td>
+                    <td data-label="Title">@quiz.Title</td>
+                    <td data-label="Number of SFXs">@quiz.NumberOfSFXs</td>
+                    <td data-label="Author">@quiz.Author</td>
+                    <td data-label="Date Created">@quiz.Created.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script defer>
+    $(document).ready( function () {
+        $('#quizzes-table').DataTable();
+    } );
+</script>
