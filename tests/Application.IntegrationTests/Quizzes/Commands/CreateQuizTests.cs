@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Commands;
@@ -50,8 +51,11 @@ public class CreateQuizTests : TestBase
         result.Should().NotBeNull();
         result.Title.Should().Be(command.CreateQuizVm.Title);
 
-        // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
         result.SFXs[0].Name.Should().Be(files[0].FileName);
+
+        // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
+        string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
+        Directory.Exists(directory).Should().BeTrue();
     }
 }
 
