@@ -13,7 +13,7 @@ public class SFXFileBuilder : ISFXFileBuilder
         _logger = logger;
     }
 
-    public async Task SaveSFXs(IList<IFormFile> files, string id)
+    public async Task SaveSFXs(IList<IFormFile> files, string quizId)
     {
         foreach (var file in files)
         {
@@ -22,7 +22,7 @@ public class SFXFileBuilder : ISFXFileBuilder
                 if (file is null)
                     throw new NullReferenceException();
 
-                string directory = Path.Combine("./wwwroot", "assets", "SFXs", id);
+                string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
 
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
@@ -39,9 +39,14 @@ public class SFXFileBuilder : ISFXFileBuilder
         }
     }
 
-    public Task RemoveSFXs()
+    public async Task RemoveSFXs(string quizId)
     {
-        throw new NotImplementedException();
+        string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
+
+        if (!Directory.Exists(directory))
+            return;
+
+        Directory.Delete(directory, true);
     }
 }
 

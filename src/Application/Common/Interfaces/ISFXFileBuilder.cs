@@ -4,8 +4,8 @@ namespace Application.Common.Interfaces;
 
 public interface ISFXFileBuilder
 {
-    public Task SaveSFXs(IList<IFormFile> files, string id);
-    public Task RemoveSFXs();
+    public Task SaveSFXs(IList<IFormFile> files, string quizId);
+    public Task RemoveSFXs(string quizId);
 
 }
 

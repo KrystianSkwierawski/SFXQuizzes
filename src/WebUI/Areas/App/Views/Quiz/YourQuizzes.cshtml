@@ -1,5 +1,45 @@
-﻿@using Application.Quizzes.Queries.GetQuizzes
+﻿@using Application.Quizzes.Queries.GetUsersQuizzes
 @model IList<QuizDto>
 
-<h1 class="text-center">Your Quizzes</h1>
-@await Html.PartialAsync("_QuizzesTablePartial", Model);
+<div class="container">
+    <h1 class="text-center">Your Quizzes</h1>
+
+    <table class="table-responsive" id="quizzes-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>title</th>
+                <th>number of sfxs</th>
+                <th>date created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var (quiz, index) in Model.Select((quiz, index) => (quiz, index + 1)))
+            {
+                <tr onclick="(function(){ window.location = '/quiz/@quiz.Id'; })()">
+                    <td data-label="#">@index</td>
+                    <td data-label="Title">@quiz.Title</td>
+                    <td data-label="Number of SFXs">@quiz.NumberOfSFXs</td>
+                    <td data-label="Date Created">@quiz.Created.ToShortDateString()</td>
+                    <td>
+                        <form method="post" asp-area="app" asp-controller="quiz" asp-action="delete" asp-route-id="@quiz.Id">
+                            <button type="submit" class="btn btn-danger mx-1 my-1" ><i class="fas fa-trash-alt"></i></button>
+                        </form>
+
+                        <form asp-area="app" asp-controller="quiz" asp-action="update" asp-route-id="@quiz.Id">
+                            <button type="submit" class="btn btn-info"><i class="fas fa-edit"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script defer>
+    $(document).ready( function () {
+        $('#quizzes-table').DataTable();
+    } );
+</script>

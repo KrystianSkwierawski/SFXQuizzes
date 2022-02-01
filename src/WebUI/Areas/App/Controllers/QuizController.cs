@@ -1,4 +1,5 @@
 ﻿using Application.Quizzes.Commands.CreateQuiz;
+using Application.Quizzes.Commands.DeleteQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
 using Application.Quizzes.Queries.GetUsersQuizzes;
@@ -29,10 +30,11 @@ public class QuizController : BaseController
     }
 
     [HttpGet]
+    [Authorize]
     [Route("yourquizzes")]
     public async Task<IActionResult> YourQuizzes()
     {
-        IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(new GetUsersQuizzesQuery());
+        IList<Application.Quizzes.Queries.GetUsersQuizzes.QuizDto> quizzes = await Mediator.Send(new GetUsersQuizzesQuery());
 
         return View(quizzes);
     }
@@ -55,6 +57,15 @@ public class QuizController : BaseController
         string id = await Mediator.Send(new CreateQuizCommand { CreateQuizVm = createQuizVm });
 
         return RedirectToAction("index", "quiz", new { id });
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Delete(string id)
+    {
+        await Mediator.Send(new DeleteQuizCommand { Id = id });
+
+        return RedirectToAction("yourquizzes", "quiz");
     }
 }
 
