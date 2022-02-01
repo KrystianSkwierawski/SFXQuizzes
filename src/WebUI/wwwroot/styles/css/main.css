@@ -397,18 +397,15 @@ th {
   padding: 0;
 }
 
-.explore {
-  color: white;
-}
-.explore h1 {
-  text-align: center;
-  margin: 1rem 0;
+#explore__table {
+  overflow-x: auto;
 }
 
 table.dataTable {
-  width: 100%;
+  min-width: 100%;
   color: white;
   border-spacing: 0 0.8rem;
+  overflow-x: auto;
 }
 table.dataTable tbody tr {
   color: #81879e;

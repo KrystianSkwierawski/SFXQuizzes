@@ -1,0 +1,5 @@
+﻿@using Application.Quizzes.Queries.GetQuizzes
+@model IList<QuizDto>
+
+<h1 class="text-center">Your Quizzes</h1>
+@await Html.PartialAsync("_QuizzesTablePartial", Model);

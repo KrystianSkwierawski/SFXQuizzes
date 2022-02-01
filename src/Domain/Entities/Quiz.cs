@@ -9,6 +9,8 @@ public class Quiz : AuditableEntity
 
     public string Title { get; set; }
 
+    public string Author { get; set; }
+
     public bool IsPublic { get; set; }
 
     public bool Approved { get; set; } = false;

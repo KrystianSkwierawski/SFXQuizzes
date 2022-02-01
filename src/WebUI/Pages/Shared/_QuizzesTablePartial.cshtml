@@ -1,16 +1,16 @@
 ﻿@using Application.Quizzes.Queries.GetQuizzes
 @model IList<QuizDto>
 
-<div class="explore container">
-    <h1>Explore</h1>
-
-    <table id="explore__table">
+<div class="container">
+    <table class="table-responsive" id="quizzes-table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Title</th>
                 <th>Number of SFXs</th>
                 <th>Author</th>
+                <th>Date Created</th>
+
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,8 @@
                     <td>@index</td>
                     <td>@quiz.Title</td>
                     <td>@quiz.NumberOfSFXs</td>
-                    <td>user123</td>
+                    <td>@quiz.Author</td>
+                    <td>@quiz.Created.ToShortDateString()</td>
                 </tr>
             }
         </tbody>
@@ -30,7 +31,6 @@
 <script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script defer>
     $(document).ready( function () {
-        $('#explore__table').DataTable();
+        $('#quizzes-table').DataTable();
     } );
 </script>
-

@@ -14,11 +14,13 @@ public class CreateQuizCommand : IRequest<string>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISFXFileBuilder _SFXFileBulider;
+        private readonly ICurrentUserService _currentUserService;
 
-        public CreateQuizCommandHandler(IApplicationDbContext context, ISFXFileBuilder SFXFileBulider)
+        public CreateQuizCommandHandler(IApplicationDbContext context, ISFXFileBuilder SFXFileBulider, ICurrentUserService currentUserService)
         {
             _context = context;
             _SFXFileBulider = SFXFileBulider;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
@@ -38,6 +40,7 @@ public class CreateQuizCommand : IRequest<string>
                 Id = Guid.NewGuid().ToString(),
                 Title = request.CreateQuizVm.Title,
                 IsPublic = request.CreateQuizVm.IsPublic,
+                Author = _currentUserService.UserName,
                 SFXs = SFXs
             };
 
