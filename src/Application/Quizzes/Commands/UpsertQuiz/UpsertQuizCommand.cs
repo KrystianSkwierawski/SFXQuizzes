@@ -42,7 +42,7 @@ public class UpsertQuizCommand : IRequest<string>
                 entity.Id = Guid.NewGuid().ToString();
                 entity.Title = request.UpsertQuizVm.Title;
                 entity.IsPublic = request.UpsertQuizVm.IsPublic;
-                entity.Approved = request.UpsertQuizVm.Approved;
+                entity.Approved = request.UpsertQuizVm.Approved; //set if is in role admin
                 entity.Author = _currentUserService.UserName;
                 entity.SFXs = SFXs;
 
@@ -55,7 +55,7 @@ public class UpsertQuizCommand : IRequest<string>
 
                 entity.Title = request.UpsertQuizVm.Title;
                 entity.IsPublic = request.UpsertQuizVm.IsPublic;
-                entity.Approved = request.UpsertQuizVm.Approved;
+                entity.Approved = request.UpsertQuizVm.Approved; //set if is in role admin
                 entity.SFXs = SFXs;
 
                 await _SFXFileBulider.RemoveSFXs(request.UpsertQuizVm.Id);

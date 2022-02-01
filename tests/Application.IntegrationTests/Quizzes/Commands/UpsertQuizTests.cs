@@ -57,46 +57,46 @@ public class CreateQuizTests : TestBase
         Directory.Exists(directory).Should().BeTrue();
     }
 
-    //[Test]
-    //public async Task ShouldUpdateQuiz()
-    //{
-    //    //Arrang
-    //    IList<IFormFile> files = new List<IFormFile>() {
-    //        new FormFile(null, 0, 0, null, "sfx.wav")
-    //    };
+    [Test]
+    public async Task ShouldUpdateQuiz()
+    {
+        //Arrang
+        IList<IFormFile> files = new List<IFormFile>() {
+            new FormFile(null, 0, 0, null, "sfx.wav")
+        };
 
-    //    var quizId = await SendAsync(new UpsertQuizCommand
-    //    {
-    //        UpsertQuizVm = new()
-    //        {
-    //            Title = "test",
-    //            Files = files
-    //        }
-    //    });
+        var quizId = await SendAsync(new UpsertQuizCommand
+        {
+            UpsertQuizVm = new()
+            {
+                Title = "test",
+                Files = files
+            }
+        });
 
+        var command = new UpsertQuizCommand()
+        {
+            UpsertQuizVm = new()
+            {
+                Id = quizId,
+                Title = "edit",
+                Files = files
+            }
+        };
+        //Act
+        await SendAsync(command);
 
-    //    var command = new UpsertQuizCommand()
-    //    {
-    //        UpsertQuizVm = new()
-    //        {
-    //            Id = quizId,
-    //            Title = "edit",
-    //        }
-    //    };
-    //    //Act
-    //    await SendAsync(command);
+        //Assert
+        Quiz result = await FindAsync<Quiz>(quizId);
 
-    //    //Assert
-    //    Quiz result = await FindAsync<Quiz>(quizId);
+        result.Should().NotBeNull();
+        result.Title.Should().Be(command.UpsertQuizVm.Title);
 
-    //    result.Should().NotBeNull();
-    //    result.Title.Should().Be(command.UpsertQuizVm.Title);
+        result.SFXs[0].Name.Should().Be(files[0].FileName);
 
-    //    result.SFXs[0].Name.Should().Be(files[0].FileName);
-
-    //    // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
-    //    string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
-    //    Directory.Exists(directory).Should().BeTrue();
-    //}
+        // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
+        string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
+        Directory.Exists(directory).Should().BeTrue();
+    }
 }
 
