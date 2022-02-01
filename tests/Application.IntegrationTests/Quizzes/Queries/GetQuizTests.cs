@@ -1,9 +1,8 @@
-﻿using Application.Quizzes.Commands.UpsertQuiz;
-using Application.Quizzes.Queries.GetQuiz;
+﻿using Application.Quizzes.Queries.GetQuiz;
+using Domain.Entities;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Queries;
@@ -16,31 +15,22 @@ public class GetQuizTests : TestBase
     public async Task ShouldReturnQuiz()
     {
         //Arrange 
-        IList<IFormFile> files = new List<IFormFile>() {
-            new FormFile(null, 0, 0, null, "sfx.wav")
-        };
-
-        UpsertQuizVm upsertQuizVm = new()
+        var entity = await AddAsync<Quiz>(new()
         {
+            Id = Guid.NewGuid().ToString(),
             Title = "test",
-            Files = files
-        };
+            Author = "user"
+        });
 
-        var quizId = await SendAsync(new UpsertQuizCommand { UpsertQuizVm = upsertQuizVm });    
-
-        GetQuizQuery query = new() { Id = quizId };
 
         //Act
-        QuizDto result = await SendAsync(query);
+        QuizDto result = await SendAsync(new GetQuizQuery { Id = entity.Id });
 
 
         //Assert
 
         result.Should().NotBeNull();
-        result.Title.Should().Be(upsertQuizVm.Title);
-
-        // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
-        result.SFXs[0].Name.Should().Be(upsertQuizVm.Files[0].FileName);
+        result.Title.Should().Be(result.Title);
     }
 }
 
