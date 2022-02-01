@@ -1,8 +1,4 @@
-﻿#explore__table {
-    overflow-x: auto;
-}
-
-table.dataTable {
+﻿table.dataTable {
     min-width: 100%;
     color: white;
     border-spacing: 0 .8rem;
@@ -21,11 +17,36 @@ table.dataTable {
 
     & thead tr {
         background-color: #222431;
+        text-transform: uppercase;
     }
 }
 
-.dataTables_wrapper{
-   margin: 2rem 0;
+@media screen and (max-width: 600px) {
+    table.dataTable {
+        & tr {
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+
+        & td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            text-align: right;
+        }
+
+
+        & td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.dataTables_wrapper {
+    margin: 2rem 0;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .paginate_button:active {
