@@ -10,7 +10,7 @@
     quiz__endQuizButton: document.querySelector('.quiz__end-quiz-button'),
     sfxNameInputs: document.querySelectorAll('.sfx-name-input'),
     quiz__currentScore: document.querySelector('.quiz__current-score'),
-    createQuizForm: document.querySelector('.create-quiz-form'),
+    upsertQuizForm: document.querySelector('.upsert-quiz-form'),
     quizId: document.querySelector('.quiz-id')
 };
 

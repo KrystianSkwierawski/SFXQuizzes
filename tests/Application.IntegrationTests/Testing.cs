@@ -118,16 +118,18 @@ public class Testing
         return await context.FindAsync<TEntity>(keyValues);
     }
 
-    public static async Task AddAsync<TEntity>(TEntity entity)
+    public static async Task<TEntity> AddAsync<TEntity>(TEntity entity)
         where TEntity : class
     {
         using var scope = _scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-        context.Add(entity);
+        await context.AddAsync(entity);
 
         await context.SaveChangesAsync();
+
+        return entity;
     }
 
     public static async Task AddRangeAsync<TEntity>(List<TEntity> entities)

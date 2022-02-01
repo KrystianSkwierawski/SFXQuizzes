@@ -22,6 +22,8 @@ public class DeleteQuizCommand : IRequest
 
         public async Task<Unit> Handle(DeleteQuizCommand request, CancellationToken cancellationToken)
         {
+            //TODO: delete if quiz owner or is in role admin
+
             Quiz entity = await _context.Quizzes.FindAsync(request.Id);
 
             if (entity is null)

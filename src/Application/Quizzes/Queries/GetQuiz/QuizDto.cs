@@ -12,7 +12,13 @@ public class QuizDto : IMapFrom<Quiz>
     }
 
     public string Id { get; set; }
+
     public string Title { get; set; }
+
+    public bool IsPublic { get; set; }
+
+    public bool Approved { get; set; }
+
     public IList<SFX> SFXs { get; set; }
 }
 

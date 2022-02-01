@@ -1,9 +1,14 @@
-﻿@model Application.Quizzes.Commands.CreateQuiz.CreateQuizVm;
+﻿@model Application.Quizzes.Commands.UpsertQuiz.UpsertQuizVm;
+
+@{
+    string pageTitle = (Model.Id is null) ? "Create Quiz" : "Update Quiz";
+}
 
 <div class="quiz-creator container">
-    <h1>Quiz Creator</h1>
+    <h1>@pageTitle</h1>
 
-    <form class="create-quiz-form" method="post" enctype="multipart/form-data">
+    <form asp-area="app" asp-controller="quiz" asp-action="upsert" class="create-quiz-form" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="text" hidden>
 
         <div class="drop-area">
             <i class="fas fa-cloud-upload-alt"></i>
@@ -18,10 +23,14 @@
         </div>
 
 
-
         <div class="form-check">
             <input asp-for="IsPublic" type="checkbox" class="form-check-input" checked id="public">
             <label class="form-check-label" for="public">Public Quiz</label>
+        </div>
+
+        <div class="form-check d-none">
+            <input asp-for="Approved" type="checkbox" class="form-check-input" id="approved">
+            <label class="form-check-label" for="approved">Approved Quiz</label>
         </div>
 
         <div class="captacha">
@@ -34,7 +43,7 @@
             <label for="title">Title*</label>
         </div>
 
-        <button class="create-quiz-button" type="submit" aria-label="create quiz">Create Quiz</button>
+        <button class="upsert-quiz-button" type="submit" aria-label="@pageTitle">@pageTitle</button>
     </form>
 </div>
 

@@ -1,4 +1,4 @@
-﻿using Application.Quizzes.Commands.CreateQuiz;
+﻿using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -20,13 +20,13 @@ public class GetQuizTests : TestBase
             new FormFile(null, 0, 0, null, "sfx.wav")
         };
 
-        CreateQuizVm createQuizVm = new()
+        UpsertQuizVm upsertQuizVm = new()
         {
             Title = "test",
             Files = files
         };
 
-        var quizId = await SendAsync(new CreateQuizCommand { CreateQuizVm = createQuizVm});    
+        var quizId = await SendAsync(new UpsertQuizCommand { UpsertQuizVm = upsertQuizVm });    
 
         GetQuizQuery query = new() { Id = quizId };
 
@@ -37,10 +37,10 @@ public class GetQuizTests : TestBase
         //Assert
 
         result.Should().NotBeNull();
-        result.Title.Should().Be(createQuizVm.Title);
+        result.Title.Should().Be(upsertQuizVm.Title);
 
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
-        result.SFXs[0].Name.Should().Be(createQuizVm.Files[0].FileName);
+        result.SFXs[0].Name.Should().Be(upsertQuizVm.Files[0].FileName);
     }
 }
 

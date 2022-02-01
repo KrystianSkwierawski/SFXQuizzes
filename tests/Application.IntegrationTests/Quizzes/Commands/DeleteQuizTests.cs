@@ -1,6 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Quizzes.Commands.CreateQuiz;
 using Application.Quizzes.Commands.DeleteQuiz;
+using Application.Quizzes.Commands.UpsertQuiz;
 using Domain.Entities;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -32,9 +32,9 @@ public class DeleteQuizTests : TestBase
             new FormFile(null, 0, 0, null, "sfx.wav")
         };
 
-        var quizId = await SendAsync(new CreateQuizCommand
+        var quizId = await SendAsync(new UpsertQuizCommand
         {
-            CreateQuizVm = new()
+            UpsertQuizVm = new()
             {
                 Title = "test",
                 Files = files
@@ -42,7 +42,7 @@ public class DeleteQuizTests : TestBase
         });
 
         //Act
-        await SendAsync(new DeleteQuizCommand { Id= quizId });
+        await SendAsync(new DeleteQuizCommand { Id = quizId });
 
         //Assert
         var result = await FindAsync<Quiz>(quizId);

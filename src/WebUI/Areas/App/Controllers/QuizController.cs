@@ -1,5 +1,5 @@
-﻿using Application.Quizzes.Commands.CreateQuiz;
-using Application.Quizzes.Commands.DeleteQuiz;
+﻿using Application.Quizzes.Commands.DeleteQuiz;
+using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
 using Application.Quizzes.Queries.GetUsersQuizzes;
@@ -41,21 +41,29 @@ public class QuizController : BaseController
 
 
     [Authorize]
-    [Route("quiz/create")]
-    public async Task<IActionResult> Create()
+    [HttpGet]
+    public async Task<IActionResult> Upsert(string? id)
     {
-        CreateQuizVm createQuizVm = new CreateQuizVm();
+        UpsertQuizVm upsertQuizVm = new();
 
-        return View(createQuizVm);
+        if(id is not null)
+        {
+            Application.Quizzes.Queries.GetQuiz.QuizDto quizDto = await Mediator.Send(new GetQuizQuery { Id = id });
+
+            upsertQuizVm.Id = quizDto.Id;
+            upsertQuizVm.Title = quizDto.Title;
+            upsertQuizVm.IsPublic = quizDto.IsPublic;
+            upsertQuizVm.Approved = quizDto.Approved;
+        }
+
+        return View(upsertQuizVm);
     }
 
     [Authorize]
     [HttpPost]
-    [Route("quiz/create")]
-    public async Task<IActionResult> Create(CreateQuizVm createQuizVm)
+    public async Task<IActionResult> Upsert(UpsertQuizVm upsertQuizVm)
     {
-        string id = await Mediator.Send(new CreateQuizCommand { CreateQuizVm = createQuizVm });
-
+        string id = await Mediator.Send(new UpsertQuizCommand { UpsertQuizVm = upsertQuizVm });
         return RedirectToAction("index", "quiz", new { id });
     }
 

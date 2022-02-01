@@ -1,10 +1,8 @@
-﻿using Application.Quizzes.Commands.CreateQuiz;
+﻿using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
-using Domain.Entities;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,9 +21,9 @@ public class GetQuizzesTests : TestBase
             new FormFile(null, 0, 0, null, "sfx2.wav")
         };
 
-        await SendAsync(new CreateQuizCommand()
+        await SendAsync(new UpsertQuizCommand()
         {
-            CreateQuizVm = new CreateQuizVm()
+            UpsertQuizVm = new UpsertQuizVm()
             {
                 Title = "quiz",
                 Files = files

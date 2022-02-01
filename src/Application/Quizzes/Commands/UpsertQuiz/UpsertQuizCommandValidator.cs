@@ -2,38 +2,38 @@
 using FluentValidation;
 using Newtonsoft.Json.Linq;
 
-namespace Application.Quizzes.Commands.CreateQuiz;
+namespace Application.Quizzes.Commands.UpsertQuiz;
 
-public class CreateQuizCommandValidator : AbstractValidator<CreateQuizCommand>
+public class UpsertQuizCommandValidator : AbstractValidator<UpsertQuizCommand>
 {
     private readonly ICaptachaAPIService _captachaAPIService;
 
-    public CreateQuizCommandValidator(ICaptachaAPIService captachaAPIService)
+    public UpsertQuizCommandValidator(ICaptachaAPIService captachaAPIService)
     {
         _captachaAPIService = captachaAPIService;
     }
 
-    public CreateQuizCommandValidator()
+    public UpsertQuizCommandValidator()
     {
-        RuleFor(command => command.CreateQuizVm.Title)
+        RuleFor(command => command.UpsertQuizVm.Title)
             .MaximumLength(50)
             .NotNull()
             .NotEmpty();
 
-        RuleFor(vm => vm.CreateQuizVm.Files)
+        RuleFor(vm => vm.UpsertQuizVm.Files)
             .NotNull()
             .NotEmpty();
 
         // 8Kbps Bitrate per seconds = 1KB. 300 seconds
         // 320Kbps Bitrate per second = 40KB. 7.5 seconds
-        RuleForEach(command => command.CreateQuizVm.Files)
+        RuleForEach(command => command.UpsertQuizVm.Files)
             .Must(file => file.Length < (300 * 1024)) // 300KB for each file
             .Must(file => HasSupportedFileFormat(file.FileName));
 
-        RuleFor(command => command.CreateQuizVm.Files.Count())
+        RuleFor(command => command.UpsertQuizVm.Files.Count())
             .LessThanOrEqualTo(30);
 
-        RuleFor(command => command.CreateQuizVm.Captacha)
+        RuleFor(command => command.UpsertQuizVm.Captacha)
             .MustAsync(BeValid);
     }
 
