@@ -5,7 +5,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a asp-area="app" asp-controller="quiz" asp-action="yourquizzes" >Your quizzes</a>
+    if (User.IsInRole("Administrator"))
+    {
+        <a asp-area="app" asp-controller="quiz" asp-action="adminpanel">Admin panel</a>
+    }
+    <a asp-area="app" asp-controller="quiz" asp-action="yourquizzes">Your quizzes</a>
     <a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
     <form class="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
         <button type="submit" class="logout-form__button">Sign out</button>

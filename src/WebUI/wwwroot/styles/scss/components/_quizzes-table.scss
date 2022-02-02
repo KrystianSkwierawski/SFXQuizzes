@@ -2,7 +2,6 @@
     min-width: 100%;
     color: white;
     border-spacing: 0 .8rem;
-    overflow-x: auto;
 
     & tbody tr {
         color: #81879e;
@@ -41,6 +40,10 @@
             float: left;
             font-weight: bold;
             text-transform: uppercase;
+        }
+
+        & th {
+            display: block;
         }
     }
 }

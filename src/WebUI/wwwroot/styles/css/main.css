@@ -401,7 +401,6 @@ table.dataTable {
   min-width: 100%;
   color: white;
   border-spacing: 0 0.8rem;
-  overflow-x: auto;
 }
 table.dataTable tbody tr {
   color: #81879e;
@@ -432,6 +431,9 @@ table.dataTable thead tr {
     float: left;
     font-weight: bold;
     text-transform: uppercase;
+  }
+  table.dataTable th {
+    display: block;
   }
 }
 .dataTables_wrapper {

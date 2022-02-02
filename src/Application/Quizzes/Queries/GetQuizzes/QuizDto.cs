@@ -7,10 +7,16 @@ namespace Application.Quizzes.Queries.GetQuizzes;
 public class QuizDto : IMapFrom<Quiz>
 {
     public string Id { get; set; }
+
     public string Title { get; set; }
+
     public int NumberOfSFXs { get; set; }
 
     public DateTime Created { get; set; }
+
+    public bool IsPublic { get; set; }
+
+    public bool Approved { get; set; }
 
     public string Author { get; set; }
 
