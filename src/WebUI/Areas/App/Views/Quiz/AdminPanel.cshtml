@@ -2,7 +2,7 @@
 @model IList<QuizDto>
 
 @{
-    string returnUrl = ViewContext.RouteData.Values["Action"].ToString();
+    string returnUrl = "/adminpanel";
 }
 
 
@@ -34,7 +34,7 @@
                     <td>
                         @if (!quiz.Approved)
                         {
-                            <form class="d-inline" method="post" asp-area="app" asp-controller="quiz" asp-action="approve" asp-route-id="@quiz.Id">
+                            <form class="d-inline" method="post" asp-area="app" asp-controller="quiz" asp-action="approve" asp-route-id="@quiz.Id" asp-route-returnurl="@returnUrl">
                                 <button type="submit" class="btn btn-success mx-1 my-1"><i class="fas fa-check"></i></button>
                             </form>
                         }

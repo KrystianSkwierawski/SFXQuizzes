@@ -19,6 +19,8 @@ public class QuizDto : IMapFrom<Quiz>
 
     public bool Approved { get; set; }
 
+    public string Author { get; set; }
+
     public IList<SFX> SFXs { get; set; }
 }
 
