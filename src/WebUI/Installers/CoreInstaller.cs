@@ -20,6 +20,7 @@ public class CoreInstaller : IInstaller
         {
             options.SignIn.RequireConfirmedAccount = false;
             options.User.RequireUniqueEmail = true;
+            options.Password.RequireNonAlphanumeric = false;
         })
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>();
