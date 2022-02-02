@@ -1,4 +1,5 @@
-﻿using Application.Quizzes.Commands.DeleteQuiz;
+﻿using Application.Quizzes.Commands.ApproveQuiz;
+using Application.Quizzes.Commands.DeleteQuiz;
 using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
@@ -25,6 +26,17 @@ public class QuizController : BaseController
     public async Task<IActionResult> Explore()
     {
         GetQuizzesQuery query = new() { QuizFilter = QuizFilter.PublicAndApproved };
+        IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(query);
+
+        return View(quizzes);
+    }
+
+    [HttpGet]
+    [Authorize("Administrator")]
+    [Route("adminpanel")]
+    public async Task<IActionResult> AdminPanel()
+    {
+        GetQuizzesQuery query = new() { QuizFilter = QuizFilter.None };
         IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(query);
 
         return View(quizzes);
@@ -68,6 +80,14 @@ public class QuizController : BaseController
     {
         string id = await Mediator.Send(new UpsertQuizCommand { UpsertQuizVm = upsertQuizVm });
         return RedirectToAction("index", "quiz", new { id });
+    }
+
+    [Authorize("Administrator")]
+    [HttpPost]
+    public async Task<IActionResult> Approve(string id)
+    {
+        await Mediator.Send(new ApproveQuizCommand { Id = id });
+        return RedirectToAction("adminpanel", "quiz");
     }
 
     [Authorize]

@@ -10,8 +10,6 @@ using System.IO;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Commands;
-
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Testing;
 public class DeleteQuizTests : TestBase
 {

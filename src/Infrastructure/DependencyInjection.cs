@@ -34,6 +34,9 @@ public static class DependencyInjection
         services.AddTransient<ICaptachaAPIService, CaptachaAPIService>();
         services.AddTransient<IIdentityService, IdentityService>();
 
+        services.AddAuthorization(options =>
+            options.AddPolicy("Administrator", policy => policy.RequireRole("Administrator")));
+
         return services;
     }
 

@@ -30,9 +30,9 @@ public class GetQuizzesQuery : IRequest<IList<QuizDto>>
 
             quizzes = request.QuizFilter switch
             {
+                QuizFilter.None => quizzes,
                 QuizFilter.CurrentUser => quizzes.Where(quiz => quiz.CreatedBy == _currentUserService.UserId),
                 QuizFilter.PublicAndApproved => quizzes.Where(quiz => quiz.IsPublic == true && quiz.Approved == true),
-                QuizFilter.None => quizzes,
                 _ => throw new Exception()
             };
 
