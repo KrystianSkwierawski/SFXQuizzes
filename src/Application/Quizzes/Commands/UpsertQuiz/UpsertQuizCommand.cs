@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using Domain.ValueObjects;
 using MediatR;
@@ -25,7 +26,7 @@ public class UpsertQuizCommand : IRequest<string>
 
         public async Task<string> Handle(UpsertQuizCommand request, CancellationToken cancellationToken)
         {
-            Quiz entity = new();
+            string quizId = string.Empty;
 
             IList<SFX> SFXs = new List<SFX>();
 
@@ -37,37 +38,56 @@ public class UpsertQuizCommand : IRequest<string>
                 });
             };
 
+
             if (request.UpsertQuizVm.Id is null)
-            {
-                entity.Id = Guid.NewGuid().ToString();
-                entity.Title = request.UpsertQuizVm.Title;
-                entity.IsPublic = request.UpsertQuizVm.IsPublic;
-                entity.Approved = request.UpsertQuizVm.Approved; //set if is in role admin
-                entity.Author = _currentUserService.UserName;
-                entity.SFXs = SFXs;
+                quizId = await CreateAsync(request.UpsertQuizVm, SFXs);
 
-                await _context.Quizzes.AddAsync(entity);
-            }
+            if (request.UpsertQuizVm.Id is not null)
+                quizId = await UpdateAsync(request.UpsertQuizVm, SFXs);
 
-            if(request.UpsertQuizVm.Id is not null)
-            {
-                entity = await _context.Quizzes.FindAsync(request.UpsertQuizVm.Id);
-
-                entity.Title = request.UpsertQuizVm.Title;
-                entity.IsPublic = request.UpsertQuizVm.IsPublic;
-                entity.Approved = request.UpsertQuizVm.Approved; //set if is in role admin
-                entity.SFXs = SFXs;
-
-                await _SFXFileBulider.RemoveSFXs(request.UpsertQuizVm.Id);
-            }
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            await _SFXFileBulider.SaveSFXs(request.UpsertQuizVm.Files, entity.Id);
+            await _SFXFileBulider.SaveSFXs(request.UpsertQuizVm.Files, quizId);
+
+            return quizId;
+        }
+
+        public async Task<string> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
+        {
+            Quiz entity = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = upsertQuizVm.Title,
+                IsPublic = upsertQuizVm.IsPublic,
+                Approved = upsertQuizVm.Approved, //set if is in role admin
+                Author = _currentUserService.UserName,
+                SFXs = SFXs
+            };
+
+            await _context.Quizzes.AddAsync(entity);
+
+            return entity.Id;
+        }
+
+        public async Task<string> UpdateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
+        {
+            Quiz entity = entity = await _context.Quizzes.FindAsync(upsertQuizVm.Id);
+
+            if (entity is null)
+                throw new NotFoundException(nameof(Quiz), upsertQuizVm.Id);
+
+            entity.Title = upsertQuizVm.Title;
+            entity.IsPublic = upsertQuizVm.IsPublic;
+            entity.Approved = upsertQuizVm.Approved; //set if is in role admin
+            entity.SFXs = SFXs;
+
+            await _SFXFileBulider.RemoveSFXs(upsertQuizVm.Id);
 
             return entity.Id;
         }
     }
 }
+
 
 

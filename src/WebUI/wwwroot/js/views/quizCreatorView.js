@@ -1,21 +1,21 @@
 import { elements } from './base.js';
-export var selectedFilesStatus = function (fileList) {
-    var markup = (fileList.length) > 1 ? "<p>".concat(fileList.length, " files selected</p>") : "<p>".concat(fileList[0].name, " selected</p>");
+export const selectedFilesStatus = (fileList) => {
+    const markup = (fileList.length) > 1 ? `<p>${fileList.length} files selected</p>` : `<p>${fileList[0].name} selected</p>`;
     elements.dropArea__status.innerHTML = markup;
 };
-export var addDragEnterBC = function () {
+export const addDragEnterBC = () => {
     elements.dropArea.classList.add('drag_enter');
 };
-export var removeDragEnterBC = function () {
+export const removeDragEnterBC = () => {
     elements.dropArea.classList.remove('drag_enter');
 };
-export var resetFilesInput = function () {
+export const resetFilesInput = () => {
     elements.filesInput.files = new DataTransfer().files;
 };
-export var setFilesInputValue = function (files) {
+export const setFilesInputValue = (files) => {
     elements.filesInput.files = files;
 };
-export var getFilesInputValue = function () {
+export const getFilesInputValue = () => {
     return elements.filesInput.files;
 };
 //# sourceMappingURL=quizCreatorView.js.map

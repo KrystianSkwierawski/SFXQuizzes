@@ -1,7 +1,7 @@
-export var isAnswerCorrect = function (sfxId, userAnswer) {
-    var fileName = window.answers.get(sfxId).split('.')[0].toLowerCase();
-    var answers = fileName.split(' ` ');
-    var isAnswerCorrect = answers.some(function (answer) { return answer === userAnswer; });
+export const isAnswerCorrect = (sfxId, userAnswer) => {
+    const fileName = window.answers.get(sfxId).split('.')[0].toLowerCase();
+    const answers = fileName.split(' ` ');
+    const isAnswerCorrect = answers.some(answer => answer === userAnswer);
     return isAnswerCorrect;
 };
 //# sourceMappingURL=Quiz.js.map
