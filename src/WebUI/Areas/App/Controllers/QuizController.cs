@@ -41,7 +41,7 @@ public class QuizController : BaseController
 
 
     [Authorize]
-    [HttpGet]
+    [HttpGet("/quiz/upsert")]
     public async Task<IActionResult> Upsert(string? id)
     {
         UpsertQuizVm upsertQuizVm = new();
@@ -60,7 +60,7 @@ public class QuizController : BaseController
     }
 
     [Authorize]
-    [HttpPost]
+    [HttpPost("/quiz/upsert")]
     public async Task<IActionResult> Upsert(UpsertQuizVm upsertQuizVm)
     {
         string id = await Mediator.Send(new UpsertQuizCommand { UpsertQuizVm = upsertQuizVm });
