@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Infrastructure.Files;
+using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ public static class DependencyInjection
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<ISFXFileBuilder, SFXFileBuilder>();
         services.AddTransient<ICaptachaAPIService, CaptachaAPIService>();
-
+        services.AddTransient<IIdentityService, IdentityService>();
 
         return services;
     }
