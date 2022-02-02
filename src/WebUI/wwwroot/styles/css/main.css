@@ -1019,6 +1019,12 @@ header p {
 
 .quiz__title {
   text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.quiz__author {
+  text-align: center;
+  color: white;
 }
 
 body {

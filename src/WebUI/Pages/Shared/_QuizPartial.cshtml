@@ -15,6 +15,11 @@
             <h1 class="quiz__title">@Model.Title</h1>
         }
 
+        @if (!string.IsNullOrEmpty(Model.Author))
+        {
+            <p class="quiz__author">Created by: @Model.Author</p>           
+        }
+
         <div class="quiz__sfxs-players">
 
             @foreach (var (SFX, index) in Model.SFXs.Select((SFX, index) => (SFX, index + 1)))
