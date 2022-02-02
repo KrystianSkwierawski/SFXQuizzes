@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Quizzes.Commands;
 
 using static Testing;
-public class ApproveQuizCommandTests : TestBase
+public class ApproveQuizTests : TestBase
 {
     [Test]
     public async Task ShouldApproveQuiz()
