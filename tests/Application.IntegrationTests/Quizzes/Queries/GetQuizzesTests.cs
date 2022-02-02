@@ -16,6 +16,8 @@ public class GetQuizzesTests : TestBase
     public async Task ShouldReturnQuizzes()
     {
         //Arrange
+        await RunAsDefaultUserAsync();
+
         IList<IFormFile> files = new List<IFormFile>() {
             new FormFile(null, 0, 0, null, "sf1.wav"),
             new FormFile(null, 0, 0, null, "sfx2.wav")

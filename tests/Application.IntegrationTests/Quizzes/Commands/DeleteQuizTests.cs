@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Commands;
 
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Testing;
 public class DeleteQuizTests : TestBase
 {
@@ -28,6 +29,8 @@ public class DeleteQuizTests : TestBase
     public async Task ShouldDeleteTask()
     {
         //Arrange
+        await RunAsDefaultUserAsync();
+
         IList<IFormFile> files = new List<IFormFile>() {
             new FormFile(null, 0, 0, null, "sfx.wav")
         };
@@ -48,10 +51,36 @@ public class DeleteQuizTests : TestBase
         var result = await FindAsync<Quiz>(quizId);
         result.Should().BeNull();
 
-
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
         string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
         Directory.Exists(directory).Should().BeFalse();
+    }
+
+    [Test]
+    public async Task ShouldThrowForbiddenAccessException_WhenDeletingQuizNotAsOwnerOrAdmin()
+    {
+        await RunAsAdministratorAsync();
+
+        IList<IFormFile> files = new List<IFormFile>() {
+            new FormFile(null, 0, 0, null, "sfx.wav")
+        };
+
+        var quizId = await SendAsync(new UpsertQuizCommand
+        {
+            UpsertQuizVm = new()
+            {
+                Title = "test",
+                Files = files
+            }
+        });
+
+
+        await RunAsDefaultUserAsync();
+
+        DeleteQuizCommand command = new() { Id = quizId };
+
+        await FluentActions.Invoking(() =>
+                        SendAsync(command)).Should().ThrowAsync<ForbiddenAccessException>();
     }
 }
 

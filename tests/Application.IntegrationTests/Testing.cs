@@ -1,4 +1,5 @@
-﻿using Infrastructure.Identity;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,10 @@ public class Testing
     private static IServiceScopeFactory _scopeFactory;
     private static Checkpoint _checkpoint;
 
+    private static string? _currentUserId;
+    private static string? _currentUserName;
+
+
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
     {
@@ -48,6 +53,9 @@ public class Testing
         services.AddLogging();
 
         startup.ConfigureServices(services);
+
+        services.AddTransient(provider =>
+           Mock.Of<ICurrentUserService>(s => s.UserId == _currentUserId && s.UserName == _currentUserName));
 
         _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
 
@@ -78,7 +86,7 @@ public class Testing
         ApplicationUser user = new()
         {
             Email = "test@gmail.com",
-            UserName = Guid.NewGuid().ToString(),
+            UserName = "test",
         };
 
         var createUserResult = await userManager.CreateAsync(user);
@@ -91,6 +99,49 @@ public class Testing
         }
 
         return user;
+    }
+
+    public static async Task<(string, string)> RunAsDefaultUserAsync()
+    {
+        return await RunAsUserAsync("test@local", "Testing1234!", Array.Empty<string>());
+    }
+
+    public static async Task<(string, string)> RunAsAdministratorAsync()
+    {
+        return await RunAsUserAsync("administrator@local", "Administrator1234!", new[] { "Administrator" });
+    }
+
+    public static async Task<(string, string)> RunAsUserAsync(string userName, string password, string[] roles)
+    {
+        using var scope = _scopeFactory.CreateScope();
+
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        var user = new ApplicationUser { UserName = userName, Email = userName };
+
+        var result = await userManager.CreateAsync(user, password);
+
+        if (roles.Any())
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            foreach (var role in roles)
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+
+            await userManager.AddToRolesAsync(user, roles);
+        }
+
+        if (result.Succeeded)
+        {
+            _currentUserId = user.Id;
+            _currentUserName = user.UserName;
+
+            return (_currentUserId, _currentUserName);
+        }
+
+        throw new Exception($"Unable to create {userName}.{Environment.NewLine}{result}");
     }
 
 
