@@ -1,5 +1,6 @@
 ﻿using Application;
 using Infrastructure;
+using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using WebUI.Installers;
@@ -15,8 +16,13 @@ public class CoreInstaller : IInstaller
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+        services.AddDefaultIdentity<ApplicationUser>(options =>
+        {
+            options.SignIn.RequireConfirmedAccount = false;
+            options.User.RequireUniqueEmail = true;
+        })
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
 
         services.AddRazorPages();
     }

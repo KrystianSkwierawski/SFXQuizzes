@@ -22,15 +22,17 @@
             <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true" />
         </div>
 
+        @if (User.IsInRole("Administrator"))
+        {
+            <div class="form-check">
+                <input asp-for="Approved" type="checkbox" class="form-check-input" id="approved">
+                <label class="form-check-label" for="approved">Approved Quiz</label>
+            </div>
+        }
 
         <div class="form-check">
             <input asp-for="IsPublic" type="checkbox" class="form-check-input" checked id="public">
             <label class="form-check-label" for="public">Public Quiz</label>
-        </div>
-
-        <div class="form-check d-none">
-            <input asp-for="Approved" type="checkbox" class="form-check-input" id="approved">
-            <label class="form-check-label" for="approved">Approved Quiz</label>
         </div>
 
         <div class="captacha">

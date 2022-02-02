@@ -1,4 +1,6 @@
+using Infrastructure.Identity;
 using Infrastructure.Persistance;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebUI;
@@ -22,6 +24,10 @@ public class Program
                     context.Database.Migrate();
                 }
 
+                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager, roleManager);
             }
             catch (Exception ex)
             {

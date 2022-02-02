@@ -1,14 +1,14 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using System.Text.Json;
 
 namespace Infrastructure.Persistance;
 
-public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IDateTime _dateTime;
@@ -21,6 +21,7 @@ public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
     }
 
     public DbSet<Quiz> Quizzes { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
