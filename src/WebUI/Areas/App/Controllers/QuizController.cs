@@ -2,7 +2,7 @@
 using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
-using Application.Quizzes.Queries.GetUsersQuizzes;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Areas.User.Controllers;
@@ -24,7 +24,8 @@ public class QuizController : BaseController
     [Route("explore")]
     public async Task<IActionResult> Explore()
     {
-        IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(new GetQuizzesQuery());
+        GetQuizzesQuery query = new() { QuizFilter = QuizFilter.PublicAndApproved };
+        IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(query);
 
         return View(quizzes);
     }
@@ -34,7 +35,9 @@ public class QuizController : BaseController
     [Route("yourquizzes")]
     public async Task<IActionResult> YourQuizzes()
     {
-        IList<Application.Quizzes.Queries.GetUsersQuizzes.QuizDto> quizzes = await Mediator.Send(new GetUsersQuizzesQuery());
+        GetQuizzesQuery query = new() { QuizFilter = QuizFilter.CurrentUser };
+
+        IList<Application.Quizzes.Queries.GetQuizzes.QuizDto> quizzes = await Mediator.Send(query);
 
         return View(quizzes);
     }
@@ -46,7 +49,7 @@ public class QuizController : BaseController
     {
         UpsertQuizVm upsertQuizVm = new();
 
-        if(id is not null)
+        if (id is not null)
         {
             Application.Quizzes.Queries.GetQuiz.QuizDto quizDto = await Mediator.Send(new GetQuizQuery { Id = id });
 

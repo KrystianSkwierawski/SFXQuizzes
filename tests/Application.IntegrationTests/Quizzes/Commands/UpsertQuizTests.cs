@@ -65,7 +65,7 @@ public class CreateQuizTests : TestBase
     public async Task ShouldUpdateQuiz()
     {
         //Arrang
-        var user = await RunAsDefaultUserAsync();
+        var (userId, userName) = await RunAsDefaultUserAsync();
 
         IList<IFormFile> files = new List<IFormFile>() {
             new FormFile(null, 0, 0, null, "sfx.wav")
@@ -97,8 +97,8 @@ public class CreateQuizTests : TestBase
 
         result.Should().NotBeNull();
         result.Title.Should().Be(command.UpsertQuizVm.Title);
-        result.CreatedBy.Should().Be(user.Item1);
-        result.Author.Should().Be(user.Item2);
+        result.CreatedBy.Should().Be(userId);
+        result.Author.Should().Be(userName);
         result.SFXs[0].Name.Should().Be(files[0].FileName);
 
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
