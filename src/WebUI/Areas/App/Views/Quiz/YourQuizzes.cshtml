@@ -1,6 +1,11 @@
 ﻿@using Application.Quizzes.Queries.GetQuizzes
 @model IList<QuizDto>
 
+@{
+    string returnUrl = ViewContext.RouteData.Values["Action"].ToString();
+}
+
+
 <div class="container">
     <h1 class="text-center">Your Quizzes</h1>
 
@@ -23,7 +28,7 @@
                     <td data-label="number of sfxs">@quiz.NumberOfSFXs</td>
                     <td data-label="date created">@quiz.Created.ToShortDateString()</td>
                     <td>
-                        <form class="d-inline" method="post" asp-area="app" asp-controller="quiz" asp-action="delete" asp-route-id="@quiz.Id">
+                        <form class="d-inline" method="post" asp-area="app" asp-controller="quiz" asp-action="delete" asp-route-id="@quiz.Id" asp-route-returnurl="@returnUrl">
                             <button type="submit" class="btn btn-danger mx-1 my-1"><i class="fas fa-trash-alt"></i></button>
                         </form>
 

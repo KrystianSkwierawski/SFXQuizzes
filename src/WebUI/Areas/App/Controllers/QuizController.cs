@@ -92,11 +92,11 @@ public class QuizController : BaseController
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(string id, string returnUrl)
     {
         await Mediator.Send(new DeleteQuizCommand { Id = id });
 
-        return RedirectToAction("yourquizzes", "quiz");
+        return RedirectToAction(returnUrl);
     }
 }
 
