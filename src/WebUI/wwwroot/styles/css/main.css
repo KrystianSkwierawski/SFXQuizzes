@@ -661,6 +661,10 @@ h1 {
   margin-top: 1rem;
 }
 
+.drop-area__status {
+  color: white;
+}
+
 .drop-area {
   display: flex;
   margin-left: auto;
