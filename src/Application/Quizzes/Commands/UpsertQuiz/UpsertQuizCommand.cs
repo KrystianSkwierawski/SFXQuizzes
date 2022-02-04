@@ -62,7 +62,7 @@ public class UpsertQuizCommand : IRequest<string>
             return entity.Id;
         }
 
-        public async Task<Quiz> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
+        private async Task<Quiz> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
         {
             Quiz entity = new()
             {
@@ -83,7 +83,7 @@ public class UpsertQuizCommand : IRequest<string>
             return entity;
         }
 
-        public async Task<Quiz> UpdateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs, bool isInRoleAdmin)
+        private async Task<Quiz> UpdateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs, bool isInRoleAdmin)
         {
             Quiz entity = entity = await _context.Quizzes.FindAsync(upsertQuizVm.Id);
 
