@@ -1,5 +1,4 @@
 ﻿using Application.Common.Mappings;
-using Application.Quizzes.Queries.GetQuiz;
 using AutoMapper;
 using Domain.Entities;
 using NUnit.Framework;
@@ -30,7 +29,8 @@ public class MappingTests
     }
 
     [Test]
-    [TestCase(typeof(Quiz), typeof(QuizDto))]
+    [TestCase(typeof(Quiz), typeof(Application.Quizzes.Queries.GetQuiz.QuizDto))]
+    [TestCase(typeof(Quiz), typeof(Application.Quizzes.Queries.GetQuizzes.QuizDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

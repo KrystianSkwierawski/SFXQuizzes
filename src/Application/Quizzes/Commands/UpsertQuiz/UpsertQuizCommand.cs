@@ -32,13 +32,16 @@ public class UpsertQuizCommand : IRequest<string>
 
             IList<SFX> SFXs = new List<SFX>();
 
-            foreach (var file in request.UpsertQuizVm.Files)
+            if (request.UpsertQuizVm.Files is not null)
             {
-                SFXs.Add(new SFX
+                foreach (var file in request.UpsertQuizVm.Files)
                 {
-                    Name = file.FileName
-                });
-            };
+                    SFXs.Add(new SFX
+                    {
+                        Name = file.FileName
+                    });
+                };
+            }
 
 
             bool isInRoleAdmin = await _identityService.IsInRoleAsync(_currentUserService.UserId, "Administrator");
@@ -53,30 +56,34 @@ public class UpsertQuizCommand : IRequest<string>
             if (isInRoleAdmin)
                 entity.Approved = request.UpsertQuizVm.Approved;
 
-            await _context.SaveChangesAsync(cancellationToken);
 
-            await _SFXFileBulider.SaveSFXs(request.UpsertQuizVm.Files, entity.Id);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }
 
-        public async Task<Quiz> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
+        private async Task<Quiz> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)
         {
             Quiz entity = new()
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = upsertQuizVm.Title,
                 IsPublic = upsertQuizVm.IsPublic,
-                Author = _currentUserService.UserName,
-                SFXs = SFXs
+                Author = _currentUserService.UserName
             };
+
+            if (SFXs.Count > 0)
+            {
+                entity.SFXs = SFXs;
+                await _SFXFileBulider.SaveSFXs(upsertQuizVm.Files, entity.Id);
+            }
 
             await _context.Quizzes.AddAsync(entity);
 
             return entity;
         }
 
-        public async Task<Quiz> UpdateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs, bool isInRoleAdmin)
+        private async Task<Quiz> UpdateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs, bool isInRoleAdmin)
         {
             Quiz entity = entity = await _context.Quizzes.FindAsync(upsertQuizVm.Id);
 
@@ -88,9 +95,13 @@ public class UpsertQuizCommand : IRequest<string>
 
             entity.Title = upsertQuizVm.Title;
             entity.IsPublic = upsertQuizVm.IsPublic;
-            entity.SFXs = SFXs;
 
-            await _SFXFileBulider.RemoveSFXs(upsertQuizVm.Id);
+            if (SFXs.Count() > 0)
+            {
+                entity.SFXs = SFXs;
+                await _SFXFileBulider.RemoveSFXs(upsertQuizVm.Id);
+                await _SFXFileBulider.SaveSFXs(upsertQuizVm.Files, entity.Id);
+            }
 
             return entity;
         }

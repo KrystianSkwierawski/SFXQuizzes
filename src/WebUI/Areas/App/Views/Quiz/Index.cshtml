@@ -26,6 +26,33 @@
         }
     </div>
 
+    <div class="rating"></div>
+
     @await Html.PartialAsync("_QuizPartial", Model)
 </div>
+
+
+@section Scripts{
+<script src="~/lib/rater.min.js"></script>
+<script defer>
+    var options = {
+        max_value: 5,
+        step_size: 0.5,
+        cursor: 'pointer'
+    }
+
+    $(".rating").rate(options);
+
+
+    $(".rating").on("change", async function(ev, data){
+        //console.log(data.from, data.to);
+
+
+        await fetch(`https://localhost:44381/app/quiz/rate?id=@Model.Id&rateValue=${data.to}`, {
+            method: 'POST'
+        });
+    });
+
+</script>
+}
 

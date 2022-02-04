@@ -13,7 +13,13 @@ public class QuizConfiguration : IEntityTypeConfiguration<Quiz>
             .IsRequired();
 
         builder
-            .OwnsMany(x => x.SFXs);
+            .OwnsMany(quiz => quiz.SFXs);
+
+        builder
+            .OwnsMany(quiz => quiz.Rates);
+
+        //builder.Property(quiz => quiz.Rates.Select(rate => rate.Value))
+        //    .HasMaxLength(5);
     }
 }
 

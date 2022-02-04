@@ -18,7 +18,7 @@ public class IdentityService : IIdentityService
         ApplicationUser user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
         if (user is null)
-            throw new NotFoundException(nameof(ApplicationUser), userId);
+            return false;
 
         return await _userManager.IsInRoleAsync(user, role);
     }

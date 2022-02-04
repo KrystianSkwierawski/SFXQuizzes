@@ -15,7 +15,7 @@ public class GetQuizTests : TestBase
     public async Task ShouldReturnQuiz()
     {
         //Arrange 
-        var entity = await AddAsync<Quiz>(new()
+        Quiz entity = await AddAsync<Quiz>(new()
         {
             Id = Guid.NewGuid().ToString(),
             Title = "test",

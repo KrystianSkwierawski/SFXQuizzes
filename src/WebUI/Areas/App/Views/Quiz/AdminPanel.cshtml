@@ -18,6 +18,7 @@
                 <th>date created</th>
                 <th>is public</th>
                 <th>approved</th>
+                <th>rating</th>
                 <th></th>
             </tr>
         </thead>
@@ -31,6 +32,16 @@
                     <td data-label="date created">@quiz.Created</td>
                     <td data-label="is public">@quiz.IsPublic</td>
                     <td data-label="approved">@quiz.Approved</td>
+
+                    @if (quiz.AverageRate > 0)
+                    {
+                        <td data-label="rating">@quiz.AverageRate</td>
+                    }
+                    else if (quiz.AverageRate == 0)
+                    {
+                        <td data-label="rating">No rates</td>
+                    }
+
                     <td>
                         @if (!quiz.Approved)
                         {
@@ -52,9 +63,16 @@
     </table>
 </div>
 
+
+@section Scripts{
 <script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script defer>
     $(document).ready( function () {
         $('#quizzes-table').DataTable();
     } );
 </script>
+}
+
+@section Styles{
+<link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+}

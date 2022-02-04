@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using Application.Common.Interfaces;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +24,17 @@ namespace WebUI.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IIdentityService _identityService;
+        private readonly ICurrentUserService _currentUserService;
+
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, IIdentityService identityService, ICurrentUserService currentUserService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -37,6 +42,8 @@ namespace WebUI.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _identityService = identityService;
+            _currentUserService = currentUserService;
         }
 
         /// <summary>
@@ -96,6 +103,9 @@ namespace WebUI.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            public bool CreateAdminAccount { get; set; } = false;
         }
 
 
@@ -119,8 +129,14 @@ namespace WebUI.Areas.Identity.Pages.Account
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
+
                 if (result.Succeeded)
                 {
+                    bool currentUserIsAdmin = await _identityService.IsInRoleAsync(_currentUserService.UserId, "Administrator");
+
+                    if (Input.CreateAdminAccount && currentUserIsAdmin)
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

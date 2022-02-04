@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Quizzes.Commands;
 
 using static Testing;
-public class ApproveQuizCommandTests : TestBase
+public class ApproveQuizTests : TestBase
 {
     [Test]
     public async Task ShouldApproveQuiz()
     {
         //Arrange
-        var entity = await AddAsync<Quiz>(new()
+        Quiz entity = await AddAsync<Quiz>(new()
         {
             Id = Guid.NewGuid().ToString(),
             Title = "test",

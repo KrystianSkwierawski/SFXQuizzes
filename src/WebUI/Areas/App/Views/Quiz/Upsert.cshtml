@@ -14,12 +14,22 @@
             <i class="fas fa-cloud-upload-alt"></i>
 
             <div class="drop-area__status">
-                <p>Drag & Drop files Here</p>
-                <p>Or</p>
-                <button type="button" class="browse-files-button" aria-label="browse files">Browse Files</button>
+                @if (Model.Files?.Count() > 1)
+                {
+                    <p>@Model.Files.Count() files selected</p>
+                }
+
+                @if (@Model.Files?.Count() == 1)
+                {
+                    <p>@Model.Files[0].FileName Selected</p>
+                }
             </div>
 
-            <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required aria-required="true" />
+            <p>Drag & Drop files Here</p>
+            <p>Or</p>
+            <button type="button" class="browse-files-button" aria-label="browse files">Browse Files</button>
+
+            <input asp-for="Files" class="files-input" type="file" name="files" min="1" max="30" max-size="60000" multiple required="@(Model.Files is null)" aria-required="true" />
         </div>
 
         @if (User.IsInRole("Administrator"))
@@ -49,6 +59,8 @@
     </form>
 </div>
 
+
+@section Scripts{
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script defer type="module" src=~/js/quizCreator.js></script>
 <script defer>
@@ -60,4 +72,4 @@
         document.getElementById('captacha-field') = "";
     }
 </script>
-
+}

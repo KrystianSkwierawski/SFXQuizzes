@@ -1,9 +1,12 @@
 ﻿using Application.Quizzes.Commands.ApproveQuiz;
 using Application.Quizzes.Commands.DeleteQuiz;
+using Application.Quizzes.Commands.RateQuiz;
 using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
 using Domain.Enums;
+using Domain.ValueObjects;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Areas.User.Controllers;
@@ -69,6 +72,18 @@ public class QuizController : BaseController
             upsertQuizVm.Title = quizDto.Title;
             upsertQuizVm.IsPublic = quizDto.IsPublic;
             upsertQuizVm.Approved = quizDto.Approved;
+
+
+            IList<IFormFile> formFiles = new List<IFormFile>();
+
+            foreach (var file in quizDto.SFXs)
+            {
+                formFiles.Add(
+                    new FormFile(null, 0, 0, null, file.Name)
+                    );
+            };
+
+            upsertQuizVm.Files = formFiles;
         }
 
         return View(upsertQuizVm);
@@ -84,10 +99,23 @@ public class QuizController : BaseController
 
     [Authorize("Administrator")]
     [HttpPost]
-    public async Task<IActionResult> Approve(string id , string returnUrl)
+    public async Task<IActionResult> Approve(string id, string returnUrl)
     {
         await Mediator.Send(new ApproveQuizCommand { Id = id });
         return Redirect(returnUrl);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Rate(string id, double rateValue)
+    {
+        await Mediator.Send(new RateQuizCommand
+        {
+            Id = id,
+            RateValue = rateValue
+        });
+
+        return NoContent();
     }
 
     [Authorize]

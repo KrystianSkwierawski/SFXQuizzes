@@ -20,10 +20,6 @@ public class UpsertQuizCommandValidator : AbstractValidator<UpsertQuizCommand>
             .NotNull()
             .NotEmpty();
 
-        RuleFor(vm => vm.UpsertQuizVm.Files)
-            .NotNull()
-            .NotEmpty();
-
         // 8Kbps Bitrate per seconds = 1KB. 300 seconds
         // 320Kbps Bitrate per second = 40KB. 7.5 seconds
         RuleForEach(command => command.UpsertQuizVm.Files)

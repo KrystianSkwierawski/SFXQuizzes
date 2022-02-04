@@ -661,6 +661,10 @@ h1 {
   margin-top: 1rem;
 }
 
+.drop-area__status {
+  color: white;
+}
+
 .drop-area {
   display: flex;
   margin-left: auto;
@@ -925,6 +929,11 @@ header p {
 .quiz {
   display: flex;
   flex-direction: column;
+}
+
+.rating {
+  color: orange;
+  font-size: 2.1rem;
 }
 
 .quiz__sfxs-players {
