@@ -16,5 +16,7 @@ public class Quiz : AuditableEntity
     public bool Approved { get; set; } = false;
 
     public IList<SFX> SFXs { get; set; }
+
+    public IList<Rate> Rates { get; set; } = new List<Rate>();
 }
 

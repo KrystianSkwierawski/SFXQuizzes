@@ -174,6 +174,27 @@ namespace Infrastructure.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuizId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<double>(type: "float", nullable: false),
+                    RatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rate", x => new { x.QuizId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_Rate_Quizzes_QuizId",
+                        column: x => x.QuizId,
+                        principalTable: "Quizzes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SFX",
                 columns: table => new
                 {
@@ -249,6 +270,9 @@ namespace Infrastructure.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Rate");
 
             migrationBuilder.DropTable(
                 name: "SFX");

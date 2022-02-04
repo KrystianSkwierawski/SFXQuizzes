@@ -1,5 +1,6 @@
 ﻿using Application.Quizzes.Commands.ApproveQuiz;
 using Application.Quizzes.Commands.DeleteQuiz;
+using Application.Quizzes.Commands.RateQuiz;
 using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
@@ -101,6 +102,14 @@ public class QuizController : BaseController
     public async Task<IActionResult> Approve(string id, string returnUrl)
     {
         await Mediator.Send(new ApproveQuizCommand { Id = id });
+        return Redirect(returnUrl);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Rate(RateQuizCommand rateQuizCommand, string returnUrl)
+    {
+        await Mediator.Send(rateQuizCommand);
         return Redirect(returnUrl);
     }
 

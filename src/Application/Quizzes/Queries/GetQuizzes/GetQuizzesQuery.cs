@@ -26,7 +26,7 @@ public class GetQuizzesQuery : IRequest<IList<QuizDto>>
 
         public async Task<IList<QuizDto>> Handle(GetQuizzesQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Quiz> quizzes = _context.Quizzes;
+            IQueryable<Quiz> quizzes = _context.Quizzes.AsNoTracking();
 
             quizzes = request.QuizFilter switch
             {
