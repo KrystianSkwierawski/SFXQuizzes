@@ -1,9 +1,12 @@
 ﻿using Application.Quizzes.Commands.UpsertQuiz;
 using Application.Quizzes.Queries.GetQuizzes;
+using Domain.Entities;
 using Domain.Enums;
+using Domain.ValueObjects;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,19 +20,17 @@ public class GetQuizzesTests : TestBase
     public async Task ShouldReturnQuizzes()
     {
         //Arrange
-        await RunAsDefaultUserAsync();
+        var (userId, userName) = await RunAsDefaultUserAsync();
 
-        IList<IFormFile> files = new List<IFormFile>() {
-            new FormFile(null, 0, 0, null, "sf1.wav"),
-            new FormFile(null, 0, 0, null, "sfx2.wav")
-        };
-
-        await SendAsync(new UpsertQuizCommand()
+        Quiz entity = await AddAsync(new Quiz
         {
-            UpsertQuizVm = new UpsertQuizVm()
-            {
-                Title = "quiz",
-                Files = files
+            Id = Guid.NewGuid().ToString(),
+            Title = "test",
+            Author = userName,
+            SFXs = new List<SFX>(),
+            Rates = new List<Rate>() {
+                new Rate { RatedBy = userId, Value = 5 },
+                new Rate { RatedBy = userId, Value = 2 }
             }
         });
 
@@ -42,30 +43,27 @@ public class GetQuizzesTests : TestBase
         result.Should().NotBeNull();
         result.Should().HaveCount(1);
 
+        result[0].AverageRate.Should().Be(
+                entity.Rates.Sum(rate => rate.Value) / entity.Rates.Count()
+            );
+
         result[0].NumberOfSFXs.Should()
-            .Be(files.Count());
+            .Be(entity.SFXs.Count());
     }
 
     [Test]
     public async Task ShouldReturnPublicAndApprovedQuizzes()
     {
         //Arrange
-        await RunAsAdministratorAsync();
+        var (adminserId, userName) = await RunAsAdministratorAsync();
 
-        IList<IFormFile> files = new List<IFormFile>() {
-            new FormFile(null, 0, 0, null, "sf1.wav"),
-            new FormFile(null, 0, 0, null, "sfx2.wav")
-        };
-
-        await SendAsync(new UpsertQuizCommand()
+        Quiz entity = await AddAsync(new Quiz
         {
-            UpsertQuizVm = new UpsertQuizVm()
-            {
-                Title = "quiz",
-                Files = files,
-                IsPublic = true,
-                Approved = true
-            }
+            Id = Guid.NewGuid().ToString(),
+            Title = "test",
+            Author = userName,
+            Approved = true,
+            IsPublic = true,
         });
 
         var user = await RunAsDefaultUserAsync();
@@ -78,10 +76,8 @@ public class GetQuizzesTests : TestBase
         //Assert
         result.Should().NotBeNull();
         result.Should().HaveCount(1);
-        result[0].Author.Should().NotBe(user.Item2);
-
-        result[0].NumberOfSFXs.Should()
-            .Be(files.Count());
+        result[0].Approved.Should().BeTrue();
+        result[0].IsPublic.Should().BeTrue();
     }
 
     [Test]
@@ -90,18 +86,12 @@ public class GetQuizzesTests : TestBase
         //Arrange
         var (userId, userName) = await RunAsDefaultUserAsync();
 
-        IList<IFormFile> files = new List<IFormFile>() {
-            new FormFile(null, 0, 0, null, "sf1.wav"),
-            new FormFile(null, 0, 0, null, "sfx2.wav")
-        };
-
-        await SendAsync(new UpsertQuizCommand()
+        Quiz entity = await AddAsync(new Quiz
         {
-            UpsertQuizVm = new UpsertQuizVm()
-            {
-                Title = "quiz",
-                Files = files
-            }
+            Id = Guid.NewGuid().ToString(),
+            Title = "test",
+            Author = userName,
+            CreatedBy = userId,
         });
 
         GetQuizzesQuery query = new() { QuizFilter = QuizFilter.CurrentUser };
@@ -113,9 +103,6 @@ public class GetQuizzesTests : TestBase
         result.Should().NotBeNull();
         result.Should().HaveCount(1);
         result[0].Author.Should().Be(userName);
-
-        result[0].NumberOfSFXs.Should()
-            .Be(files.Count());
     }
 }
 
