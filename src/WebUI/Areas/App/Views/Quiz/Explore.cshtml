@@ -29,9 +29,16 @@
     </table>
 </div>
 
+
+@section Scripts{
 <script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script defer>
     $(document).ready( function () {
         $('#quizzes-table').DataTable();
     } );
 </script>
+}
+
+@section Styles{
+<link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+}
