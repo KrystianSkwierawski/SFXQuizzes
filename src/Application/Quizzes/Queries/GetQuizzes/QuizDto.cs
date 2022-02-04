@@ -28,11 +28,11 @@ public class QuizDto : IMapFrom<Quiz>
         profile.CreateMap<Quiz, QuizDto>()
             .ForMember(quizDto => quizDto.NumberOfSFXs, opt => opt.MapFrom(quiz => quiz.SFXs.Count()))
             .ForMember(quizDto => quizDto.AverageRate, opt => opt.MapFrom(quiz =>
-                CountAverageRate(quiz.Rates)
+                CalcAverageRate(quiz.Rates)
             ));
     }
 
-    private static double CountAverageRate(IList<Rate> rates)
+    private static double CalcAverageRate(IList<Rate> rates)
     {
         double sum = rates.Sum(rate => rate.Value);
 

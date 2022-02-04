@@ -107,10 +107,15 @@ public class QuizController : BaseController
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> Rate(RateQuizCommand rateQuizCommand, string returnUrl)
+    public async Task<IActionResult> Rate(string id, double rateValue)
     {
-        await Mediator.Send(rateQuizCommand);
-        return Redirect(returnUrl);
+        await Mediator.Send(new RateQuizCommand
+        {
+            Id = id,
+            RateValue = rateValue
+        });
+
+        return NoContent();
     }
 
     [Authorize]
