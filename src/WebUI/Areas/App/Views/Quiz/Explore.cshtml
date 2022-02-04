@@ -12,6 +12,7 @@
                 <th>number of sfxs</th>
                 <th>author</th>
                 <th>date created</th>
+                <th>rating</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,15 @@
                     <td data-label="number of sfxs">@quiz.NumberOfSFXs</td>
                     <td data-label="author">@quiz.Author</td>
                     <td data-label="date created">@quiz.Created.ToShortDateString()</td>
+
+                    @if (quiz.AverageRate > 0)
+                    {
+                        <td data-label="rating">@quiz.AverageRate</td>
+                    }
+                    else if (quiz.AverageRate == 0)
+                    {
+                        <td data-label="rating">No rates</td>
+                    }
                 </tr>
             }
         </tbody>
