@@ -26,6 +26,24 @@
         }
     </div>
 
+    <div class="rating"></div>
+
     @await Html.PartialAsync("_QuizPartial", Model)
 </div>
+
+<script src="~/lib/rater.min.js"></script>
+<script defer>
+    var options = {
+        max_value: 5,
+        step_size: 0.5,
+        cursor: 'pointer'
+    }
+
+    $(".rating").rate(options);
+
+    $(".rating").on("change", function(ev, data){
+        console.log(data.from, data.to);
+    });
+
+</script>
 
