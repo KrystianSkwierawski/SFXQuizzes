@@ -22,6 +22,14 @@ public class QuizDto : IMapFrom<Quiz>
 
     public string Author { get; set; }
 
+    public double UserRate { get; set; } = 0;
+
     public IList<SFX> SFXs { get; set; }
+
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<Quiz, QuizDto>()
+            .ForMember(quizDto => quizDto.UserRate, opt => opt.Ignore());  
+    }
 }
 

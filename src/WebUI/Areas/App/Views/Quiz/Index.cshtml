@@ -1,5 +1,8 @@
-﻿@using System.Security.Claims
-@model Application.Quizzes.Queries.GetQuiz.QuizDto;
+﻿@model Application.Quizzes.Queries.GetQuiz.QuizDto;
+@using Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> _signInManager;
+
 
 @{
     string approveReturnUrl = $"/quiz/{Model.Id}";
@@ -35,24 +38,39 @@
 @section Scripts{
 <script src="~/lib/rater.min.js"></script>
 <script defer>
-    var options = {
-        max_value: 5,
-        step_size: 0.5,
-        cursor: 'pointer'
-    }
+    //https://github.com/auxiliary/rater
 
-    $(".rating").rate(options);
-
+    initializeRating();
 
     $(".rating").on("change", async function(ev, data){
-        //console.log(data.from, data.to);
+
+        if(data.from === data.to)
+            return;
+
+        if('@_signInManager.IsSignedIn(User)' === 'False'){
+
+            $(".rating").rate("setValue", 0);
+
+            return alert('You have to be signed in to rate the quiz.');
+        }
 
 
-        await fetch(`https://localhost:44381/app/quiz/rate?id=@Model.Id&rateValue=${data.to}`, {
+        await fetch(`/app/quiz/rate?id=@Model.Id&rateValue=${data.to}`, {
             method: 'POST'
         });
     });
 
+
+    function initializeRating(){
+        var options = {
+            max_value: 5,
+            step_size: 0.5,
+            cursor: 'pointer',
+            initial_value: @Model.UserRate
+        }
+
+        $(".rating").rate(options);
+    }
 </script>
 }
 

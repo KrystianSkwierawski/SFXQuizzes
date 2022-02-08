@@ -608,7 +608,7 @@ table.dataTable.no-footer, table.dataTable thead th {
   display: block;
   width: 100%;
   color: #adbac7;
-  padding: 0.2rem 0;
+  padding: 0.5rem 0;
   text-decoration: none;
   text-align: left;
   padding-left: 1rem;
