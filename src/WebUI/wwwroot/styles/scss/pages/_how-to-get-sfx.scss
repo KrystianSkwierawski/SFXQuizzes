@@ -32,10 +32,6 @@
 
 .instruction-point {
     padding: 3rem 0;
-
-    &:not(:last-child) {
-        border-bottom: 1px solid #81879e;
-    }
 }
 
 .point__title {

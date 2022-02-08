@@ -28,3 +28,28 @@ main {
     min-height: 100vh;
     position: relative;
 }
+
+.landscape {
+    display: none;
+
+    @include respond-to(medium) {
+        display: block;
+    }
+}
+
+.portrait {
+    display: block;
+
+    @include respond-to(medium) {
+        display: none;
+    }
+}
+
+hr {
+    background-color: #81879e;
+    height: 1px;
+    width: 100%;
+    opacity: .1;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}

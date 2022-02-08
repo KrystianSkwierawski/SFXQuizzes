@@ -429,9 +429,6 @@ th {
 .instruction-point {
   padding: 3rem 0;
 }
-.instruction-point:not(:last-child) {
-  border-bottom: 1px solid #81879e;
-}
 
 .point__title {
   font-size: 1.4rem;
@@ -948,6 +945,80 @@ header p {
   letter-spacing: 4px;
 }
 
+.about-app {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+.about-app h2 {
+  font-size: 2rem;
+  color: #d2a517;
+  text-transform: uppercase;
+}
+
+.about-app__get-sfx, .about-app__create-quiz {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .about-app__get-sfx, .about-app__create-quiz {
+    flex-direction: row;
+  }
+}
+.about-app__get-sfx a, .about-app__create-quiz a {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #d2a517;
+  color: black;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  margin: 3rem auto;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .about-app__get-sfx a, .about-app__create-quiz a {
+    margin: auto;
+  }
+}
+.about-app__get-sfx a:hover, .about-app__create-quiz a:hover {
+  text-decoration: underline;
+}
+.about-app__get-sfx p, .about-app__create-quiz p {
+  color: white;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+.about-app__get-sfx div, .about-app__create-quiz div {
+  max-width: 100%;
+}
+@media screen and (min-height: 550px) and (min-width: 768px) {
+  .about-app__get-sfx div, .about-app__create-quiz div {
+    max-width: 60%;
+  }
+}
+.about-app__get-sfx img, .about-app__create-quiz img {
+  height: auto;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.about-app__create-quiz > a {
+  order: 1;
+}
+
+.about-app__get-sfx > a {
+  order: 1;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .about-app__get-sfx > a {
+    order: 0;
+  }
+}
+
 .sfx-player {
   border: 3px solid #81879E;
   padding: 1.8rem;
@@ -1024,17 +1095,15 @@ header p {
   border: 0;
   background: none;
   border-radius: 8px;
-  background-color: #D2A517;
-  color: black;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  background-color: #81879e;
+  color: white;
+  margin: 0 3rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   font-weight: bold;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   margin-top: 1rem;
   transition: 0.2s ease;
-  margin-bottom: 4rem;
   transition: 0.1s ease-in-out;
 }
 @media screen and (min-height: 550px) and (min-width: 1000px) {
@@ -1098,4 +1167,31 @@ body::before {
 main {
   min-height: 100vh;
   position: relative;
+}
+
+.landscape {
+  display: none;
+}
+@media screen and (min-height: 550px) and (min-width: 768px) {
+  .landscape {
+    display: block;
+  }
+}
+
+.portrait {
+  display: block;
+}
+@media screen and (min-height: 550px) and (min-width: 768px) {
+  .portrait {
+    display: none;
+  }
+}
+
+hr {
+  background-color: #81879e;
+  height: 1px;
+  width: 100%;
+  opacity: 0.1;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }

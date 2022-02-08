@@ -31,5 +31,31 @@
     </div>
 
     @await Html.PartialAsync("_QuizPartial", demoQuiz);
+
+    <hr />
+
+    <div class="about-app">
+        <h2>easy to create a quiz</h2>
+
+        <div class="about-app__get-sfx">
+            <a asp-area="app" asp-controller="home" asp-action="howtogetsfx">How to get a SFX</a>
+
+            <div>
+                <p>Get a SFX</p>
+                <img class="landscape" src="~/assets/images/get-sfx_landscape.jpg" alt="create a quiz" />
+                <img class="portrait" src="~/assets/images/get-sfx_portrait.jpg" alt="create a quiz" />
+            </div>
+        </div>
+
+        <div class="about-app__create-quiz">
+            <a asp-area="app" asp-controller="quiz" asp-action="upsert">Create a quiz</a>
+
+            <div>
+                <p>And just Drag & Drop</p>
+                <img class="landscape" src="~/assets/images/create-quiz_landscape.jpg" alt="create a quiz" />
+                <img class="portrait" src="~/assets/images/create-quiz_portrait.jpg" alt="create a quiz" />
+            </div>
+        </div>
+    </div>
 </div>
 
