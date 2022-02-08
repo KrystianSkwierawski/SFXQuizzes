@@ -12,7 +12,7 @@
 
                     <div class="dropdown__menu d-none">
                         <a asp-area="app" asp-controller="quiz" asp-action="explore">Explore</a>
-                        <a href="/">How to get sfx</a>
+                        <a asp-area="app" asp-controller="home" asp-action="howtogetsfx">How to get a SFX</a>
                         @await Html.PartialAsync("_LoginPartial")
                     </div>
                 </div>

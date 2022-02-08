@@ -2,7 +2,7 @@
 
 @import 'abstracts/_variables.scss', 'abstracts/_mixins.scss';
 
-@import 'components/_quizzes-table.scss', 'pages/_account-manager.scss', 'pages/_login.scss', 'pages/_register.scss', 'layout/_navbar.scss','pages/_quiz-creator.scss', 'layout/_footer.scss', 'pages/_home.scss', 'components/_quiz.scss';
+@import 'pages/_how-to-get-sfx.scss', 'components/_quizzes-table.scss', 'pages/_account-manager.scss', 'pages/_login.scss', 'pages/_register.scss', 'layout/_navbar.scss','pages/_quiz-creator.scss', 'layout/_footer.scss', 'pages/_home.scss', 'components/_quiz.scss';
 
 body {
     height: auto;
