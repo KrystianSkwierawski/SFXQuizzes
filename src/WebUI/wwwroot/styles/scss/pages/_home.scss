@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.try-it {
+﻿.try-it {
     margin-top: 4rem;
     text-align: center;
 
@@ -39,5 +36,82 @@ header {
 
     & p {
         letter-spacing: 4px;
+    }
+}
+
+.about-app {
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+
+
+    & h2 {
+        font-size: 2rem;
+        color: #d2a517;
+        text-transform: uppercase;
+    }
+}
+
+.about-app__get-sfx, .about-app__create-quiz {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    justify-content: space-between;
+    align-items: center;
+
+    @include respond-to(large) {
+        flex-direction: row;
+    }
+
+    & a {
+        box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+        background-color: #d2a517;
+        color: black;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        margin: 3rem auto;
+
+        @include respond-to(large) {
+            margin: auto;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    & p {
+        color: white;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    & div {
+        max-width: 100%;
+
+        @include respond-to(large) {
+            max-width: 60%;
+        }
+    }
+
+    & img {
+        height: auto;
+        border-radius: 12px;
+        width: 100%;
+    }
+}
+
+.about-app__create-quiz > a {
+    order: 1;
+}
+
+.about-app__get-sfx > a {
+    order: 1;
+
+    @include respond-to(large) {
+        order: 0;
     }
 }

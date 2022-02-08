@@ -8,5 +8,12 @@ public class HomeController : BaseController
     {
         return View();
     }
+
+
+    [Route("howtogetsfx")]
+    public async Task<IActionResult> HowToGetSFX()
+    {
+        return View();
+    }
 }
 
