@@ -420,7 +420,7 @@ th {
   max-width: 100%;
   display: block;
 }
-@media screen and (min-height: 550px) and (min-width: 768px) {
+@media screen and (min-height: 550px) and (min-width: 1000px) {
   .how-to-get-sfx__instruction img {
     max-width: 60%;
   }
@@ -995,7 +995,7 @@ header p {
 .about-app__get-sfx div, .about-app__create-quiz div {
   max-width: 100%;
 }
-@media screen and (min-height: 550px) and (min-width: 768px) {
+@media screen and (min-height: 550px) and (min-width: 1000px) {
   .about-app__get-sfx div, .about-app__create-quiz div {
     max-width: 60%;
   }
@@ -1170,20 +1170,20 @@ main {
 }
 
 .landscape {
-  display: none;
+  display: none !important;
 }
 @media screen and (min-height: 550px) and (min-width: 768px) {
   .landscape {
-    display: block;
+    display: block !important;
   }
 }
 
 .portrait {
-  display: block;
+  display: block !important;
 }
 @media screen and (min-height: 550px) and (min-width: 768px) {
   .portrait {
-    display: none;
+    display: none !important;
   }
 }
 

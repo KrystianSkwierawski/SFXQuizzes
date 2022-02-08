@@ -30,18 +30,18 @@ main {
 }
 
 .landscape {
-    display: none;
+    display: none !important;
 
     @include respond-to(medium) {
-        display: block;
+        display: block !important;
     }
 }
 
 .portrait {
-    display: block;
+    display: block !important;
 
     @include respond-to(medium) {
-        display: none;
+        display: none !important;
     }
 }
 

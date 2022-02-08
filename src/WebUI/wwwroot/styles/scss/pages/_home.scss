@@ -92,7 +92,7 @@ header {
     & div {
         max-width: 100%;
 
-        @include respond-to(medium){
+        @include respond-to(large) {
             max-width: 60%;
         }
     }
