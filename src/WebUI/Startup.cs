@@ -1,4 +1,5 @@
-﻿using Project.WebUI.Installers;
+﻿using Microsoft.Extensions.FileProviders;
+using Project.WebUI.Installers;
 
 namespace WebUI;
 
@@ -28,12 +29,13 @@ public class Startup
         else
         {
             app.UseExceptionHandler("/Error");
-            //app.UseHsts();
+            app.UseHsts();
         }
 
         app.UseHealthChecks("/health");
 
         app.UseHttpsRedirection();
+
         app.UseStaticFiles();
 
         app.UseRouting();
