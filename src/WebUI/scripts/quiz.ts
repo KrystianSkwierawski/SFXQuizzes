@@ -54,7 +54,7 @@ elements.volumeInputs.forEach(input => {
 
         const sfxId: string = (<HTMLElement>input.parentNode.parentNode).id;
 
-        if (sfxId !== _audio.id)
+        if (!_linkedVolumes && sfxId !== _audio.id)
             return;
 
         changeVolume(input)

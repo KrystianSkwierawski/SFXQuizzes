@@ -35,7 +35,7 @@ function linkVolumeButtons() {
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
         const sfxId = input.parentNode.parentNode.id;
-        if (sfxId !== _audio.id)
+        if (!_linkedVolumes && sfxId !== _audio.id)
             return;
         changeVolume(input);
     });
