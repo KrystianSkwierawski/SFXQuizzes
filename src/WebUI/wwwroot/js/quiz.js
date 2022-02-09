@@ -15,6 +15,7 @@ function playAudio(playAudioButton) {
     _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxName}` : `/assets/SFXs/demo/${sfxName}`;
     const volume = +quizView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
+    _audio.id = sfxId;
     _audio.play();
 }
 elements.linkVolumeButtons.forEach(button => {
@@ -33,7 +34,9 @@ function linkVolumeButtons() {
 }
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
-        //TODO: if playing current sfx     
+        const sfxId = input.parentNode.parentNode.id;
+        if (sfxId !== _audio.id)
+            return;
         changeVolume(input);
     });
 });

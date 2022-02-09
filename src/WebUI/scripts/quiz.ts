@@ -23,6 +23,8 @@ function playAudio(playAudioButton) {
     const volume: number = +quizView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
 
+    _audio.id = sfxId;
+
     _audio.play();
 }
 
@@ -49,7 +51,12 @@ function linkVolumeButtons() {
 
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
-        //TODO: if playing current sfx     
+
+        const sfxId: string = (<HTMLElement>input.parentNode.parentNode).id;
+
+        if (sfxId !== _audio.id)
+            return;
+
         changeVolume(input)
     });
 });
