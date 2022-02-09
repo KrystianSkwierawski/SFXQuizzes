@@ -801,6 +801,7 @@ footer {
   flex-direction: column;
   padding: 1rem 1rem;
   position: relative;
+  margin-top: 2rem;
 }
 footer::before {
   content: "";
