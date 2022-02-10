@@ -1115,7 +1115,7 @@ header p {
   margin-bottom: 0;
 }
 
-.sfx-player__start-button {
+.sfx-player__play-button, .sfx-player__pause-button {
   border: 0;
   background: none;
   margin-left: 1rem;

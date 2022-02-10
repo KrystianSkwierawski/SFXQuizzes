@@ -65,7 +65,7 @@
     margin-bottom: 0;
 }
 
-.sfx-player__start-button {
+.sfx-player__play-button, .sfx-player__pause-button {
     @include reset-button;
     margin-left: 1rem;
     margin-right: 1rem;

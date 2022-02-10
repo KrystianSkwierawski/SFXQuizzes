@@ -6,12 +6,16 @@ import { isAnswerCorrect } from './models/Quiz.js';
 let _audio: HTMLAudioElement = new Audio();
 let _linkedVolumes: boolean;
 
-elements.sfxPlayer__startButtons.forEach(button => {
-    button.addEventListener('click', () => playAudio(button));
+elements.sfxPlayer__playButtons.forEach((button: HTMLElement) => {
+    button.addEventListener('click', () => {
+        quizView.showPlayAudioButtons();
+        quizView.showPauseAudioButton(button.parentElement);
+        playAudio(button, button.parentElement)
+    });
 });
 
-function playAudio(playAudioButton) {
-    const sfxId: string = (<HTMLElement>playAudioButton.parentNode).id;
+function playAudio(playAudioButton, sfxPlayerEl) {
+    const sfxId: string = sfxPlayerEl.id;
     const quizId: string | undefined = quizView.getQuizId();
     const sfxName: string | undefined = (<any>window).answers.get(sfxId);
 
@@ -26,7 +30,21 @@ function playAudio(playAudioButton) {
     _audio.id = sfxId;
 
     _audio.play();
+
+    _audio.addEventListener('ended', () => {
+        quizView.showPlayAudioButton(sfxPlayerEl);
+    });
+
 }
+
+elements.sfxPlayer__pauseButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (!_audio.ended)
+            _audio.pause();
+
+        quizView.showPlayAudioButton(button.parentElement);
+    })
+});
 
 
 elements.linkVolumeButtons.forEach(button => {
@@ -52,7 +70,7 @@ function linkVolumeButtons() {
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
 
-        const sfxId: string = (<HTMLElement>input.parentNode.parentNode).id;
+        const sfxId: string = (<HTMLElement>input.parentElement.parentElement).id;
 
         if (!_linkedVolumes && sfxId !== _audio.id)
             return;
@@ -87,7 +105,7 @@ function handleUsersSfxNameGuess(e, nameInput) {
     if (!(e.key === 'Enter') || !(e.keyCode === 13))
         return;
 
-    const sfxId: string = (<HTMLElement>nameInput.parentNode).id;
+    const sfxId: string = (<HTMLElement>nameInput.parentElement).id;
     const userAnswer: string = (<string>e.target.value).toLowerCase();
 
     if (isAnswerCorrect(sfxId, userAnswer)) {

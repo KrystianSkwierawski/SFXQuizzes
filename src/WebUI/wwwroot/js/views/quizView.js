@@ -22,11 +22,37 @@ export const showUnlinkVolumeButton = () => {
         button.classList.remove('d-none');
     });
 };
+export const showPlayAudioButtons = ( /*sfxPlayerEl: HTMLElement*/) => {
+    //const playAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    //playAudioEl.classList.remove('d-none');
+    //const pauseAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    //pauseAudioEl.classList.add('d-none');
+    elements.sfxPlayer__playButtons.forEach(button => {
+        if (button.classList.contains('d-none'))
+            button.classList.remove('d-none');
+    });
+    elements.sfxPlayer__pauseButtons.forEach(button => {
+        if (!button.classList.contains('d-none'))
+            button.classList.add('d-none');
+    });
+};
+export const showPlayAudioButton = (sfxPlayerEl) => {
+    const playAudioEl = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    playAudioEl.classList.remove('d-none');
+    const pauseAudioEl = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    pauseAudioEl.classList.add('d-none');
+};
+export const showPauseAudioButton = (sfxPlayerEl) => {
+    const playAudioEl = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    playAudioEl.classList.add('d-none');
+    const pauseAudioEl = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    pauseAudioEl.classList.remove('d-none');
+};
 export const setInputToAnsweredCorrectly = (input) => {
     input.classList.add('text-success');
     input.classList.remove('text-danger');
     input.setAttribute('disabled', "");
-    const sfxId = input.parentNode.id;
+    const sfxId = input.parentElement.id;
     const answer = window.answers.get(sfxId).split('.')[0].split(' ` ')[0];
     input.value = answer;
 };
@@ -39,7 +65,7 @@ export const setInputToAnsweredInCorrectly = (input) => {
 };
 export const setAllAnswers = function () {
     elements.sfxNameInputs.forEach((input) => {
-        const sfxId = input.parentNode.id;
+        const sfxId = input.parentElement.id;
         const answer = window.answers.get(sfxId).split('.')[0].split(' ` ')[0];
         input.setAttribute("disabled", "");
         input.value = answer;
