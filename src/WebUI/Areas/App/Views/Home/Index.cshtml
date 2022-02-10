@@ -38,23 +38,36 @@
         <h2>easy to create a quiz</h2>
 
         <div class="about-app__get-sfx">
-            <a asp-area="app" asp-controller="home" asp-action="howtogetsfx">How to get a SFX</a>
+            <a class="about-app-link" asp-area="app" asp-controller="home" asp-action="howtogetsfx">How to get a SFX</a>
 
             <div>
                 <p>Get a SFX</p>
-                  <img loading="lazy" class="landscape" src="/assets/images/how-to-get-sfx/cut-file_landscape.webp" alt="get a sfx" />
-            <img loading="lazy" class="portrait" src="/assets/images/how-to-get-sfx/cut-file_portrait.webp" alt="get a sfx" />
+                <img loading="lazy" class="landscape" src="/assets/images/how-to-get-sfx/cut-file_landscape.webp" alt="get a sfx" />
+                <img loading="lazy" class="portrait" src="/assets/images/how-to-get-sfx/cut-file_portrait.webp" alt="get a sfx" />
             </div>
         </div>
 
         <div class="about-app__create-quiz">
-            <a asp-area="app" asp-controller="quiz" asp-action="upsert">Create a quiz</a>
+            <a class="about-app-link" asp-area="app" asp-controller="quiz" asp-action="upsert">Create a quiz</a>
 
             <div>
                 <p>And just Drag & Drop</p>
                 <img loading="lazy" class="landscape" src="~/assets/images/create-quiz_landscape.webp" alt="create a quiz" />
                 <img loading="lazy" class="portrait" src="~/assets/images/create-quiz_portrait.webp" alt="create a quiz" />
             </div>
+        </div>
+
+        <div class="about-app__share">
+            <p>And share it <i class="fas fa-share"></i></p>
+        </div>
+
+        <hr />
+
+        <div class="about-app__explore">
+            <h2>Or just use other users' quizzes</h2>
+            <img class="landscape" src="~/assets/images/explore_landscape.webp" alt="other users' quizzes"/>
+            <img class="portrait" src="~/assets/images/explore_portrait.webp" alt="other users' quizzes"/>
+            <a class="about-app-link land" asp-area="app" asp-controller="quiz" asp-action="explore">Explore</a>
         </div>
     </div>
 </div>

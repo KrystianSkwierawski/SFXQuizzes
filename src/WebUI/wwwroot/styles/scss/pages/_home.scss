@@ -44,6 +44,7 @@ header {
     text-align: center;
     display: flex;
     flex-direction: column;
+    padding-top: 1rem;
     margin-bottom: 2rem;
 
 
@@ -63,24 +64,6 @@ header {
 
     @include respond-to(large) {
         flex-direction: row;
-    }
-
-    & a {
-        box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
-        background-color: #d2a517;
-        color: black;
-        text-decoration: none;
-        padding: 1rem 2rem;
-        border-radius: 4px;
-        margin: 3rem auto;
-
-        @include respond-to(large) {
-            margin: auto;
-        }
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 
     & p {
@@ -104,6 +87,24 @@ header {
     }
 }
 
+.about-app-link {
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    background-color: #d2a517;
+    color: black;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    margin: 3rem auto;
+
+    @include respond-to(large) {
+        margin: auto;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .about-app__create-quiz > a {
     order: 1;
 }
@@ -113,5 +114,34 @@ header {
 
     @include respond-to(large) {
         order: 0;
+    }
+}
+
+.about-app__share {
+    color: white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 2rem 0;
+
+
+    & p {
+        margin: 0;
+    }
+
+
+    & i {
+        font-size: 2rem;
+    }
+}
+
+.about-app__explore {
+    color: white;
+    text-transform: uppercase;
+    padding-top: 1rem;
+
+    & img{
+        padding: 3rem 0;
+        height: auto;
+        width: 100%;
     }
 }
