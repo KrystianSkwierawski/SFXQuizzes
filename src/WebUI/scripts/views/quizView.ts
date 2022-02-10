@@ -29,11 +29,14 @@ export const showUnlinkVolumeButton = () => {
     });
 };
 
-export const setInputToAnsweredCorrectly = (input: HTMLElement) => {
+export const setInputToAnsweredCorrectly = (input: HTMLInputElement) => {
     input.classList.add('text-success');
     input.classList.remove('text-danger');
-
     input.setAttribute('disabled', "");
+
+    const sfxId: string = (<HTMLElement>input.parentNode).id;
+    const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
+    input.value = answer;
 };
 
 export const addOnePointToCurrentScore = () => {

@@ -26,6 +26,9 @@ export const setInputToAnsweredCorrectly = (input) => {
     input.classList.add('text-success');
     input.classList.remove('text-danger');
     input.setAttribute('disabled', "");
+    const sfxId = input.parentNode.id;
+    const answer = window.answers.get(sfxId).split('.')[0].split(' ` ')[0];
+    input.value = answer;
 };
 export const addOnePointToCurrentScore = () => {
     const currentScore = +elements.quiz__currentScore.innerHTML;
