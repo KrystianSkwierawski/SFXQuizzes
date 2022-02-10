@@ -801,10 +801,11 @@ footer {
   flex-direction: column;
   padding: 1rem 1rem;
   position: relative;
+  margin-top: 2rem;
 }
 footer::before {
   content: "";
-  background-image: url("../../../assets/images/footer-bacground.png");
+  background-image: url("../../../assets/images/footer-bacground.webp");
   position: absolute;
   top: 0;
   left: 0;
@@ -950,6 +951,7 @@ header p {
   text-align: center;
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
   margin-bottom: 2rem;
 }
 .about-app h2 {
@@ -970,23 +972,6 @@ header p {
     flex-direction: row;
   }
 }
-.about-app__get-sfx a, .about-app__create-quiz a {
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  background-color: #d2a517;
-  color: black;
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  margin: 3rem auto;
-}
-@media screen and (min-height: 550px) and (min-width: 1000px) {
-  .about-app__get-sfx a, .about-app__create-quiz a {
-    margin: auto;
-  }
-}
-.about-app__get-sfx a:hover, .about-app__create-quiz a:hover {
-  text-decoration: underline;
-}
 .about-app__get-sfx p, .about-app__create-quiz p {
   color: white;
   font-size: 1.5rem;
@@ -1006,6 +991,25 @@ header p {
   width: 100%;
 }
 
+.about-app-link {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #d2a517;
+  color: black;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  margin: 3rem auto;
+}
+@media screen and (min-height: 550px) and (min-width: 1000px) {
+  .about-app-link {
+    margin: auto;
+  }
+}
+.about-app-link:hover {
+  text-decoration: underline;
+  color: black;
+}
+
 .about-app__create-quiz > a {
   order: 1;
 }
@@ -1019,18 +1023,47 @@ header p {
   }
 }
 
+.about-app__share {
+  color: white;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 2rem 0;
+}
+.about-app__share p {
+  margin: 0;
+}
+.about-app__share i {
+  font-size: 2rem;
+}
+
+.about-app__explore {
+  color: white;
+  text-transform: uppercase;
+  padding-top: 1rem;
+}
+.about-app__explore img {
+  padding: 3rem 0;
+  height: auto;
+  width: 100%;
+}
+
 .sfx-player {
   border: 3px solid #81879E;
   padding: 1.8rem;
   position: relative;
   flex-grow: 1;
-  margin: 3rem;
   display: flex;
   justify-content: center;
   color: #81879E;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
   background-color: #222431;
+  margin: 3rem 0;
+}
+@media screen and (min-height: 550px) and (min-width: 768px) {
+  .sfx-player {
+    margin: 3rem;
+  }
 }
 .sfx-player p {
   margin-top: auto;
@@ -1040,6 +1073,12 @@ header p {
 .quiz {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+@media screen and (min-height: 550px) and (min-width: 768px) {
+  .quiz {
+    width: auto;
+  }
 }
 
 .rating {
@@ -1076,7 +1115,7 @@ header p {
   margin-bottom: 0;
 }
 
-.sfx-player__start-button {
+.sfx-player__play-button, .sfx-player__pause-button {
   border: 0;
   background: none;
   margin-left: 1rem;
@@ -1095,9 +1134,8 @@ header p {
   border: 0;
   background: none;
   border-radius: 8px;
-  background-color: #81879e;
-  color: white;
-  margin: 0 3rem;
+  color: black;
+  background-color: #d2a517;
   padding-top: 1rem;
   padding-bottom: 1rem;
   font-weight: bold;
@@ -1154,7 +1192,7 @@ body {
 }
 body::before {
   content: "";
-  background-image: url(https://storage.googleapis.com/subtlepatterns-production/designers/subtlepatterns/uploads/double-bubble-dark.png);
+  background-image: url("../../../assets/images/body-bacground.webp");
   opacity: 0.1;
   position: absolute;
   left: 0;
@@ -1192,6 +1230,9 @@ hr {
   height: 1px;
   width: 100%;
   opacity: 0.1;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin: 2rem 0;
+}
+
+center {
+  background-color: white;
 }

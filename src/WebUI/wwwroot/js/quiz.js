@@ -3,11 +3,15 @@ import * as quizView from './views/quizView.js';
 import { isAnswerCorrect } from './models/Quiz.js';
 let _audio = new Audio();
 let _linkedVolumes;
-elements.sfxPlayer__startButtons.forEach(button => {
-    button.addEventListener('click', () => playAudio(button));
+elements.sfxPlayer__playButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        quizView.showPlayAudioButtons();
+        quizView.showPauseAudioButton(button.parentElement);
+        playAudio(button, button.parentElement);
+    });
 });
-function playAudio(playAudioButton) {
-    const sfxId = playAudioButton.parentNode.id;
+function playAudio(playAudioButton, sfxPlayerEl) {
+    const sfxId = sfxPlayerEl.id;
     const quizId = quizView.getQuizId();
     const sfxName = window.answers.get(sfxId);
     if (!_audio.ended)
@@ -15,8 +19,19 @@ function playAudio(playAudioButton) {
     _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxName}` : `/assets/SFXs/demo/${sfxName}`;
     const volume = +quizView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
+    _audio.id = sfxId;
     _audio.play();
+    _audio.addEventListener('ended', () => {
+        quizView.showPlayAudioButton(sfxPlayerEl);
+    });
 }
+elements.sfxPlayer__pauseButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (!_audio.ended)
+            _audio.pause();
+        quizView.showPlayAudioButton(button.parentElement);
+    });
+});
 elements.linkVolumeButtons.forEach(button => {
     button.addEventListener('click', unlinkVolumeButtons);
 });
@@ -33,7 +48,9 @@ function linkVolumeButtons() {
 }
 elements.volumeInputs.forEach(input => {
     input.addEventListener('input', () => {
-        //TODO: if playing current sfx     
+        const sfxId = input.parentElement.parentElement.id;
+        if (!_linkedVolumes && sfxId !== _audio.id)
+            return;
         changeVolume(input);
     });
 });
@@ -55,7 +72,7 @@ elements.sfxNameInputs.forEach(input => {
 function handleUsersSfxNameGuess(e, nameInput) {
     if (!(e.key === 'Enter') || !(e.keyCode === 13))
         return;
-    const sfxId = nameInput.parentNode.id;
+    const sfxId = nameInput.parentElement.id;
     const userAnswer = e.target.value.toLowerCase();
     if (isAnswerCorrect(sfxId, userAnswer)) {
         quizView.setInputToAnsweredCorrectly(nameInput);

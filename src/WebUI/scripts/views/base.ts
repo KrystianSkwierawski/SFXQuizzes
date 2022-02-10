@@ -3,7 +3,8 @@
     browseFilesButton: document.querySelector('.browse-files-button'),
     filesInput: document.querySelector('.files-input'),
     dropArea__status: document.querySelector('.drop-area__status'),
-    sfxPlayer__startButtons: document.querySelectorAll('.sfx-player__start-button'),
+    sfxPlayer__playButtons: document.querySelectorAll('.sfx-player__play-button'),
+    sfxPlayer__pauseButtons: document.querySelectorAll('.sfx-player__pause-button'),
     linkVolumeButtons: document.querySelectorAll('.link-volume-button'),
     unlinkVolumeButtons: document.querySelectorAll('.unlink-volume-button'),
     volumeInputs: document.querySelectorAll('.volume-input'),
@@ -15,5 +16,7 @@
 };
 
 export const elementStrings = {
-    volumeInput: '.volume-input'
+    volumeInput: '.volume-input',
+    sfxPlayer__playButton: '.sfx-player__play-button',
+    sfxPlayer__pauseButton: '.sfx-player__pause-button'
 };

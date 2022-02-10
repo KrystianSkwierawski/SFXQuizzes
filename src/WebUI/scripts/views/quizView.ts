@@ -29,11 +29,49 @@ export const showUnlinkVolumeButton = () => {
     });
 };
 
-export const setInputToAnsweredCorrectly = (input: HTMLElement) => {
+export const showPlayAudioButtons = (/*sfxPlayerEl: HTMLElement*/) => {
+    //const playAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    //playAudioEl.classList.remove('d-none');
+
+    //const pauseAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    //pauseAudioEl.classList.add('d-none');
+
+    elements.sfxPlayer__playButtons.forEach(button => {
+        if (button.classList.contains('d-none'))
+            button.classList.remove('d-none');
+    });
+
+    elements.sfxPlayer__pauseButtons.forEach(button => {
+        if (!button.classList.contains('d-none'))
+            button.classList.add('d-none');
+    });
+};
+
+
+export const showPlayAudioButton = (sfxPlayerEl: HTMLElement) => {
+    const playAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    playAudioEl.classList.remove('d-none');
+
+    const pauseAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    pauseAudioEl.classList.add('d-none');
+};
+
+export const showPauseAudioButton = (sfxPlayerEl: HTMLElement) => {
+    const playAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
+    playAudioEl.classList.add('d-none');
+
+    const pauseAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
+    pauseAudioEl.classList.remove('d-none');
+};
+
+export const setInputToAnsweredCorrectly = (input: HTMLInputElement) => {
     input.classList.add('text-success');
     input.classList.remove('text-danger');
-
     input.setAttribute('disabled', "");
+
+    const sfxId: string = input.parentElement.id;
+    const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
+    input.value = answer;
 };
 
 export const addOnePointToCurrentScore = () => {
@@ -47,7 +85,7 @@ export const setInputToAnsweredInCorrectly = (input: HTMLElement) => {
 
 export const setAllAnswers = function () {
     elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
-        const sfxId: string = (<HTMLElement>input.parentNode).id;
+        const sfxId: string = input.parentElement.id;
 
         const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
 

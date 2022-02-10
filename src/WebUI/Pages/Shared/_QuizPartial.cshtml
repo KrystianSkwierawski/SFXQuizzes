@@ -1,51 +1,52 @@
 ﻿@model Application.Quizzes.Queries.GetQuiz.QuizDto;
 
 
-<div>
-    <script defer>
-        //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
-        window.answers = new Map();
-    </script>
+<script defer>
+    //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
+    window.answers = new Map();
+</script>
 
-    <div class="quiz">
-        <input class="quiz-id" value="@Model.Id" hidden />
+<div class="quiz">
+    <input class="quiz-id" value="@Model.Id" hidden />
 
-        @if (!string.IsNullOrEmpty(Model.Title))
+    @if (!string.IsNullOrEmpty(Model.Title))
+    {
+        <h1 class="quiz__title">@Model.Title</h1>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.Author))
+    {
+        <p class="quiz__author">Created by: @Model.Author</p>
+    }
+
+    <div class="quiz__sfxs-players">
+
+        @foreach (var (SFX, index) in Model.SFXs.Select((SFX, index) => (SFX, index + 1)))
         {
-            <h1 class="quiz__title">@Model.Title</h1>
-        }
+            <div class="sfx-player" id="@SFX.Id">
+                <p>@index.</p>
+                <input class="sfx-name-input" type="text" placeholder="Guess sfx name" />
 
-        @if (!string.IsNullOrEmpty(Model.Author))
-        {
-            <p class="quiz__author">Created by: @Model.Author</p>
-        }
+                <button aria-label="play" class="sfx-player__play-button"><i class="fas fa-play"></i></button>
+                <button aria-label="pause" class="sfx-player__pause-button d-none"><i class="fas fa-pause"></i></button>
 
-        <div class="quiz__sfxs-players">
 
-            @foreach (var (SFX, index) in Model.SFXs.Select((SFX, index) => (SFX, index + 1)))
-            {
-                <div class="sfx-player" id="@SFX.Id">
-                    <p>@index.</p>
-                    <input class="sfx-name-input" type="text" placeholder="Guess sfx name" />
-                    <button aria-label="play" class="sfx-player__start-button"><i class="fas fa-play"></i></button>
-
-                    <div class="volume">
-                        <button aria-label="link volumes" class="link-volume-button d-none"><i class="fas fa-link"></i></button>
-                        <button aria-label="unlink volumes" class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
-                        <input aria-label="volume input" class="volume-input" type="range" />
-                    </div>
-
-                    <script defer>answers.set('@SFX.Id', '@SFX.Name');</script>
+                <div class="volume">
+                    <button aria-label="link volumes" class="link-volume-button d-none"><i class="fas fa-link"></i></button>
+                    <button aria-label="unlink volumes" class="unlink-volume-button"> <i class="fas fa-unlink"></i></button>
+                    <input aria-label="volume input" class="volume-input" type="range" />
                 </div>
-            }
 
-        </div>
+                <script defer>answers.set('@SFX.Id', '@SFX.Name');</script>
+            </div>
+        }
 
-        <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / @Model.SFXs.Count()</p>
-        <button class="quiz__end-quiz-button">End The Quiz</button>
     </div>
 
+    <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / @Model.SFXs.Count()</p>
+    <button class="quiz__end-quiz-button">End The Quiz</button>
 </div>
+
 
 <script type="module" defer src="~/js/quiz.js"></script>
 

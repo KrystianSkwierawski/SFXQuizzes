@@ -3,13 +3,17 @@
     padding: 1.8rem;
     position: relative;
     flex-grow: 1;
-    margin: 3rem;
     display: flex;
     justify-content: center;
     color: #81879E;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
     background-color: #222431;
+    margin: 3rem 0;
+
+    @include respond-to(medium){
+        margin: 3rem;
+    }
 
     & p {
         margin-top: auto;
@@ -20,6 +24,11 @@
 .quiz {
     display: flex;
     flex-direction: column;
+    width: 100%;
+
+    @include respond-to(medium){
+        width: auto;
+    }
 }
 
 .rating{
@@ -56,7 +65,7 @@
     margin-bottom: 0;
 }
 
-.sfx-player__start-button {
+.sfx-player__play-button, .sfx-player__pause-button {
     @include reset-button;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -73,9 +82,8 @@
 .quiz__end-quiz-button {
     @include reset-button;
     border-radius: 8px;
-    background-color: #81879e;
-    color: white;
-    margin: 0 3rem;
+    color: black;
+    background-color: #d2a517;
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-weight: bold;
