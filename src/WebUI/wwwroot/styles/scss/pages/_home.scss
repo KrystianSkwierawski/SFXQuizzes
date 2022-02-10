@@ -102,6 +102,7 @@ header {
 
     &:hover {
         text-decoration: underline;
+        color: black;
     }
 }
 
@@ -139,7 +140,7 @@ header {
     text-transform: uppercase;
     padding-top: 1rem;
 
-    & img{
+    & img {
         padding: 3rem 0;
         height: auto;
         width: 100%;

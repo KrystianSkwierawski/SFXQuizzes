@@ -1007,6 +1007,7 @@ header p {
 }
 .about-app-link:hover {
   text-decoration: underline;
+  color: black;
 }
 
 .about-app__create-quiz > a {
