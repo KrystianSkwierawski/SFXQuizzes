@@ -34,7 +34,6 @@ function playAudio(playAudioButton, sfxPlayerEl) {
     _audio.addEventListener('ended', () => {
         quizView.showPlayAudioButton(sfxPlayerEl);
     });
-
 }
 
 elements.sfxPlayer__pauseButtons.forEach(button => {
