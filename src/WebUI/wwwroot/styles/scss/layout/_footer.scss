@@ -37,6 +37,9 @@
     }
 }
 
+.footer__brand{
+    padding-bottom: 1rem;
+}
 
 .footer__top {
     display: flex;
@@ -95,14 +98,6 @@ nav {
 
 .footer__bottom {
     margin-bottom: 2rem;
-}
-
-.top__brand {
-    flex-grow: 1;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    font-family: 'Quicksand', sans-serif;
-    color: white !important;
 }
 
 .footer__bottom {

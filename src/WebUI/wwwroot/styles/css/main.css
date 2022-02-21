@@ -576,9 +576,11 @@ table.dataTable.no-footer, table.dataTable thead th {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-top: 1rem;
 }
-.navbar h1 {
-  margin-top: 0;
+
+.navbar__brand {
+  padding: 1rem 0;
 }
 
 .navbar__list {
@@ -594,16 +596,6 @@ table.dataTable.no-footer, table.dataTable thead th {
 .logout-form__button {
   border: 0;
   background: none;
-}
-
-.navbar__brand {
-  font-family: "Quicksand", sans-serif;
-  color: white;
-  font-size: 1.4rem;
-  text-decoration: none;
-}
-.navbar__brand:hover {
-  color: white;
 }
 
 .list__create-quiz-link {
@@ -830,6 +822,10 @@ footer::after {
   }
 }
 
+.footer__brand {
+  padding-bottom: 1rem;
+}
+
 .footer__top {
   display: flex;
   flex-grow: 1;
@@ -884,14 +880,6 @@ nav ul {
 
 .footer__bottom {
   margin-bottom: 2rem;
-}
-
-.top__brand {
-  flex-grow: 1;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  font-family: "Quicksand", sans-serif;
-  color: white !important;
 }
 
 .footer__bottom {
