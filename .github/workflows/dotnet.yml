@@ -15,7 +15,7 @@ jobs:
     - name: Install dotnet ef
       run: dotnet tool install --global dotnet-ef
     - name: Build with dotnet
-      run: dotnet build --configuration Release SFXQuizzes.sln
+      run: dotnet build --configuration Release SQuizzes.sln
 
   test:
     runs-on: ubuntu-latest
@@ -32,6 +32,6 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
     - name: run tests
-      run: dotnet test SFXQuizzes.sln --configuration Release
+      run: dotnet test SQuizzes.sln --configuration Release
       env:
-        ConnectionStrings__DefaultConnection: Server=.;Database=SFXQuizzesTestDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true
+        ConnectionStrings__DefaultConnection: Server=.;Database=SQuizzesTestDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true
