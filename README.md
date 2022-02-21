@@ -1,4 +1,4 @@
-# SQuizzes
+<a href="https://wiktoriaskorek.com/"><p align="center"><img src="https://user-images.githubusercontent.com/52860350/154974630-9e66d068-8256-4ecb-84f7-d7f65f309831.png" alt="multistopwatch"/></p><a/>
 
 ## What is this application?
 In the application, you can create your own SFX quiz and share it with friends or just use and try to guess other users' quizzes.
