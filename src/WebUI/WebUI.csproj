@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<UserSecretsId>aspnet-SFXQuizzes-AD95BFD5-83E7-4377-A66B-62EA13E0766C</UserSecretsId>
+		<UserSecretsId>aspnet-SQuizzes-AD95BFD5-83E7-4377-A66B-62EA13E0766C</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
