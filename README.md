@@ -1,4 +1,4 @@
-# SFXQuizzes
+# SQuizzes
 
 ## What is this application?
 In the application, you can create your own SFX quiz and share it with friends or just use and try to guess other users' quizzes.
