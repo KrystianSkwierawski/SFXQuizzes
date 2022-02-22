@@ -22,11 +22,7 @@ export const showUnlinkVolumeButton = () => {
         button.classList.remove('d-none');
     });
 };
-export const showPlayAudioButtons = ( /*sfxPlayerEl: HTMLElement*/) => {
-    //const playAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__playButton);
-    //playAudioEl.classList.remove('d-none');
-    //const pauseAudioEl: HTMLElement = sfxPlayerEl.querySelector(elementStrings.sfxPlayer__pauseButton);
-    //pauseAudioEl.classList.add('d-none');
+export const showPlayAudioButtons = () => {
     elements.sfxPlayer__playButtons.forEach(button => {
         if (button.classList.contains('d-none'))
             button.classList.remove('d-none');

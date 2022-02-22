@@ -66,10 +66,10 @@ function linkVolumeButtons() {
 }
 
 
-elements.volumeInputs.forEach(input => {
+elements.volumeInputs.forEach((input: HTMLInputElement) => {
     input.addEventListener('input', () => {
 
-        const sfxId: string = (<HTMLElement>input.parentElement.parentElement).id;
+        const sfxId: string = input.parentElement.parentElement.id;
 
         if (!_linkedVolumes && sfxId !== _audio.id)
             return;
@@ -78,8 +78,8 @@ elements.volumeInputs.forEach(input => {
     });
 });
 
-function changeVolume(volumeInput) {
-    const volumeInputValue: string = (<HTMLInputElement>volumeInput).value;
+function changeVolume(volumeInput: HTMLInputElement) {
+    const volumeInputValue: string = volumeInput.value;
 
     _audio.volume = +volumeInputValue / 100;
 
@@ -90,21 +90,21 @@ function changeVolume(volumeInput) {
 }
 
 function setLinkedVolumeInputs(volume: string) {
-    elements.volumeInputs.forEach(input => {
-        (<HTMLInputElement>input).value = volume;
+    elements.volumeInputs.forEach((input: HTMLInputElement) => {
+        input.value = volume;
     })
 }
 
 
-elements.sfxNameInputs.forEach(input => {
+elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
     input.addEventListener('keyup', (e: any) => handleUsersSfxNameGuess(e, input));
 });
 
-function handleUsersSfxNameGuess(e, nameInput) {
+function handleUsersSfxNameGuess(e, nameInput: HTMLInputElement) {
     if (!(e.key === 'Enter') || !(e.keyCode === 13))
         return;
 
-    const sfxId: string = (<HTMLElement>nameInput.parentElement).id;
+    const sfxId: string = nameInput.parentElement.id;
     const userAnswer: string = (<string>e.target.value).toLowerCase();
 
     if (isAnswerCorrect(sfxId, userAnswer)) {

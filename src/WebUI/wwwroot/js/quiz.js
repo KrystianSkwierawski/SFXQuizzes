@@ -46,7 +46,7 @@ function linkVolumeButtons() {
     quizView.showLinkVolumeButton();
     _linkedVolumes = true;
 }
-elements.volumeInputs.forEach(input => {
+elements.volumeInputs.forEach((input) => {
     input.addEventListener('input', () => {
         const sfxId = input.parentElement.parentElement.id;
         if (!_linkedVolumes && sfxId !== _audio.id)
@@ -62,11 +62,11 @@ function changeVolume(volumeInput) {
     setLinkedVolumeInputs(volumeInputValue);
 }
 function setLinkedVolumeInputs(volume) {
-    elements.volumeInputs.forEach(input => {
+    elements.volumeInputs.forEach((input) => {
         input.value = volume;
     });
 }
-elements.sfxNameInputs.forEach(input => {
+elements.sfxNameInputs.forEach((input) => {
     input.addEventListener('keyup', (e) => handleUsersSfxNameGuess(e, input));
 });
 function handleUsersSfxNameGuess(e, nameInput) {
