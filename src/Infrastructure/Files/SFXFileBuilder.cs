@@ -15,12 +15,15 @@ public class SFXFileBuilder : ISFXFileBuilder
 
     public async Task SaveSFXs(IList<IFormFile> files, string quizId)
     {
+        if (files is null || files.Count() == 0)
+            throw new ArgumentNullException(nameof(files));
+
         foreach (var file in files)
         {
             try
             {
                 if (file is null)
-                    throw new NullReferenceException();
+                    throw new ArgumentNullException(nameof(file));
 
                 string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
 

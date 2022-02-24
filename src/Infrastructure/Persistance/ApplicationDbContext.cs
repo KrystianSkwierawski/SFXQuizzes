@@ -4,6 +4,8 @@ using Domain.Entities;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Reflection;
 
 namespace Infrastructure.Persistance;
@@ -21,6 +23,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     }
 
     public DbSet<Quiz> Quizzes { get; set; }
+
+    public DatabaseFacade Database => base.Database;
 
 
     protected override void OnModelCreating(ModelBuilder builder)

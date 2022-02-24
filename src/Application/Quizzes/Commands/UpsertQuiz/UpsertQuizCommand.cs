@@ -3,6 +3,7 @@ using Application.Common.Interfaces;
 using Domain.Entities;
 using Domain.ValueObjects;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Quizzes.Commands.UpsertQuiz;
 
@@ -17,49 +18,68 @@ public class UpsertQuizCommand : IRequest<string>
         private readonly ISFXFileBuilder _SFXFileBulider;
         private readonly ICurrentUserService _currentUserService;
         private readonly IIdentityService _identityService;
+        private readonly ILogger<UpsertQuizCommandHandler> _logger;
 
-        public UpsertQuizCommandHandler(IApplicationDbContext context, ISFXFileBuilder SFXFileBulider, ICurrentUserService currentUserService, IIdentityService identityService)
+
+        public UpsertQuizCommandHandler(IApplicationDbContext context, ISFXFileBuilder SFXFileBulider, ICurrentUserService currentUserService, IIdentityService identityService, ILogger<UpsertQuizCommandHandler> logger)
         {
             _context = context;
             _SFXFileBulider = SFXFileBulider;
             _currentUserService = currentUserService;
             _identityService = identityService;
+            _logger = logger;
         }
 
         public async Task<string> Handle(UpsertQuizCommand request, CancellationToken cancellationToken)
         {
-            Quiz entity = new();
+            using var transaction = _context.Database.BeginTransaction();
 
-            IList<SFX> SFXs = new List<SFX>();
-
-            if (request.UpsertQuizVm.Files is not null)
+            try
             {
-                foreach (var file in request.UpsertQuizVm.Files)
+                Quiz entity = new();
+
+                IList<SFX> SFXs = new List<SFX>();
+
+                if (request.UpsertQuizVm.Files is not null)
                 {
-                    SFXs.Add(new SFX
+                    foreach (var file in request.UpsertQuizVm.Files)
                     {
-                        Name = file.FileName
-                    });
-                };
+                        SFXs.Add(new SFX
+                        {
+                            Name = file.FileName
+                        });
+                    };
+                }
+
+
+                bool isInRoleAdmin = await _identityService.IsInRoleAsync(_currentUserService.UserId, "Administrator");
+
+                if (request.UpsertQuizVm.Id is null)
+                    entity = await CreateAsync(request.UpsertQuizVm, SFXs);
+
+                if (request.UpsertQuizVm.Id is not null)
+                    entity = await UpdateAsync(request.UpsertQuizVm, SFXs, isInRoleAdmin);
+
+
+                if (isInRoleAdmin)
+                    entity.Approved = request.UpsertQuizVm.Approved;
+
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                transaction.Commit();
+
+                return entity.Id;
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating or editing quiz.");
 
+                transaction.Rollback();
+                _SFXFileBulider.RemoveSFXs(request.UpsertQuizVm.Id);
 
-            bool isInRoleAdmin = await _identityService.IsInRoleAsync(_currentUserService.UserId, "Administrator");
-
-            if (request.UpsertQuizVm.Id is null)
-                entity = await CreateAsync(request.UpsertQuizVm, SFXs);
-
-            if (request.UpsertQuizVm.Id is not null)
-                entity = await UpdateAsync(request.UpsertQuizVm, SFXs, isInRoleAdmin);
-
-
-            if (isInRoleAdmin)
-                entity.Approved = request.UpsertQuizVm.Approved;
-
-
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return entity.Id;
+                throw ex;
+            }
         }
 
         private async Task<Quiz> CreateAsync(UpsertQuizVm upsertQuizVm, IList<SFX> SFXs)

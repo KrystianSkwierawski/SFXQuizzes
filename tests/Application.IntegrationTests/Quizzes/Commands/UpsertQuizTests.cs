@@ -1,8 +1,11 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Application.Quizzes.Commands.DeleteQuiz;
 using Application.Quizzes.Commands.UpsertQuiz;
 using Domain.Entities;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -104,42 +107,6 @@ public class CreateQuizTests : TestBase
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
         string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
         Directory.Exists(directory).Should().BeTrue();
-    }
-
-    [Test]
-    public async Task ShouldThrowForbiddenAccessException_WhenUpdatingQuizNotAsOwnerOrAdmin()
-    {
-        await RunAsAdministratorAsync();
-
-        IList<IFormFile> files = new List<IFormFile>() {
-            new FormFile(null, 0, 0, null, "sfx.wav")
-        };
-
-        var quizId = await SendAsync(new UpsertQuizCommand
-        {
-            UpsertQuizVm = new()
-            {
-                Title = "test",
-                Files = files
-            }
-        });
-
-
-        await RunAsDefaultUserAsync();
-
-        var command = new UpsertQuizCommand()
-        {
-            UpsertQuizVm = new()
-            {
-                Id = quizId,
-                Title = "edit",
-                Files = files
-            }
-        };
-
-
-        await FluentActions.Invoking(() =>
-             SendAsync(command)).Should().ThrowAsync<ForbiddenAccessException>();
     }
 }
 
