@@ -636,16 +636,19 @@ table.dataTable.no-footer, table.dataTable thead th {
 .dropdown__menu a, .dropdown__menu form, .dropdown__menu button {
   display: block;
   width: 100%;
-  color: #adbac7;
+  color: white;
   padding: 0.5rem 0;
   text-decoration: none;
   text-align: left;
   padding-left: 1rem;
+  font-weight: 500;
 }
 .dropdown__menu a:hover, .dropdown__menu form:hover, .dropdown__menu button:hover {
-  color: #cdd9e5;
   text-decoration: none;
   background-color: #316dca;
+}
+.dropdown__menu a:hover span, .dropdown__menu form:hover span, .dropdown__menu button:hover span {
+  color: #cdd9e5;
 }
 .dropdown__menu::before {
   content: "";
@@ -654,6 +657,11 @@ table.dataTable.no-footer, table.dataTable thead th {
   right: 9px;
   border: 8px solid transparent;
   border-bottom-color: #444c56;
+}
+.dropdown__menu span {
+  font-weight: normal;
+  color: #737373;
+  font-size: 0.8rem;
 }
 .dropdown__menu:after {
   content: "";

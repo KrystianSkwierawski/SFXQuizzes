@@ -9,7 +9,6 @@
 
 .navbar__brand {
     padding: 1rem 0;
-
 }
 
 .navbar__list {
@@ -67,16 +66,20 @@
     & a, form, button {
         display: block;
         width: 100%;
-        color: #adbac7;
+        color: white;
         padding: .5rem 0;
         text-decoration: none;
         text-align: left;
         padding-left: 1rem;
+        font-weight: 500;
 
         &:hover {
-            color: #cdd9e5;
             text-decoration: none;
             background-color: #316dca;
+        }
+
+        &:hover span {
+            color: #cdd9e5;
         }
     }
 
@@ -87,6 +90,12 @@
         right: 9px;
         border: 8px solid transparent;
         border-bottom-color: #444c56;
+    }
+
+    & span {
+        font-weight: normal;
+        color: #737373;
+        font-size: .8rem;
     }
 
     &:after {
