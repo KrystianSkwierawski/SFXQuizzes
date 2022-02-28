@@ -1,4 +1,6 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Domain.Entities;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using MediatR;
@@ -109,6 +111,28 @@ public class Testing
     public static async Task<(string, string)> RunAsAdministratorAsync()
     {
         return await RunAsUserAsync("administrator@local", "Administrator1234!", new[] { "Administrator" });
+    }
+
+    public static async Task UpdateCurrentUserNameAsync(string userName)
+    {
+        using var scope = _scopeFactory.CreateScope();
+
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        ApplicationUser user = await userManager.FindByIdAsync(_currentUserId);
+
+        if (user is null)
+            throw new NotFoundException(nameof(ApplicationUser), _currentUserId);
+
+        var setUserNameResult = await userManager.SetUserNameAsync(user, userName);
+        if (setUserNameResult.Succeeded)
+        {
+            _currentUserName = userName;
+
+            return;
+        }
+
+        throw new Exception($"Unable to update userName: {userName}.{Environment.NewLine}{setUserNameResult}");
     }
 
     public static async Task<(string, string)> RunAsUserAsync(string userName, string password, string[] roles)
