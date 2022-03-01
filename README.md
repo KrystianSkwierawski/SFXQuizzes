@@ -1,7 +1,7 @@
 <a href="https://wiktoriaskorek.com/"><p align="center"><img src="https://user-images.githubusercontent.com/52860350/154974630-9e66d068-8256-4ecb-84f7-d7f65f309831.png" alt="multistopwatch"/></p><a/>
 
 ## What is this application?
-In the application, you can create your own SFX quiz and share it with friends or just use and try to guess other users' quizzes.
+Application where you can easily create your own sound quiz and share it with friends or guess other users' quizzes.
 
 ## Why this project was created?
 I got inspired by <a href="https://vg-sfx-quiz.herokuapp.com/">Video Game SFX Quiz<a> when I was playing with my friends. We liked it but didn't find another one, so I created an application where the users can easily create an SFX quiz.
