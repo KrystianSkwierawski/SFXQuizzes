@@ -18,10 +18,11 @@ public class SFXFileBuilder : ISFXFileBuilder
         if (files is null || files.Count() == 0)
             throw new ArgumentNullException(nameof(files));
 
-        foreach (var file in files)
+        try
         {
-            try
+            foreach (var file in files)
             {
+
                 if (file is null)
                     throw new ArgumentNullException(nameof(file));
 
@@ -35,10 +36,10 @@ public class SFXFileBuilder : ISFXFileBuilder
 
                 await file.CopyToAsync(fileStream);
             }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex, "An error occurred while saving file. It might happen when testing with an empty file.");
-            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation(ex, "An error occurred while saving file. It might happen when testing with an empty file.");
         }
     }
 
