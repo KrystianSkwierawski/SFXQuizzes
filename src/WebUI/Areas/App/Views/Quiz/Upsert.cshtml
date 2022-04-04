@@ -57,7 +57,25 @@
 
         <button class="upsert-quiz-button" type="submit" aria-label="@pageTitle">@pageTitle</button>
     </form>
+
+    <hr />
+
+    <div class="how-to-get-sfx__instruction text-white">
+        <div class="instruction-point p-0">
+            <p class="point__title">Name file convention</p>
+            <p class="text-center">
+                - After ' ` ' you can add alternatives names that are also correct. <br />
+                - The filename will be your SFX name, which will be guessed. <br />
+                - File format ought to be .mp3, .ogg or .wav.
+            </p>
+            <img loading="lazy" src="~/assets/images/how-to-get-sfx/name-file.webp" alt="name the file" />
+        </div>
+    </div>
+
+    <a class="quiz-creator__how-to-get-sfx-link" asp-area="app" asp-controller="home" asp-action="howtogetsfx">How to get a SFX</a>
 </div>
+
+
 
 
 @section Scripts{
