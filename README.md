@@ -11,7 +11,7 @@ I got inspired by <a href="https://vg-sfx-quiz.herokuapp.com/">Video Game SFX Qu
 - For simplicity, I used ASP.NET Core scaffolded Identity and just change it a little bit. For now, I resigned with an email-sender, email confirmation, and authenticating via external services(Facebook, Google, etc).
   
   
-## Tools:
+## Tools
 ### Back-end
  * C#
  * .NET 6.0
