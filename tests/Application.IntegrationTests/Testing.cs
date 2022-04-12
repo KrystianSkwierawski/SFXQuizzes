@@ -63,7 +63,7 @@ public class Testing
 
         _checkpoint = new Checkpoint
         {
-            TablesToIgnore = new[] { "__EFMigrationsHistory" }
+            TablesToIgnore = new Respawn.Graph.Table[] { "__EFMigrationsHistory" }
         };
 
         EnsureDatabase();
