@@ -3,6 +3,8 @@ using Infrastructure;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
+using WebMarkupMin.AspNetCore6;
+using WebMarkupMin.Core;
 using WebUI.Installers;
 
 namespace Project.WebUI.Installers;
@@ -24,6 +26,32 @@ public class CoreInstaller : IInstaller
         })
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+        // HTML minification (https://github.com/Taritsyn/WebMarkupMin)
+       services.AddWebMarkupMin(
+        options =>
+        {
+            options.AllowMinificationInDevelopmentEnvironment = true;
+            options.AllowCompressionInDevelopmentEnvironment = true;
+        })
+        .AddHtmlMinification(
+            options =>
+            {
+                options.MinificationSettings.RemoveRedundantAttributes = true;
+                options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
+                options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
+            })
+        .AddHttpCompression();
+
+        // Bundling, minification and Sass transpilation (https://github.com/ligershark/WebOptimizer)
+        services.AddWebOptimizer(
+            pipeline =>
+            {
+                pipeline.MinifyJsFiles();
+                pipeline.CompileScssFiles()
+                        .InlineImages(1);
+            });
 
         services.AddRazorPages();
     }

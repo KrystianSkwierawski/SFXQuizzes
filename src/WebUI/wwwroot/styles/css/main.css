@@ -413,6 +413,9 @@ th {
 .how-to-get-sfx__instruction p {
   text-align: center;
 }
+.how-to-get-sfx__instruction li {
+  margin: 0.5rem 0;
+}
 .how-to-get-sfx__instruction img {
   height: auto;
   margin: 1rem auto;
@@ -904,6 +907,9 @@ nav ul {
   list-style-type: none;
   padding-left: 0;
 }
+nav li {
+  margin-top: 0.5rem;
+}
 
 .footer__bottom {
   margin-bottom: 2rem;
@@ -955,7 +961,6 @@ header h1 {
   text-align: center;
   margin-top: 0;
   padding-top: 1rem;
-  font-family: "Quicksand", sans-serif;
 }
 header p {
   letter-spacing: 4px;
@@ -1196,6 +1201,10 @@ header p {
 .quiz__author {
   text-align: center;
   color: white;
+}
+
+.link-volume-button, .unlink-volume-button {
+  margin-right: 0.6rem;
 }
 
 body {

@@ -38,4 +38,3 @@ const validateSupportedFormats = (files) => {
     }
     return;
 };
-//# sourceMappingURL=Files.js.map

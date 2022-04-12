@@ -4,4 +4,3 @@ export const isAnswerCorrect = (sfxId, userAnswer) => {
     const isAnswerCorrect = answers.some(answer => answer === userAnswer);
     return isAnswerCorrect;
 };
-//# sourceMappingURL=Quiz.js.map

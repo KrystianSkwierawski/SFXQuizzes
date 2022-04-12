@@ -18,4 +18,3 @@ export const setFilesInputValue = (files) => {
 export const getFilesInputValue = () => {
     return elements.filesInput.files;
 };
-//# sourceMappingURL=quizCreatorView.js.map
