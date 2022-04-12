@@ -32,6 +32,10 @@ public class Startup
             app.UseHsts();
         }
 
+
+        app.UseWebMarkupMin();
+        app.UseWebOptimizer();
+
         app.UseStaticFiles(new StaticFileOptions()
         {
             HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
@@ -46,8 +50,6 @@ public class Startup
             }
         });
 
-        app.UseWebMarkupMin();
-        app.UseWebOptimizer();
 
         app.UseHealthChecks("/health");
 

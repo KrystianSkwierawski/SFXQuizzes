@@ -4,7 +4,6 @@ using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore6;
-using WebMarkupMin.Core;
 using WebUI.Installers;
 
 namespace Project.WebUI.Installers;
@@ -35,13 +34,7 @@ public class CoreInstaller : IInstaller
          .AddHttpCompression();
 
         // Bundling, minification and Sass transpilation (https://github.com/ligershark/WebOptimizer)
-        services.AddWebOptimizer(
-            pipeline =>
-            {
-                pipeline.MinifyJsFiles();
-                pipeline.CompileScssFiles()
-                        .InlineImages(1);
-            });
+        services.AddWebOptimizer();
 
         services.AddRazorPages();
     }
