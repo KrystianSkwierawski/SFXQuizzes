@@ -67,4 +67,3 @@ export const setAllAnswers = function () {
         input.value = answer;
     });
 };
-//# sourceMappingURL=quizView.js.map

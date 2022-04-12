@@ -82,4 +82,3 @@ function handleUsersSfxNameGuess(e, nameInput) {
     quizView.setInputToAnsweredInCorrectly(nameInput);
 }
 elements.quiz__endQuizButton.addEventListener('click', quizView.setAllAnswers);
-//# sourceMappingURL=quiz.js.map

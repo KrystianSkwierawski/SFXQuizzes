@@ -40,10 +40,10 @@
 
                     <td>
                         <form class="d-inline" method="post" asp-area="app" asp-controller="quiz" asp-action="delete" asp-route-id="@quiz.Id" asp-route-returnurl="@returnUrl">
-                            <button type="submit" class="btn btn-danger mx-1 my-1"><i class="fas fa-trash-alt"></i></button>
+                            <button type="submit" aria-label="delete" class="btn btn-danger mx-1 my-1"><i class="fas fa-trash-alt"></i></button>
                         </form>
 
-                        <a asp-area="app" asp-controller="quiz" asp-action="upsert" asp-route-id="@quiz.Id" type="submit" class="btn btn-info d-inline"><i class="fas fa-edit"></i></a>
+                        <a asp-area="app" aria-label="edit" asp-controller="quiz" asp-action="upsert" asp-route-id="@quiz.Id" type="submit" class="btn btn-info d-inline"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             }
@@ -53,11 +53,12 @@
 
 
 @section Scripts{
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script defer>
     $(document).ready( function () {
         $('#quizzes-table').DataTable();
-    } );
+    });
 </script>
 }
 

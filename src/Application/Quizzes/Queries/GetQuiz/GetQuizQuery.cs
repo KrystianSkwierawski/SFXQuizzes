@@ -4,6 +4,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.ValueObjects;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Quizzes.Queries.GetQuiz;
 
@@ -27,6 +28,7 @@ public class GetQuizQuery : IRequest<QuizDto>
         public async Task<QuizDto> Handle(GetQuizQuery request, CancellationToken cancellationToken)
         {
             Quiz entity = _context.Quizzes
+                .AsNoTracking()
                 .FirstOrDefault(x => x.Id == request.Id);
 
             if (entity is null)

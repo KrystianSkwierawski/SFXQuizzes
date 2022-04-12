@@ -38,4 +38,3 @@ elements.dropArea.addEventListener('dragstart', (e) => {
 elements.browseFilesButton.addEventListener('click', () => {
     elements.filesInput.click();
 });
-//# sourceMappingURL=quizCreator.js.map

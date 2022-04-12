@@ -11,7 +11,7 @@
     background-color: #222431;
     margin: 3rem 0;
 
-    @include respond-to(medium){
+    @include respond-to(medium) {
         margin: 3rem;
     }
 
@@ -26,12 +26,12 @@
     flex-direction: column;
     width: 100%;
 
-    @include respond-to(medium){
+    @include respond-to(medium) {
         width: auto;
     }
 }
 
-.rating{
+.rating {
     color: orange;
     font-size: 2.1rem;
 }
@@ -126,7 +126,11 @@
     margin-bottom: .5rem;
 }
 
-.quiz__author{
+.quiz__author {
     text-align: center;
     color: white;
+}
+
+.link-volume-button, .unlink-volume-button {
+    margin-right: .6rem;
 }

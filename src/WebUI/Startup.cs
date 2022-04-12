@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.FileProviders;
-using Project.WebUI.Installers;
+﻿using Project.WebUI.Installers;
+using WebMarkupMin.AspNetCore6;
 
 namespace WebUI;
 
@@ -32,11 +32,28 @@ public class Startup
             app.UseHsts();
         }
 
+
+        app.UseWebMarkupMin();
+        app.UseWebOptimizer();
+
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
+            OnPrepareResponse = (context) =>
+            {
+                var headers = context.Context.Response.GetTypedHeaders();
+                headers.CacheControl = new Microsoft.Net.Http.Headers.CacheControlHeaderValue
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromDays(30)
+                };
+            }
+        });
+
+
         app.UseHealthChecks("/health");
 
         app.UseHttpsRedirection();
-
-        app.UseStaticFiles();
 
         app.UseRouting();
 

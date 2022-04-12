@@ -19,4 +19,3 @@ export const elementStrings = {
     sfxPlayer__playButton: '.sfx-player__play-button',
     sfxPlayer__pauseButton: '.sfx-player__pause-button'
 };
-//# sourceMappingURL=base.js.map

@@ -94,6 +94,10 @@ nav {
         list-style-type: none;
         padding-left: 0;
     }
+
+    & li{
+        margin-top: .5rem;
+    }
 }
 
 .footer__bottom {
