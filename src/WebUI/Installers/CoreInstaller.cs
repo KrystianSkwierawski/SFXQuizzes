@@ -29,20 +29,19 @@ public class CoreInstaller : IInstaller
 
 
         // HTML minification (https://github.com/Taritsyn/WebMarkupMin)
-       services.AddWebMarkupMin(
-        options =>
-        {
-            options.AllowMinificationInDevelopmentEnvironment = true;
-            options.AllowCompressionInDevelopmentEnvironment = true;
-        })
-        .AddHtmlMinification(
-            options =>
-            {
-                options.MinificationSettings.RemoveRedundantAttributes = true;
-                options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
-                options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
-            })
-        .AddHttpCompression();
+        services
+            .AddWebMarkupMin(
+                options =>
+                {
+                    options.AllowMinificationInDevelopmentEnvironment = true;
+                    options.DisablePoweredByHttpHeaders = true;
+                })
+            .AddHtmlMinification(
+                options =>
+                {
+                    options.MinificationSettings.RemoveOptionalEndTags = false;
+                    options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
+                });
 
         // Bundling, minification and Sass transpilation (https://github.com/ligershark/WebOptimizer)
         services.AddWebOptimizer(
