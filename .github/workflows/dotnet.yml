@@ -34,4 +34,4 @@ jobs:
     - name: run tests
       run: dotnet test SQuizzes.sln --configuration Release
       env:
-        ConnectionStrings__DefaultConnection: Server=.;Database=SQuizzesTestDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true
+        ConnectionStrings__DefaultConnection: Server=.;Database=SQuizzesTestDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true;TrustServerCertificate=true
