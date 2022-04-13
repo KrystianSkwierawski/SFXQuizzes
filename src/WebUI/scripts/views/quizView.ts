@@ -1,4 +1,6 @@
 ﻿import { elements, elementStrings } from './base.js';
+import { getBreakingMark } from '../models/Files.js';
+
 
 export const getVolumeInputValue = (audioPlayer: HTMLElement) => {
     const volumeInput: HTMLInputElement = audioPlayer.querySelector(elementStrings.volumeInput);
@@ -64,7 +66,10 @@ export const setInputToAnsweredCorrectly = (input: HTMLInputElement) => {
     input.setAttribute('disabled', "");
 
     const sfxId: string = input.parentElement.id;
-    const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
+
+    let answer: string = (<any>window).answers.get(sfxId);
+    const breakingMark = getBreakingMark(answer);
+    answer = answer.split(breakingMark)[0];
     input.value = answer;
 };
 
@@ -81,7 +86,9 @@ export const setAllAnswers = function () {
     elements.sfxNameInputs.forEach((input: HTMLInputElement) => {
         const sfxId: string = input.parentElement.id;
 
-        const answer: string = (<any>window).answers.get(sfxId).split('.')[0].split(' ` ')[0];
+        let answer: string = (<any>window).answers.get(sfxId);
+        const breakingMark = getBreakingMark(answer);
+        answer = answer.split(breakingMark)[0];
 
         input.setAttribute("disabled", "");
         input.value = answer;

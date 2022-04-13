@@ -4,6 +4,7 @@
 <script defer>
     //A global variable, accessible by a user. I did it this way to save API calls. It is okay that users can access this variable.
     window.answers = new Map();
+    window.encodedNamesWithExtensions = new Map();
 </script>
 
 <div class="quiz">
@@ -37,10 +38,14 @@
                     <input aria-label="volume input" class="volume-input" type="range" />
                 </div>
 
-                <script defer>answers.set('@SFX.Id', '@SFX.Name');</script>
+
+
+                <script defer>
+                    answers.set('@SFX.Id', '@Html.Raw(SFX.Name)');
+                    encodedNamesWithExtensions.set('@SFX.Id', '@SFX.EncodedNameWithExtension');
+                </script>
             </div>
         }
-
     </div>
 
     <p class="quiz__score">Score: <span class="quiz__current-score">0</span> / @Model.SFXs.Count()</p>

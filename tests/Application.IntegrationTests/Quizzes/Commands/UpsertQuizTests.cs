@@ -3,6 +3,7 @@ using Application.Common.Interfaces;
 using Application.Quizzes.Commands.DeleteQuiz;
 using Application.Quizzes.Commands.UpsertQuiz;
 using Domain.Entities;
+using Domain.ValueObjects;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Moq;
@@ -10,10 +11,12 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Quizzes.Commands;
 
+using static System.Net.WebRequestMethods;
 using static Testing;
 public class CreateQuizTests : TestBase
 {
@@ -57,7 +60,13 @@ public class CreateQuizTests : TestBase
         result.Title.Should().Be(command.UpsertQuizVm.Title);
         result.CreatedBy.Should().Be(user.Item1);
         result.Author.Should().Be(user.Item2);
-        result.SFXs[0].Name.Should().Be(files[0].FileName);
+
+        string nameWithoutExtension = Path.GetFileNameWithoutExtension(files[0].FileName);
+        string extension = Path.GetExtension(files[0].FileName);
+        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+
+        result.SFXs[0].Name.Should().Be(nameWithoutExtension);
+        result.SFXs[0].EncodedNameWithExtension.Should().Be(encodedNameWithExtension);
 
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
         string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
@@ -102,7 +111,13 @@ public class CreateQuizTests : TestBase
         result.Title.Should().Be(command.UpsertQuizVm.Title);
         result.CreatedBy.Should().Be(userId);
         result.Author.Should().Be(userName);
-        result.SFXs[0].Name.Should().Be(files[0].FileName);
+
+        string nameWithoutExtension = Path.GetFileNameWithoutExtension(files[0].FileName);
+        string extension = Path.GetExtension(files[0].FileName);
+        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+
+        result.SFXs[0].Name.Should().Be(nameWithoutExtension);
+        result.SFXs[0].EncodedNameWithExtension.Should().Be(encodedNameWithExtension);
 
         // Application.IntegrationTests\bin\Debug\net6.0\wwwroot\assets\SFXs\{id}
         string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);

@@ -5,6 +5,7 @@ using Domain.Entities;
 using Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Application.Quizzes.Queries.GetQuiz;
 

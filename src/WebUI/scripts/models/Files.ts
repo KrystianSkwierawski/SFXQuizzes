@@ -12,30 +12,9 @@
     if (supportedFormatsError)
         return supportedFormatsError;
 
-    const notOnlyASCIICharsError = validateIfOnlyASCIIChars(files);
-    if (notOnlyASCIICharsError)
-        return notOnlyASCIICharsError;
-
     return;
 };
 
-const validateIfOnlyASCIIChars = (files: FileList) => {
-    const ascii = /^[ -~]+$/;
-
-    const fileNamesWithNonASCIIChars = Array.from(files).filter(file => !ascii.test(file.name));
-
-    if (fileNamesWithNonASCIIChars.length > 0) {
-        let validationError = 'Only ASCII characters are supported\n';
-
-        fileNamesWithNonASCIIChars.forEach(file => {
-            validationError += `\n${file.name}`;
-        });
-
-        return validationError;
-    }
-
-    return;
-};
 
 const validateNumberOfFiles = (files: FileList) => {
     if (files.length > 30)
@@ -79,4 +58,19 @@ const validateSupportedFormats = (files: FileList) => {
 
     return;
 };
+
+export const getBreakingMark = (name: string) => {
+    let breakingMark: string;
+
+    if (name.includes(" ` "))
+        breakingMark = " ` ";
+
+    if (name.includes(" ' "))
+        breakingMark = " ' ";
+
+    if (name.includes(" ; "))
+        breakingMark = " ; ";
+
+    return breakingMark;
+}
 

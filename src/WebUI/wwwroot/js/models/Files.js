@@ -8,21 +8,6 @@ export const validateFiles = (files) => {
     const supportedFormatsError = validateSupportedFormats(files);
     if (supportedFormatsError)
         return supportedFormatsError;
-    const notOnlyASCIICharsError = validateIfOnlyASCIIChars(files);
-    if (notOnlyASCIICharsError)
-        return notOnlyASCIICharsError;
-    return;
-};
-const validateIfOnlyASCIIChars = (files) => {
-    const ascii = /^[ -~]+$/;
-    const fileNamesWithNonASCIIChars = Array.from(files).filter(file => !ascii.test(file.name));
-    if (fileNamesWithNonASCIIChars.length > 0) {
-        let validationError = 'Only ASCII characters are supported\n';
-        fileNamesWithNonASCIIChars.forEach(file => {
-            validationError += `\n${file.name}`;
-        });
-        return validationError;
-    }
     return;
 };
 const validateNumberOfFiles = (files) => {
@@ -52,4 +37,14 @@ const validateSupportedFormats = (files) => {
         return validationError;
     }
     return;
+};
+export const getBreakingMark = (name) => {
+    let breakingMark;
+    if (name.includes(" ` "))
+        breakingMark = " ` ";
+    if (name.includes(" ' "))
+        breakingMark = " ' ";
+    if (name.includes(" ; "))
+        breakingMark = " ; ";
+    return breakingMark;
 };
