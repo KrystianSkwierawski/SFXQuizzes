@@ -17,12 +17,12 @@ elements.sfxPlayer__playButtons.forEach((button: HTMLElement) => {
 function playAudio(playAudioButton, sfxPlayerEl) {
     const sfxId: string = sfxPlayerEl.id;
     const quizId: string | undefined = quizView.getQuizId();
-    const sfxName: string | undefined = (<any>window).answers.get(sfxId);
+    const sfxFileName: string | undefined = (<any>window).encodedNamesWithExtensions.get(sfxId);
 
     if (!_audio.ended)
         _audio.pause();
 
-    _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxName}` : `/assets/SFXs/demo/${sfxName}`;
+    _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxFileName}` : `/assets/SFXs/demo/${sfxFileName}`;
 
     const volume: number = +quizView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;

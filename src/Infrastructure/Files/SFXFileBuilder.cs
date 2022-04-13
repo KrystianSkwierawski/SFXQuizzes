@@ -1,6 +1,8 @@
 ﻿using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text;
 
 namespace Infrastructure.Files;
 
@@ -31,7 +33,11 @@ public class SFXFileBuilder : ISFXFileBuilder
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
 
-                string filePath = Path.Combine(directory, file.FileName);
+                string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
+                string extension = Path.GetExtension(file.FileName);
+                string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+
+                string filePath = Path.Combine(directory, encodedNameWithExtension);
                 using var fileStream = new FileStream(filePath, FileMode.Create);
 
                 await file.CopyToAsync(fileStream);

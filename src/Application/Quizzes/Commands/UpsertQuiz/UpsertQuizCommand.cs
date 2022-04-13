@@ -4,6 +4,7 @@ using Domain.Entities;
 using Domain.ValueObjects;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Text;
 
 namespace Application.Quizzes.Commands.UpsertQuiz;
 
@@ -44,13 +45,17 @@ public class UpsertQuizCommand : IRequest<string>
                 {
                     foreach (var file in request.UpsertQuizVm.Files)
                     {
+                        string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
+                        string extension = Path.GetExtension(file.FileName);
+                        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+
                         SFXs.Add(new SFX
                         {
-                            Name = file.FileName
+                            Name = nameWithoutExtension,
+                            EncodedNameWithExtension = encodedNameWithExtension
                         });
                     };
                 }
-
 
                 bool isInRoleAdmin = await _identityService.IsInRoleAsync(_currentUserService.UserId, "Administrator");
 

@@ -1,16 +1,9 @@
-﻿export const isAnswerCorrect = (sfxId, userAnswer) => {
-    const fileName: string = (<any>window).answers.get(sfxId).split('.')[0].toLowerCase();
+﻿import { getBreakingMark } from './Files.js';
 
-    let breakingMark: string;
+export const isAnswerCorrect = (sfxId, userAnswer) => {
+    const fileName: string = (<any>window).answers.get(sfxId).toLowerCase();
 
-    if (fileName.includes(" ` "))
-        breakingMark = " ` '";
-
-    if (fileName.includes(" ' "))
-        breakingMark = " ' ";
-
-    if (fileName.includes(" ; "))
-        breakingMark = " ; ";
+    const breakingMark = getBreakingMark(fileName);
 
     const answers: string[] = fileName.split(breakingMark);
 

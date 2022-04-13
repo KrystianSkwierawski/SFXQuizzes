@@ -13,10 +13,10 @@ elements.sfxPlayer__playButtons.forEach((button) => {
 function playAudio(playAudioButton, sfxPlayerEl) {
     const sfxId = sfxPlayerEl.id;
     const quizId = quizView.getQuizId();
-    const sfxName = window.answers.get(sfxId);
+    const sfxFileName = window.encodedNamesWithExtensions.get(sfxId);
     if (!_audio.ended)
         _audio.pause();
-    _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxName}` : `/assets/SFXs/demo/${sfxName}`;
+    _audio.src = quizId ? `/assets/SFXs/${quizId}/${sfxFileName}` : `/assets/SFXs/demo/${sfxFileName}`;
     const volume = +quizView.getVolumeInputValue(playAudioButton.parentElement) / 100;
     _audio.volume = volume;
     _audio.id = sfxId;
