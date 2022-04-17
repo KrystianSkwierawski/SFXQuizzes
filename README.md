@@ -9,6 +9,9 @@ I got inspired by <a href="https://vg-sfx-quiz.herokuapp.com/">Video Game SFX Qu
 ## Some technical info
 - I wanted to practice .NET MVC with razor pages and this time I created the app using just it. There was not too much JavaScript and components, Angular wasn't necessary.
 - For simplicity, I used ASP.NET Core scaffolded Identity and just change it a little bit. For now, I resigned with an email-sender, email confirmation, and authenticating via external services(Facebook, Google, etc).
+
+![squizzes](https://user-images.githubusercontent.com/52860350/163707727-bd345426-b2d4-4920-b0a5-474f8a66926b.jpg)
+
   
   
 ## Tools
