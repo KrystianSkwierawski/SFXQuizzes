@@ -63,7 +63,7 @@ public class CreateQuizTests : TestBase
 
         string nameWithoutExtension = Path.GetFileNameWithoutExtension(files[0].FileName);
         string extension = Path.GetExtension(files[0].FileName);
-        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+        string encodedNameWithExtension = "0" + extension; //index + extension
 
         result.SFXs[0].Name.Should().Be(nameWithoutExtension);
         result.SFXs[0].EncodedNameWithExtension.Should().Be(encodedNameWithExtension);
@@ -114,7 +114,7 @@ public class CreateQuizTests : TestBase
 
         string nameWithoutExtension = Path.GetFileNameWithoutExtension(files[0].FileName);
         string extension = Path.GetExtension(files[0].FileName);
-        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+        string encodedNameWithExtension = "0" + extension; //index + extension
 
         result.SFXs[0].Name.Should().Be(nameWithoutExtension);
         result.SFXs[0].EncodedNameWithExtension.Should().Be(encodedNameWithExtension);

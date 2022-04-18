@@ -22,25 +22,24 @@ public class SFXFileBuilder : ISFXFileBuilder
 
         try
         {
-            foreach (var file in files)
+            foreach (var item in files.Select((file, index) => (file, index)))
             {
-
-                if (file is null)
-                    throw new ArgumentNullException(nameof(file));
+                if (item.file is null)
+                    throw new ArgumentNullException(nameof(item.file));
 
                 string directory = Path.Combine("./wwwroot", "assets", "SFXs", quizId);
 
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
 
-                string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
-                string extension = Path.GetExtension(file.FileName);
-                string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+                string nameWithoutExtension = Path.GetFileNameWithoutExtension(item.file.FileName);
+                string extension = Path.GetExtension(item.file.FileName);
+                string encodedNameWithExtension = item.index.ToString() + extension;
 
                 string filePath = Path.Combine(directory, encodedNameWithExtension);
                 using var fileStream = new FileStream(filePath, FileMode.Create);
 
-                await file.CopyToAsync(fileStream);
+                await item.file.CopyToAsync(fileStream);
             }
         }
         catch (Exception ex)
