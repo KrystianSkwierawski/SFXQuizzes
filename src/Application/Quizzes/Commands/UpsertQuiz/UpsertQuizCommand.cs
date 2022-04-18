@@ -5,6 +5,7 @@ using Domain.ValueObjects;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Text;
+using System.Web;
 
 namespace Application.Quizzes.Commands.UpsertQuiz;
 
@@ -43,11 +44,11 @@ public class UpsertQuizCommand : IRequest<string>
 
                 if (request.UpsertQuizVm.Files is not null)
                 {
-                    foreach (var file in request.UpsertQuizVm.Files)
+                    foreach (var item in request.UpsertQuizVm.Files.Select((file, index) => (file, index)))
                     {
-                        string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
-                        string extension = Path.GetExtension(file.FileName);
-                        string encodedNameWithExtension = Convert.ToBase64String(Encoding.UTF8.GetBytes(nameWithoutExtension)) + extension;
+                        string nameWithoutExtension = Path.GetFileNameWithoutExtension(item.file.FileName);
+                        string extension = Path.GetExtension(item.file.FileName);
+                        string encodedNameWithExtension = item.index.ToString() + extension;
 
                         SFXs.Add(new SFX
                         {
