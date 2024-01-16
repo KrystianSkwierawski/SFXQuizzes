@@ -35,4 +35,4 @@ I got inspired by <a href="https://vg-sfx-quiz.herokuapp.com/">Video Game SFX Qu
  * Postman
 
 ## Status
-Project is in progress.
+The project(demo) is finished.
